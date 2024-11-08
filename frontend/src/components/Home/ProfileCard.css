@@ -1,0 +1,126 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a2e;
+    color: #F4F4F8;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    justify-content: space-between; /* Ensures settings button is at the bottom */
+}
+
+.profile-card {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #13524b;
+    color: #F4F4F8;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+}
+
+.profile-card:hover {
+    background-color: #4CAF50;
+    color: inherit;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.profile-info:hover {
+    background-color: transparent;
+}
+
+.profile-name {
+    font-weight: bold;
+    color: #F4F4F8;
+    font-size: 1.2em;
+}
+
+.profile-title {
+    font-size: 1em;
+    color: #F4F4F8;
+    margin-top: 5px;
+}
+
+.admins-menu {
+    margin-top: 20px;
+}
+
+.admins-menu-title {
+    padding: 10px 0;
+    font-size: 1.2em;
+    color: #F4F4F8;
+    margin-bottom: 10px;
+}
+
+.navbar-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-links li {
+    margin-bottom: 5px;
+}
+
+.navbar-links li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #162447;
+    color: #F4F4F8;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.navbar-links li a:hover {
+    background-color: #2ec4b6;
+    color: #000;
+}
+
+.navbar-links .icon {
+    margin-right: 15px;
+}
+
+.settings-button {
+    margin: 20px 0 50px 0; /* Adds a margin of 30px from the bottom */
+    padding: 10px 20px;
+    background-color: #162447;
+    color: #F4F4F8;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.settings-button .icon {
+    margin-right: 10px; /* Adds space between the icon and text */
+}
+
+.settings-button:hover {
+    background-color: #2ec4b6;
+    color: #000;
+}

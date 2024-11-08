@@ -1,0 +1,73 @@
+.balance-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-left: 290px;
+    background-color: #13524b;
+    color: #ecf0f1;
+}
+
+.balance-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.balance-header, .stocks-header {
+    margin-bottom: 20px;
+}
+
+.balance-header h2, .stocks-header h2 {
+    margin: 0;
+}
+
+.stock-list {
+    list-style: none;
+    padding: 0;
+}
+
+.stock-item {
+    padding: 10px;
+    background-color: #162447;
+    color: #ecf0f1;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stock-symbol, .stock-quantity {
+    font-weight: bold;
+}
+
+.balance-actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.balance-actions input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ecf0f1;
+    color: #13524b;
+    width: 100px;
+}
+
+.balance-actions button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1abc9c;
+    color: #ecf0f1;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 120px;
+}
+
+.balance-actions button:hover {
+    background-color: #16a085;
+}

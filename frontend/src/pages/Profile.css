@@ -1,0 +1,82 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #13524b; /* Green background */
+    overflow: hidden; /* Prevent vertical scroll */
+}
+
+.profile-card-custom {
+    background: #1a1a2e;
+    padding: 20px; /* Adjusted padding for even spacing */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px; /* Adjusted width */
+    max-height: 90vh; /* Ensure it fits within the viewport */
+    overflow: hidden; /* Ensure no overflow */
+}
+
+.profile-card-custom h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.profile-card-custom form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-card-custom .profile-field-custom {
+    margin-bottom: 15px; /* Reduced space between fields */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-card-custom label {
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.profile-card-custom input {
+    width: calc(100% - 20px); /* Even spacing from left and right edges */
+    margin: 0 auto;
+    padding: 8px; /* Adjusted padding for smaller input fields */
+    border: none;
+    border-radius: 5px;
+    background: #162447;
+    color: #fff;
+}
+
+.profile-card-custom p {
+    width: calc(100% - 20px); /* Even spacing from left and right edges */
+    margin: 0 auto;
+    padding: 8px; /* Adjusted padding for smaller paragraph fields */
+    border-radius: 5px;
+    background: #162447;
+    color: #fff;
+}
+
+.chart-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px; /* Reduced margin */
+}
+
+.chart-buttons button {
+    width: 100%;
+    padding: 10px;
+    background: #2ec4b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.chart-buttons button:hover {
+    background: #1ec1a6;
+}

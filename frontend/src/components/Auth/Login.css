@@ -1,0 +1,85 @@
+/* Login.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #2ec4b6;
+}
+
+.login-card {
+    background: #1a1a2e;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.login-card h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.error-message {
+    background: #ff4d4f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #162447;
+    color: #fff;
+}
+
+.login-card input::placeholder {
+    color: #a9a9a9;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 10px;
+    background: #2ec4b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-card button:hover {
+    background: #1ec1a6;
+}
+
+.login-card p {
+    color: #fff;
+    margin-top: 20px;
+}
+
+.login-card p a {
+    color: #2ec4b6;
+    text-decoration: none;
+}
+
+.login-card p a:hover {
+    text-decoration: underline;
+}
+
+.login-card .forgot-password {
+    color: #a9a9a9;
+    margin-bottom: 20px;
+    display: block;
+    text-align: left;
+}

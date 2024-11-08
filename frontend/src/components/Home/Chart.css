@@ -1,0 +1,57 @@
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 1rem; /* Ajustare pentru alinierea corectă */
+    height: calc(100vh - 60px); /* Mărim înălțimea graficului pentru a ocupa tot spațiul */
+    background-color: #13524B; /* Fundal verde închis */
+    overflow-y: hidden; /* Eliminăm scroll-ul vertical */
+    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
+    color: #F4F4F8; /* Culoarea textului similară cu navbar-links li a */
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h1 {
+    margin: 0;
+    font-size: 30px; /* Dimensiunea fontului */
+    color: #F4F4F8; /* Culoarea textului */
+}
+
+.chart-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.chart-buttons button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #13524b;
+    color: #F4F4F8;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+}
+
+.chart-buttons button.active,
+.chart-buttons button:hover {
+    background-color: #4CAF50;
+    color: inherit;
+}
+
+.chart-content {
+    flex-grow: 1;
+    overflow-y: hidden; /* Eliminăm scroll-ul vertical */
+    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
+}

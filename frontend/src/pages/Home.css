@@ -1,0 +1,121 @@
+.home-container {
+    display: flex;
+    height: 100vh;
+    margin-left: 290px;
+    background-color: #13524b;
+    overflow-y: hidden; /* Scoatem scroll-ul vertical */
+    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
+}
+
+.home-content {
+    flex-grow: 1;
+    color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
+    padding: 20px;
+    overflow-y: hidden;
+    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
+    display: flex;
+    flex-direction: column;
+}
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.home-header h2 {
+    margin: 0;
+}
+
+.home-header .header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    height: 40vh; /* Mărim înălțimea secțiunii cardurilor */
+    overflow-y: hidden; /* Scoatem scroll-ul vertical */
+    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
+}
+
+.chart-container {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    height: 1500vh; /* Mărim înălțimea graficului */
+    overflow-y: hidden; /* Înlăturăm scroll-ul vertical */
+    overflow-x: hidden; /* Înlăturăm scroll-ul orizontal */
+}
+
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #89023E;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-icon:hover {
+    background-color: #0056b3;
+}
+
+.card {
+    background-color: #13524b; /* Schimbat pentru a fi similar cu profile-card */
+    color: white; /* Text alb */
+    border: none; /* Eliminăm bordura albă */
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.333% - 30px); /* Ajustăm flex pentru a împărți spațiul în mod egal */
+    min-width: 50px;
+    max-width: 250px; /* Micșorăm lățimea maximă pentru carduri */
+    text-decoration: none; /* Asigură că link-ul nu are subliniere */
+    display: block; /* Asigură că link-ul ocupă întregul spațiu al cardului */
+    transition: background-color 0.3s, transform 0.3s; /* Adăugăm tranziția */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card:hover {
+    background-color: #2ec4b6; /* Schimbă culoarea de fundal la hover */
+    color: inherit; /* Păstrează culoarea textului la hover */
+}
+
+.card.green {
+    background-color: #4CAF50; /* Verde */
+    color: white; /* Text alb */
+}
+
+.card.red {
+    background-color: #89023E; /* Roșu */
+    color: white; /* Text alb */
+}
+
+.card.blue {
+    background-color: #162447; /* Albastru */
+    color: white; /* Text alb */
+}
+
+.chart {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aliniem conținutul la stânga */
+    margin: 20px; /* Micșorăm margin pentru a se încadra mai bine */
+    height: 100%; /* Asigurăm că graficul ocupă întreg spațiul vertical disponibil */
+    width: 100%; /* Asigurăm că graficul ocupă întreg spațiul orizontal disponibil */
+}
+
+.chart h1 {
+    font-size: 18px; /* Micșorăm dimensiunea fontului */
+    margin-bottom: 10px; /* Micșorăm margin pentru a economisi spațiu */
+}

@@ -1,0 +1,48 @@
+.business-news-container {
+    display: flex;
+    height: 100vh;
+    margin-left: 290px;
+    background-color: #13524b;
+}
+
+.news-content {
+    color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.news-scroll-container {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.news-article {
+    margin-bottom: 5px; /* Aceeași marjă ca navbar-links li */
+    padding: 10px; /* Aceeași padding ca navbar-links li a */
+    background-color: #162447; /* Aceeași culoare de fundal ca navbar-links li a */
+    color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
+    border-radius: 5px; /* Aceeași bordură rotunjită ca navbar-links li a */
+    text-decoration: none; /* Eliminăm sublinierea */
+    display: flex; /* Asigurăm că ocupă întregul spațiu */
+    flex-direction: column; /* Aliniem conținutul pe verticală */
+    align-items: flex-start; /* Aliniem conținutul la stânga */
+    transition: background-color 0.3s; /* Aceeași tranziție ca navbar-links li a */
+    cursor: pointer; /* Adăugăm cursor pointer */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adăugăm o umbră pentru consistență */
+}
+
+.news-article:hover {
+    background-color: #2ec4b6; /* Aceeași culoare de fundal la hover ca navbar-links li a:hover */
+    color: #000; /* Aceeași culoare a textului la hover ca navbar-links li a:hover */
+}
+
+.news-article h4 {
+    margin: 0 0 10px;
+    text-decoration: none; /* Eliminăm sublinierea */
+}
+
+.news-article p {
+    margin: 10px 0 0; /* Adăugăm spațiu între descriere și titlu */
+    text-decoration: none; /* Eliminăm sublinierea */
+}

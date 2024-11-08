@@ -1,0 +1,156 @@
+.stock-list-container {
+    display: flex;
+    height: 100vh; /* Similar to .business-news-container */
+    margin-left: 290px;
+    background-color: #13524b; /* Same background color */
+}
+
+.stock-list-content {
+    color: #ecf0f1; /* Same text color */
+    flex-grow: 1;
+    padding: 20px;
+    /* Adjust this value if necessary to match the width of your Navbar */
+}
+
+.stock-list {
+    max-height: 80vh;
+    /* Adjust this value as necessary */
+    overflow-y: auto;
+    padding-right: 10px;
+    /* Space for scrollbar */
+}
+
+.stock-item {
+    margin-bottom: 5px; /* Same margin */
+    padding: 10px; /* Same padding */
+    background-color: #162447; /* Same background color */
+    color: #ecf0f1; /* Same text color */
+    border-radius: 5px; /* Same border radius */
+    text-decoration: none; /* Remove underline */
+    display: flex; /* Ensure it takes the full space */
+    flex-direction: column; /* Align content vertically */
+    align-items: flex-start; /* Align content to the left */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for consistency */
+    transition: background-color 0.3s; /* Same transition */
+    cursor: default; /* Change cursor to default */
+}
+
+.stock-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.stock-header h2 {
+    margin: 0;
+}
+
+.stock-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.stock-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.stock-value {
+    font-weight: normal;
+}
+
+.stock-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Ensure the buttons span the full width */
+    margin-top: 10px; /* Add some space above the buttons */
+}
+
+.stock-buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+}
+
+.stock-buttons .buy-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.stock-buttons .buy-button:hover {
+    background-color: #00a706; /* Green for buy button */
+}
+
+.stock-buttons .sell-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.stock-buttons .sell-button:hover {
+    background-color: #b7000f; /* Red for sell button */
+}
+
+.stock-input-box {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #162447;
+    color: #ecf0f1;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 99%;
+}
+
+.stock-input-box input {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 99%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1b2a41;
+    color: #ecf0f1;
+}
+
+.stock-input-box .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.stock-input-box button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.stock-input-box button:hover {
+    background-color: #0056b3;
+}
+
+.stock-input-box .result-message {
+    margin-top: 10px;
+    background-color: #1b2a41;
+    color: #ecf0f1;
+    padding: 10px;
+    border-radius: 5px;
+    width: 99%;
+}

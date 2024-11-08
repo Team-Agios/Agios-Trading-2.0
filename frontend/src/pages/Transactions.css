@@ -1,0 +1,100 @@
+.transaction-list-container {
+    display: flex;
+    height: 100vh;
+    margin-left: 290px;
+    background-color: #13524b;
+}
+
+.transaction-list-content {
+    color: #ecf0f1;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.transaction-list {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.transaction-item {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #162447;
+    color: #ecf0f1;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    cursor: default;
+}
+
+.transaction-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.transaction-header h2 {
+    margin: 0;
+}
+
+.transaction-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.transaction-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.transaction-value {
+    font-weight: normal;
+}
+
+.transaction-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.transaction-buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.transaction-buttons .approve-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.transaction-buttons .approve-button:hover {
+    background-color: #00a706;
+}
+
+.transaction-buttons .reject-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.transaction-buttons .reject-button:hover {
+    background-color: #b7000f;
+}
