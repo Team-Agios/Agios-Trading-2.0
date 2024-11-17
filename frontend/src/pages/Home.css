@@ -2,14 +2,14 @@
     display: flex;
     height: 100vh;
     margin-left: 290px;
-    background-color: #13524b;
+    background-color: #E5E7E6;
     overflow-y: hidden; /* Scoatem scroll-ul vertical */
     overflow-x: hidden; /* Scoatem scroll-ul orizontal */
 }
 
 .home-content {
     flex-grow: 1;
-    color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
+    color: #0E1116; /* Aceeași culoare a textului ca navbar-links li a */
     padding: 20px;
     overflow-y: hidden;
     overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
@@ -54,8 +54,8 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #89023E;
-    color: white;
+    background-color: #003554;
+    color: #000;
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -66,12 +66,12 @@
 }
 
 .chatbot-icon:hover {
-    background-color: #0056b3;
+    background-color: #003554;
 }
 
 .card {
-    background-color: #13524b; /* Schimbat pentru a fi similar cu profile-card */
-    color: white; /* Text alb */
+    background-color: #003554; /* Schimbat pentru a fi similar cu profile-card */
+    color: #000; /* Text alb */
     border: none; /* Eliminăm bordura albă */
     padding: 30px 20px;
     border-radius: 10px;
@@ -87,23 +87,23 @@
 }
 
 .card:hover {
-    background-color: #2ec4b6; /* Schimbă culoarea de fundal la hover */
+    background-color: #003554; /* Schimbă culoarea de fundal la hover */
     color: inherit; /* Păstrează culoarea textului la hover */
 }
 
 .card.green {
-    background-color: #4CAF50; /* Verde */
-    color: white; /* Text alb */
+    background-color: #003554; /* Verde */
+    color: #E5E7E6; /* Text alb */
 }
 
 .card.red {
-    background-color: #89023E; /* Roșu */
-    color: white; /* Text alb */
+    background-color: #003554; /* Roșu */
+    color: #E5E7E6; /* Text alb */
 }
 
 .card.blue {
-    background-color: #162447; /* Albastru */
-    color: white; /* Text alb */
+    background-color: #003554; /* Albastru */
+    color: #E5E7E6; /* Text alb */
 }
 
 .chart {

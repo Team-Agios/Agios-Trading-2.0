@@ -113,64 +113,59 @@ const StockList10: React.FC = () => {
 
   return (
     <div className="stock-list-container">
-      <Navbar />
-      <div className="stock-list-content">
-        <div className="stock-input-box">
-          <input
-            type="text"
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value)}
-            placeholder="Enter stock symbol"
-          />
-          <div className="buttons-container">
-            <button onClick={handlePredict}>Predict</button>
-            <button onClick={handleShouldBuy}>Should Buy</button>
-          </div>
-          {prediction && <div className="result-message">Prediction: {prediction}</div>}
-          {decision && <div className="result-message">Decision: {decision}</div>}
-        </div>
-        {isLoading ? (
-          <p>Loading stocks...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <div className="stock-list">
-            {stocks.map((stock) => (
-              <div key={stock.symbol} className="stock-item">
-                <div className="stock-header">
-                  <div className="logo-placeholder"></div>
-                  <h2>{stock.symbol}</h2>
-                </div>
-                <div className="stock-details">
-                  <div className="stock-label">Current Price:</div>
-                  <div className="stock-value">${stock.currentPrice}</div>
-                </div>
-                <div className="stock-details">
-                  <div className="stock-label">High Price:</div>
-                  <div className="stock-value">${stock.highPrice}</div>
-                </div>
-                <div className="stock-details">
-                  <div className="stock-label">Low Price:</div>
-                  <div className="stock-value">${stock.lowPrice}</div>
-                </div>
-                <div className="stock-details">
-                  <div className="stock-label">Open Price:</div>
-                  <div className="stock-value">${stock.openPrice}</div>
-                </div>
-                <div className="stock-details">
-                  <div className="stock-label">Previous Close Price:</div>
-                  <div className="stock-value">${stock.previousClosePrice}</div>
-                </div>
-                <div className="stock-buttons">
-                  <button className="buy-button" onClick={() => handleBuy(stock.symbol, stock.currentPrice)}>Buy</button>
-                  <button className="sell-button" onClick={() => handleSell(stock.symbol, stock.currentPrice)}>Sell</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+  <Navbar />
+  <div className="stock-list-content">
+    <div className="stock-input-box">
+      <input
+        type="text"
+        value={symbol}
+        onChange={(e) => setSymbol(e.target.value)}
+        placeholder="Enter stock symbol"
+      />
+      <div className="buttons-container">
+        <button onClick={handlePredict}>Predict</button>
+        <button onClick={handleShouldBuy}>Should Buy</button>
       </div>
+      {prediction && <div className="result-message">Prediction: {prediction}</div>}
+      {decision && <div className="result-message">Decision: {decision}</div>}
     </div>
+    {isLoading ? (
+      <p>Loading stocks...</p>
+    ) : error ? (
+      <p>{error}</p>
+    ) : (
+      <div className="stock-list">
+        {stocks.map((stock) => (
+          <div key={stock.symbol} className="stock-item">
+            <div className="stock-header">
+              <div className="logo-placeholder"></div>
+              <h2>{stock.symbol}</h2>
+            </div>
+            <div className="stock-details">
+              <div className="stock-label">Current Price:</div>
+              <div className="stock-value">${stock.currentPrice}</div>
+            </div>
+            <div className="stock-buttons">
+              <button
+                className="buy-button"
+                onClick={() => handleBuy(stock.symbol, stock.currentPrice)}
+              >
+                Buy
+              </button>
+              <button
+                className="sell-button"
+                onClick={() => handleSell(stock.symbol, stock.currentPrice)}
+              >
+                Sell
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
+
   );
 };
 

@@ -95,33 +95,34 @@ const Chart = () => {
                 <div className="chart-content">
                     {graphData && (
                         <Line
-                            data={{
-                                labels: graphData.labels,
-                                datasets: graphData.datasets.map(dataset => ({
-                                    ...dataset,
-                                    borderColor: '#ffffff', // White border color
-                                    backgroundColor: 'rgba(255, 255, 255, 0.2)', // White background color with transparency
-                                })),
-                            }}
-                            options={{
-                                maintainAspectRatio: false,
-                                scales: {
-                                    x: {
-                                        ticks: { color: '#ffffff' }, // Dark color for x-axis labels
-                                    },
-                                    y: {
-                                        ticks: { color: '#ffffff' }, // Dark color for y-axis labels
-                                    },
-                                },
-                                plugins: {
-                                    legend: {
-                                        labels: {
-                                            color: '#ffffff' // Dark color for legend text
-                                        }
-                                    }
-                                }
-                            }}
-                        />
+    data={{
+        labels: graphData.labels,
+        datasets: graphData.datasets.map((dataset, index) => ({
+            ...dataset,
+            borderColor: index === 0 ? '#f02d3a' : index === 1 ? '#8ac926' : '#8ac926', // Culori diferite pentru fiecare linie
+            backgroundColor: 'rgba(255, 99, 132, 0.2)', // Fundal translucid
+        })),
+    }}
+    options={{
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                ticks: { color: '#000' }, // Culoare pentru etichetele axei X
+            },
+            y: {
+                ticks: { color: '#000' }, // Culoare pentru etichetele axei Y
+            },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#000', // Text de legendă în culoare închisă
+                },
+            },
+        },
+    }}
+/>
+
                     )}
                 </div>
             )}

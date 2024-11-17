@@ -40,9 +40,6 @@ const Navbar: React.FC = () => {
                     </ul>
                 </div>
             </div>
-            <Link to="/settings" className="settings-button">
-                <FaCog className="icon" /> Settings
-            </Link>
         </nav>
     );
 };

@@ -61,9 +61,8 @@ const Home: React.FC = () => {
                         stocks.map((stock, index) => {
                             const cardColors = ['green', 'red', 'blue'];
                             return (
-                                <Link
+                                <div
                                     key={index}
-                                    to={`/stocks/${stock.symbol}`}
                                     className={`card ${cardColors[index % cardColors.length]}`}
                                 >
                                     <div className="card-content">
@@ -73,7 +72,7 @@ const Home: React.FC = () => {
                                             {`$${(stock.currentPrice - stock.previousClosePrice).toFixed(2)} (${((stock.currentPrice - stock.previousClosePrice) / stock.previousClosePrice * 100).toFixed(2)}%)`}
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             );
                         })
                     )}
