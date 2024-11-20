@@ -10,6 +10,8 @@ export interface IUser extends Document {
   verificationToken: string;
   otp?: string;
   otpExpiry?: Date;
+  resetToken?: string; 
+  resetTokenExpiry?: Date; 
 }
 
 const UserSchema: Schema = new Schema({
@@ -21,7 +23,9 @@ const UserSchema: Schema = new Schema({
   isVerified: { type: Boolean, default: false },
   verificationToken: { type: String },
   otp: { type: String },
-  otpExpiry: { type: Date }
+  otpExpiry: { type: Date },
+  resetToken: { type: String }, 
+  resetTokenExpiry: { type: Date } 
 });
 
 export default mongoose.model<IUser>('User', UserSchema);
