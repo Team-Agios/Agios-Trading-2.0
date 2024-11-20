@@ -129,6 +129,54 @@ class AuthService {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1h' });
     return token;
   }
+
+  public async forgotPassword(email: string): Promise<void> {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new Error('User with this email does not exist');
+    }
+  
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); 
+  
+    user.resetToken = resetToken;
+    user.resetTokenExpiry = resetTokenExpiry;
+    await user.save();
+  
+    const transporter = await this.createTransporter();
+  
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: 'Password Reset Request',
+      text: `You requested to reset your password. Use the link below to reset it:
+      http://${process.env.HOST}/api/auth/reset-password/${resetToken}
+  
+      If you did not request this, please ignore this email.`
+    };
+  
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Password reset email sent: ' + info.response);
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
+      throw new Error('Failed to send reset password email');
+    }
+  }
+  
+  public async resetPassword(resetToken: string, newPassword: string): Promise<void> {
+    const user = await User.findOne({ resetToken, resetTokenExpiry: { $gte: new Date() } });
+    if (!user) {
+      throw new Error('Invalid or expired reset token');
+    }
+  
+    const passHash = await bcrypt.hash(newPassword, 10);
+    user.passHash = passHash;
+    user.resetToken = '';
+    user.resetTokenExpiry = undefined;
+    await user.save();
+  }
+  
 }
 
 export default new AuthService();
