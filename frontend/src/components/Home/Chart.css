@@ -1,13 +1,15 @@
 .chart-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    margin: 1rem; /* Ajustare pentru alinierea corectă */
-    height: calc(100vh - 60px); /* Mărim înălțimea graficului pentru a ocupa tot spațiul */
-    background-color: #13524B; /* Fundal verde închis */
-    overflow-y: hidden; /* Eliminăm scroll-ul vertical */
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
-    color: #F4F4F8; /* Culoarea textului similară cu navbar-links li a */
+    margin: 1rem;
+    height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
+    width: calc(100% - 250px); /* Ajustăm lățimea pentru a ține cont de navbar */
+    margin-left: 250px; /* Asigurăm că începe după navbar */
+    background-color: #E5E7E6; /* Fundal neutru */
+    overflow: hidden; /* Eliminăm scroll-ul */
+    color: #0e1116; /* Text întunecat */
+    padding: 1rem; /* Margine internă */
+    box-sizing: border-box;
 }
 
 .chart-header {
@@ -15,43 +17,76 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Butoanele vor trece pe o linie nouă dacă ecranul e mic */
 }
 
 .chart-header h1 {
     margin: 0;
-    font-size: 30px; /* Dimensiunea fontului */
-    color: #F4F4F8; /* Culoarea textului */
+    font-size: 1.5rem; /* Dimensiunea adaptată */
+    color: #0e1116;
 }
 
 .chart-buttons {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 0.5rem 0;
+    flex-wrap: wrap; /* Butoanele se împart pe mai multe linii dacă spațiul e insuficient */
 }
 
 .chart-buttons button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #13524b;
-    color: #F4F4F8;
+    margin: 0;
+    padding: 10px 15px;
+    background-color: #0e1116;
+    color: #ffffff;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
-    text-decoration: none;
-    display: block;
-    font-weight: bold;
+    font-size: 0.9rem; /* Dimensiune redusă pentru ecrane mici */
 }
 
 .chart-buttons button.active,
 .chart-buttons button:hover {
-    background-color: #4CAF50;
-    color: inherit;
+    background-color: #003554;
+    color: #ffffff;
 }
 
 .chart-content {
     flex-grow: 1;
-    overflow-y: hidden; /* Eliminăm scroll-ul vertical */
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevenim scroll-ul */
+}
+@media (max-width: 768px) {
+    .chart-container {
+        margin-left: 0; /* Eliminăm spațiul pentru navbar pe ecrane mici */
+        width: 100%; /* Ocupă toată lățimea */
+        height: calc(100vh - 60px); /* Ajustare dacă navbarul este mai mic */
+    }
+
+    .chart-header h1 {
+        font-size: 1.2rem; /* Font mai mic */
+    }
+
+    .chart-buttons button {
+        font-size: 0.8rem; /* Butoane mai mici */
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-header h1 {
+        font-size: 1rem;
+    }
+
+    .chart-buttons {
+        gap: 5px;
+    }
+
+    .chart-buttons button {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
 }

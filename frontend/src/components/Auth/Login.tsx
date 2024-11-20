@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../config/axiosConfig';
-import './Login.css';
-
+import './login.css'
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,10 +23,10 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-card">
+        <div className="login-container1">
+            <div className="login-card1">
                 <h2>Login</h2>
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {errorMessage && <div className="error-message1">{errorMessage}</div>}
                 <form onSubmit={handleLogin}>
                     <input
                         type="email"

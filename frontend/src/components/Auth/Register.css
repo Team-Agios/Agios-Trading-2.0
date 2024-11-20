@@ -3,11 +3,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #2ec4b6;
+    background: #E5E7E6;
 }
 
 .register-card {
-    background: #1a1a2e;
+    background: #003554;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,7 +17,7 @@
 
 .register-card h2 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #E5E7E6;
 }
 
 .register-card form {
@@ -31,19 +31,19 @@
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
-    background: #162447;
-    color: #fff;
+    background: #E5E7E6;
+    color: #0e1116;
 }
 
 .register-card input::placeholder {
-    color: #a9a9a9;
+    color: #0e1116;
 }
 
 .register-card button {
     width: 100%;
     padding: 10px;
-    background: #2ec4b6;
-    color: white;
+    background: #E5E7E6;
+    color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -51,16 +51,16 @@
 }
 
 .register-card button:hover {
-    background: #1ec1a6;
+    background: #cfdbd9;
 }
 
 .register-card p {
-    color: #fff;
+    color: #cfdbd9;
     margin-top: 20px;
 }
 
 .register-card p a {
-    color: #2ec4b6;
+    color: #E5E7E6;
     text-decoration: none;
 }
 

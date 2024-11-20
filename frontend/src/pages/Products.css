@@ -1,156 +1,179 @@
+/* General container styling */
 .stock-list-container {
     display: flex;
-    height: 100vh; /* Similar to .business-news-container */
-    margin-left: 290px;
-    background-color: #13524b; /* Same background color */
+    flex-direction: column;
+    min-height: 100vh; /* Full height */
+    margin-left: 290px; /* Leave space for the navbar */
+    background-color: #e5e7e6; /* Soft background color */
+    padding: 20px;
 }
 
+/* Main content area */
 .stock-list-content {
-    color: #ecf0f1; /* Same text color */
+    color: #2c3e50; /* Dark text color for readability */
     flex-grow: 1;
     padding: 20px;
-    /* Adjust this value if necessary to match the width of your Navbar */
+    border-radius: 10px;
+    background: #e5e7e6; /* Card background for contrast */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+/* Stock list styling */
 .stock-list {
-    max-height: 80vh;
-    /* Adjust this value as necessary */
-    overflow-y: auto;
-    padding-right: 10px;
-    /* Space for scrollbar */
+    display: grid; /* Arrange in grid */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexible grid */
+    gap: 20px; /* Space between cards */
+    max-height: 80vh; /* Prevent overflow */
+    overflow-y: auto; /* Enable scrolling */
+    padding-right: 10px; /* Space for scrollbar */
 }
 
+/* Stock item (individual card) */
 .stock-item {
-    margin-bottom: 5px; /* Same margin */
-    padding: 10px; /* Same padding */
-    background-color: #162447; /* Same background color */
-    color: #ecf0f1; /* Same text color */
-    border-radius: 5px; /* Same border radius */
-    text-decoration: none; /* Remove underline */
-    display: flex; /* Ensure it takes the full space */
-    flex-direction: column; /* Align content vertically */
-    align-items: flex-start; /* Align content to the left */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for consistency */
-    transition: background-color 0.3s; /* Same transition */
-    cursor: default; /* Change cursor to default */
+    background-color: #ffffff; /* White card background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effects */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.stock-item:hover {
+    transform: translateY(-5px); /* Lift the card */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    background-color: #f0f4ff; /* Light blue hover background */
+}
+
+/* Header inside each card */
 .stock-header {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.stock-header h2 {
+    font-size: 20px;
+    color: #003554; /* Blue header */
+    margin: 0;
 }
 
 .logo-placeholder {
     width: 40px;
     height: 40px;
-    background-color: #ccc;
-    margin-right: 10px;
-    border-radius: 5px;
+    background-color: #e0e0e0; /* Placeholder for logo */
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
-.stock-header h2 {
-    margin: 0;
-}
-
+/* Stock details */
 .stock-details {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #555; /* Subtle text color */
 }
 
 .stock-label {
     font-weight: bold;
-    margin-right: 10px;
 }
 
 .stock-value {
-    font-weight: normal;
+    color: #27ae60; /* Green for positive numbers */
 }
 
+/* Buttons inside each card */
 .stock-buttons {
     display: flex;
-    justify-content: space-between;
-    width: 100%; /* Ensure the buttons span the full width */
-    margin-top: 10px; /* Add some space above the buttons */
+    gap: 10px;
 }
 
 .stock-buttons button {
-    padding: 5px 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .stock-buttons .buy-button {
-    background-color: #007bff;
+    background-color: #1abc9c; /* Teal for buy */
     color: white;
 }
 
 .stock-buttons .buy-button:hover {
-    background-color: #00a706; /* Green for buy button */
+    background-color: #16a085; /* Darker teal */
+    transform: scale(1.05); /* Slight enlargement */
 }
 
 .stock-buttons .sell-button {
-    background-color: #007bff;
+    background-color: #e74c3c; /* Red for sell */
     color: white;
 }
 
 .stock-buttons .sell-button:hover {
-    background-color: #b7000f; /* Red for sell button */
+    background-color: #c0392b; /* Darker red */
+    transform: scale(1.05); /* Slight enlargement */
 }
 
+/* Input box */
 .stock-input-box {
+    background-color: #f8f9fa; /* Light gray */
+    color: #34495e; /* Dark gray text */
+    border: 1px solid #bdc3c7; /* Light border */
+    border-radius: 8px;
+    padding: 15px;
     margin-bottom: 20px;
-    padding: 10px;
-    background-color: #162447;
-    color: #ecf0f1;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 99%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .stock-input-box input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #3498db; /* Blue border */
+    border-radius: 8px;
     margin-bottom: 10px;
-    padding: 10px;
-    width: 99%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #1b2a41;
-    color: #ecf0f1;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.stock-input-box .buttons-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.stock-input-box input:focus {
+    border-color: #2980b9; /* Darker blue */
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.5); /* Glow effect */
 }
 
 .stock-input-box button {
-    padding: 10px 20px;
-    margin-right: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600; /* Bold text */
+    color: white;
+    background-color: #003554; /* Blue button */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .stock-input-box button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9; /* Darker blue */
+    transform: scale(1.05); /* Slight enlargement */
 }
 
-.stock-input-box .result-message {
-    margin-top: 10px;
-    background-color: #1b2a41;
-    color: #ecf0f1;
-    padding: 10px;
-    border-radius: 5px;
-    width: 99%;
+/* Scrollbar for stock list */
+.stock-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.stock-list::-webkit-scrollbar-thumb {
+    background-color: #bdc3c7; /* Light gray scrollbar */
+    border-radius: 10px;
+}
+
+.stock-list::-webkit-scrollbar-thumb:hover {
+    background-color: #7f8c8d; /* Darker gray on hover */
 }

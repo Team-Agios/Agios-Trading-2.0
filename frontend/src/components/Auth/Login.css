@@ -1,14 +1,14 @@
-/* Login.css */
-.login-container {
+
+.login-container1 {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #2ec4b6;
+    background: #e5e7e6;
 }
 
-.login-card {
-    background: #1a1a2e;
+.login-card1 {
+    background: #003554;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,68 +16,67 @@
     width: 300px;
 }
 
-.login-card h2 {
+.login-card1 h2 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #e5e7e6;
 }
 
-.error-message {
+.error-message1 {
     background: #ff4d4f;
-    color: #fff;
+    color: #e5e7e6;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
-.login-card form {
+.login-card1 form {
     display: flex;
     flex-direction: column;
 }
 
-.login-card input {
+.login-card1 input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
-    background: #162447;
-    color: #fff;
+    background: #e5e7e6;
+    color: #000;
 }
 
-.login-card input::placeholder {
+.login-card1 input::placeholder {
     color: #a9a9a9;
 }
 
-.login-card button {
+.login-card1 button {
     width: 100%;
     padding: 10px;
-    background: #2ec4b6;
-    color: white;
+    background: #e5e7e6;
+    color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.login-card button:hover {
-    background: #1ec1a6;
+.login-card1 button:hover {
+    background: #003554;
 }
 
-.login-card p {
+.login-card1 p {
     color: #fff;
     margin-top: 20px;
 }
 
-.login-card p a {
-    color: #2ec4b6;
+.login-card1 p a {
+    color: #e5e7e6;
     text-decoration: none;
 }
 
-.login-card p a:hover {
+.login-card1 p a:hover {
     text-decoration: underline;
 }
 
-.login-card .forgot-password {
+.login-card1 .forgot-password {
     color: #a9a9a9;
     margin-bottom: 20px;
     display: block;
