@@ -59,7 +59,7 @@ const Home: React.FC = () => {
                         <p>{error}</p>
                     ) : (
                         stocks.map((stock, index) => {
-                            const cardColors = ['green', 'red', 'blue'];
+                            const cardColors = ['green', 'red', 'blue' , 'brown'];
                             return (
                                 <div
                                     key={index}

@@ -1,14 +1,13 @@
 .chart-container {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
+    margin: 16px;
     height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
-    width: calc(100% - 250px); /* Ajustăm lățimea pentru a ține cont de navbar */
-    margin-left: 250px; /* Asigurăm că începe după navbar */
+    width: 100%;
     background-color: #f8f9fa; /* Fundal deschis */
     overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
     color: #0e1116; /* Text întunecat */
-    padding: 1rem; /* Margine internă */
+    padding-right: 16px; /* Margine internă */
     box-sizing: border-box;
     border-radius: 10px;
 }

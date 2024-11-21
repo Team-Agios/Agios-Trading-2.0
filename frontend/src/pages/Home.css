@@ -78,7 +78,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: 1 1 calc(33.333% - 30px); /* Ajustăm flex pentru a împărți spațiul în mod egal */
     min-width: 50px;
-    max-width: 250px; /* Micșorăm lățimea maximă pentru carduri */
+    max-width: 500px; /* Micșorăm lățimea maximă pentru carduri */
     text-decoration: none; /* Asigură că link-ul nu are subliniere */
     display: block; /* Asigură că link-ul ocupă întregul spațiu al cardului */
     transition: background-color 0.3s, transform 0.3s; /* Adăugăm tranziția */
@@ -105,7 +105,10 @@
     background-color: #003554; /* Albastru */
     color: #E5E7E6; /* Text alb */
 }
-
+.card.brown {
+    background-color: #003554; /* Albastru */
+    color: #E5E7E6; /* Text alb */
+}
 .chart {
     display: flex;
     flex-direction: column;
@@ -152,31 +155,15 @@
     .chart-container {
         display: flex;
         flex-direction: column;
-        margin: 1rem;
+        margin: 16px;
         height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
-        width: calc(100% - 250px); /* Ajustăm lățimea pentru a ține cont de navbar */
-        margin-left: 250px; /* Asigurăm că începe după navbar */
+        width: 100%; /* Ajustăm lățimea pentru a ține cont de navbar */
         background-color: #f8f9fa; /* Fundal deschis */
         overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
         color: #0e1116; /* Text întunecat */
         padding: 1rem; /* Margine internă */
         box-sizing: border-box;
         border-radius: 10px;
-    }
-    .chart-container {
-        flex-grow: 1; /* Menține graficul flexibil */
-        margin-left: 0px;
-        margin-bottom: 20px;
-        overflow-y: hidden; /* Înlăturăm scroll-ul vertical */
-        overflow-x: hidden; /* Înlăturăm scroll-ul orizontal */
-        align-items: left;
-        height: auto; /* Ajustare automată a înălțimii */
-        overflow-y: auto; /* Permite scroll-ul vertical */
-        overflow-x: hidden; /* Elimină scroll-ul orizontal */
-        padding: 0px; /* Adaugă padding pentru a evita lipirea conținutului de margini */
-        background-color: #FFFFFF; /* Fundal alb pentru contrast */
-        border-radius: 10px; /* Adaugă colțuri rotunjite pentru un aspect modern */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adaugă o umbră subtilă */
     }
     
     /* Header */
