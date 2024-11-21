@@ -18,12 +18,12 @@
     justify-content: space-between; /* Asigură că butonul de setări este în partea de jos */
 }
 
-.profile-card,
+.profile-card1,
 .button {
     margin: 20px 0;
     padding: 30px 20px;
     background-color: #003554;
-    color: #E5E7E6;
+    color: #0E1116;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -34,10 +34,10 @@
     font-weight: bold;
 }
 
-.profile-card:hover,
+.profile-card1:hover,
 .button:hover {
-    background-color: #e0e4e0;
-    color: inherit;
+    background-color: #003554;
+    color: #0E1116;
 }
 
 .profile-info {

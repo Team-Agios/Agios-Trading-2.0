@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import {
     Chart as ChartJS,
@@ -6,125 +6,164 @@ import {
     LinearScale,
     PointElement,
     LineElement,
-    Title,
     Tooltip,
-    Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import './Chart.css';
 
-interface GraphData {
-    labels: string[];
-    datasets: {
-        label: string;
-        data: number[];
-        borderColor?: string;
-        backgroundColor?: string;
-    }[];
+interface Dataset {
+    label: string;
+    data: number[];
 }
 
-// Înregistrăm scale-urile
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
+interface GraphResponse {
+    labels: string[];
+    datasets: Dataset[];
+}
+
+interface ProcessedData {
+    symbol: string;
+    labels: string[];
+    totalInvested: number[];
+    averagePrice: number[];
+}
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
 const Chart = () => {
-    const [graphData, setGraphData] = useState<GraphData | null>(null);
-    const [mode, setMode] = useState('week');
+    const [graphData, setGraphData] = useState<GraphResponse | null>(null);
+    const [processedData, setProcessedData] = useState<ProcessedData[]>([]);
+    const [mode, setMode] = useState<string>('week');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const fetchGraphData = async (mode: string) => {
+    const fetchGraphData = useCallback(async () => {
+        setIsLoading(true);
         try {
             const token = localStorage.getItem('authToken');
-            if (token) {
-                const response = await axios.get(`http://localhost:5869/api/portfolio/portfolio-graph`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    params: {
-                        mode: mode,
-                    },
-                });
-                if (response.data && response.data.labels && response.data.datasets) {
-                    setGraphData(response.data);
-                } else {
-                    setError('No transactions found...');
-                }
-            } else {
-                setError('No transactions found...');
+            if (!token) {
+                setError('Authorization token is missing.');
+                setIsLoading(false);
+                return;
             }
-        } catch (error) {
-            console.error('No transactions found...');
-            setError('No transactions found...');
+
+            const response = await axios.get(`http://localhost:5869/api/portfolio/portfolio-graph`, {
+                headers: { Authorization: `Bearer ${token}` },
+                params: { mode },
+            });
+
+            console.log('Graph Data Response:', response.data);
+            setGraphData(response.data);
+            setError(null);
+        } catch (error: any) {
+            console.error('Error fetching graph data:', error.response?.data || error.message);
+            setError(error.response?.data?.message || 'Failed to fetch graph data.');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [mode]);
+
+    const processGraphData = useCallback((data: GraphResponse) => {
+        const { labels, datasets } = data;
+
+        const transformedData = labels.map((label: string, index: number) => {
+            return {
+                symbol: label,
+                labels: datasets[0]?.data.map((_: number, i: number) => `Day ${i + 1}`),
+                totalInvested: datasets[0]?.data,
+                averagePrice: datasets[1]?.data,
+            };
+        });
+
+        setProcessedData(transformedData);
+    }, []);
 
     useEffect(() => {
-        let isMounted = true;
-        fetchGraphData(mode).then(() => {
-            if (isMounted) setIsLoading(false);
-        });
-        return () => {
-            isMounted = false;
-        };
-    }, [mode]);
+        fetchGraphData();
+    }, [fetchGraphData]);
+
+    useEffect(() => {
+        if (graphData) {
+            processGraphData(graphData);
+        }
+    }, [graphData, processGraphData]);
 
     return (
         <div className="chart-container">
             <div className="chart-header">
-                <h1>Portfolio Graph</h1>
+                <h1>Portfolio Graphs</h1>
                 <div className="chart-buttons">
-                    <button className={mode === 'week' ? 'active' : ''} onClick={() => setMode('week')}>Week</button>
-                    <button className={mode === 'month' ? 'active' : ''} onClick={() => setMode('month')}>Month</button>
-                    <button className={mode === 'year' ? 'active' : ''} onClick={() => setMode('year')}>Year</button>
+                    <button
+                        className={mode === 'week' ? 'active' : ''}
+                        onClick={() => setMode('week')}
+                    >
+                        Week
+                    </button>
+                    <button
+                        className={mode === 'month' ? 'active' : ''}
+                        onClick={() => setMode('month')}
+                    >
+                        Month
+                    </button>
+                    <button
+                        className={mode === 'year' ? 'active' : ''}
+                        onClick={() => setMode('year')}
+                    >
+                        Year
+                    </button>
                 </div>
             </div>
-            {error && <div className="error">{error}</div>}
-            {isLoading ? (
-                <div>No transactions found...</div>
-            ) : (
-                <div className="chart-content">
-                    {graphData && (
-                        <Line
-    data={{
-        labels: graphData.labels,
-        datasets: graphData.datasets.map((dataset, index) => ({
-            ...dataset,
-            borderColor: index === 0 ? '#f02d3a' : index === 1 ? '#8ac926' : '#8ac926', // Culori diferite pentru fiecare linie
-            backgroundColor: 'rgba(255, 99, 132, 0.2)', // Fundal translucid
-        })),
-    }}
-    options={{
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                ticks: { color: '#000' }, // Culoare pentru etichetele axei X
-            },
-            y: {
-                ticks: { color: '#000' }, // Culoare pentru etichetele axei Y
-            },
-        },
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#000', // Text de legendă în culoare închisă
-                },
-            },
-        },
-    }}
-/>
 
-                    )}
+            {error && <div className="error">{error}</div>}
+
+            {isLoading ? (
+                <div>Loading graphs...</div>
+            ) : processedData && processedData.length > 0 ? (
+                <div className="chart-content">
+                    {processedData.map((data, index) => (
+                        <div key={index} className="chart-item minimalist">
+                            <h3>{data.symbol}</h3>
+                            <Line
+                                data={{
+                                    labels: data.labels,
+                                    datasets: [
+                                        {
+                                            label: 'Total Invested',
+                                            data: data.totalInvested,
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                            borderWidth: 1,
+                                            pointRadius: 0,
+                                            tension: 0.4,
+                                        },
+                                        {
+                                            label: 'Average Price',
+                                            data: data.averagePrice,
+                                            borderColor: 'rgba(255, 99, 132, 1)',
+                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                            borderWidth: 1,
+                                            pointRadius: 0,
+                                            tension: 0.4,
+                                        },
+                                    ],
+                                }}
+                                options={{
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        tooltip: { enabled: true },
+                                        legend: { display: false },
+                                    },
+                                    scales: {
+                                        x: { display: true, grid: { display: false } },
+                                        y: { display: true, grid: { display: true } },
+                                    },
+                                }}
+                            />
+                        </div>
+                    ))}
                 </div>
+            ) : (
+                <div>No data available.</div>
             )}
         </div>
     );
