@@ -61,3 +61,32 @@ export const verifyOtp = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    await AuthService.forgotPassword(email);
+    res.send({ message: 'Password reset email sent successfully' });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(400).send(error.message);
+    } else {
+      res.status(500).send('An unexpected error occurred');
+    }
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+    await AuthService.resetPassword(token, newPassword);
+    res.send({ message: 'Password has been reset successfully' });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(400).send(error.message);
+    } else {
+      res.status(500).send('An unexpected error occurred');
+    }
+  }
+};

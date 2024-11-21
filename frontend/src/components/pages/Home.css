@@ -78,7 +78,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: 1 1 calc(33.333% - 30px); /* Ajustăm flex pentru a împărți spațiul în mod egal */
     min-width: 50px;
-    max-width: 500px; /* Micșorăm lățimea maximă pentru carduri */
+    max-width: 250px; /* Micșorăm lățimea maximă pentru carduri */
     text-decoration: none; /* Asigură că link-ul nu are subliniere */
     display: block; /* Asigură că link-ul ocupă întregul spațiu al cardului */
     transition: background-color 0.3s, transform 0.3s; /* Adăugăm tranziția */
@@ -105,10 +105,7 @@
     background-color: #003554; /* Albastru */
     color: #E5E7E6; /* Text alb */
 }
-.card.brown {
-    background-color: #003554; /* Albastru */
-    color: #E5E7E6; /* Text alb */
-}
+
 .chart {
     display: flex;
     flex-direction: column;
@@ -121,55 +118,4 @@
 .chart h1 {
     font-size: 18px; /* Micșorăm dimensiunea fontului */
     margin-bottom: 10px; /* Micșorăm margin pentru a economisi spațiu */
-}
-/* Media queries pentru ecrane mai mici de 768px */
-@media (max-width: 768px) {
-    /* Ajustarea containerului principal */
-    .home-container {
-        flex-direction: column; /* Elemente pe verticală */
-        margin-left: 0; /* Elimină spațiul lateral */
-        padding: 10px; /* Adaugă padding */
-    }
-
-    /* Sidebar */
-    .navbar {
-        width: 100%; /* Sidebar ocupă toată lățimea */
-        height: auto; /* Permite sidebar-ului să se extindă */
-        flex-direction: row; /* Elemente afișate pe un rând */
-        justify-content: space-around; /* Aliniere uniformă */
-    }
-
-    /* Cardurile */
-    .cards {
-        flex-direction: column; /* Afișare verticală */
-        gap: 15px; /* Spațiu între carduri */
-    }
-
-    .card {
-        width: 100%; /* Cardurile ocupă întreaga lățime */
-        max-width: 100%; /* Elimină restricția de lățime */
-        flex: none; /* Dezactivează comportamentul flexibil */
-    }
-
-    /* Graficul */
-    .chart-container {
-        display: flex;
-        flex-direction: column;
-        margin: 16px;
-        height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
-        width: 100%; /* Ajustăm lățimea pentru a ține cont de navbar */
-        background-color: #f8f9fa; /* Fundal deschis */
-        overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
-        color: #0e1116; /* Text întunecat */
-        padding: 1rem; /* Margine internă */
-        box-sizing: border-box;
-        border-radius: 10px;
-    }
-    
-    /* Header */
-    .home-header {
-        flex-direction: column; /* Elemente afișate pe verticală */
-        align-items: flex-start; /* Aliniere la stânga */
-        gap: 10px; /* Spațiu între elemente */
-    }
 }
