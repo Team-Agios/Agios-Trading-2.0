@@ -2,11 +2,11 @@
     display: flex;
     height: 100vh;
     margin-left: 290px;
-    background-color: #13524b;
+    background-color: #e5e7e6;
 }
 
 .news-content {
-    color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
+    color: #000; /* Aceeași culoare a textului ca navbar-links li a */
     flex-grow: 1;
     padding: 20px;
 }
@@ -20,7 +20,7 @@
 .news-article {
     margin-bottom: 5px; /* Aceeași marjă ca navbar-links li */
     padding: 10px; /* Aceeași padding ca navbar-links li a */
-    background-color: #162447; /* Aceeași culoare de fundal ca navbar-links li a */
+    background-color: #003554; /* Aceeași culoare de fundal ca navbar-links li a */
     color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
     border-radius: 5px; /* Aceeași bordură rotunjită ca navbar-links li a */
     text-decoration: none; /* Eliminăm sublinierea */

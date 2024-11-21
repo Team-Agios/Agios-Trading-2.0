@@ -19,16 +19,11 @@ const Balance: React.FC = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (response.data && typeof response.data.balance === 'number') {
-                    setBalance(response.data.balance);
-                } else {
-                    console.error('Invalid balance format:', response.data);
-                    setBalance(0); // Default value on error
-                }
+                setBalance(response.data.balance ?? 0);
             }
         } catch (error) {
+            setBalance(0);
             console.error('Error fetching balance:', error);
-            setBalance(0); // Default value on error
         }
     };
 
@@ -36,25 +31,17 @@ const Balance: React.FC = () => {
         try {
             const token = localStorage.getItem('authToken');
             const userId = localStorage.getItem('userId');
-
             if (token && userId) {
                 const response = await axios.get(`/stock/get/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (response.data && Array.isArray(response.data)) {
-                    setStocks(response.data);
-                } else {
-                    console.error('Invalid stock format:', response.data);
-                    setStocks([]);
-                }
-            } else {
-                console.error('Token or User ID is missing');
+                setStocks(response.data ?? []);
             }
         } catch (error) {
+            setStocks([]);
             console.error('Error fetching stocks:', error);
-            setStocks(null); // Default value on error
         } finally {
             setIsLoading(false);
         }
@@ -69,12 +56,7 @@ const Balance: React.FC = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (response.data && response.data.balance !== undefined) {
-                    setBalance(response.data.balance);
-                    console.log('Balance after adding:', response.data.balance);
-                } else {
-                    console.error('Error adding balance:', response.data);
-                }
+                setBalance(response.data.balance ?? balance);
             }
         } catch (error) {
             console.error('Error adding balance:', error);
@@ -89,35 +71,43 @@ const Balance: React.FC = () => {
     return (
         <div className="balance-container">
             <Navbar />
-            <div className="balance-content">
-                <div className="balance-header">
-                    <h2>Balance</h2>
-                    <p>{balance !== null ? `$${balance}` : 'Loading...'}</p>
+            <div className="balance-header">
+                <div className="balance-info">
+                    <h2>Your Balance</h2>
+                    <p>{balance !== null ? `$${balance.toFixed(2)}` : 'Loading...'}</p>
                 </div>
-                <div className="stocks-header">
-                    <h2>Stocks</h2>
-                    {isLoading ? (
-                        <p>Loading...</p>
-                    ) : stocks !== null && stocks.length > 0 ? (
-                        <ul className="stock-list">
-                            {stocks.map(stock => (
-                                <li key={stock.symbol} className="stock-item">
+            </div>
+
+            <div className="stocks-header">
+                <h2>Your Stocks</h2>
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : stocks && stocks.length > 0 ? (
+                    <ul className="stock-list">
+                        {stocks.map(stock => (
+                            <li key={stock.symbol} className="stock-item">
+                                <div className="stock-details">
                                     <span className="stock-symbol">{stock.symbol}</span>
-                                    <span className="stock-quantity">{stock.quantity}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Nu are stocuri</p>
-                    )}
-                </div>
-                <div className="balance-actions">
+                                    <span className="stock-quantity">{stock.quantity} shares</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No stocks available</p>
+                )}
+            </div>
+
+            <div className="balance-actions">
+                <div className="action-input">
                     <input
                         type="number"
                         value={amount}
                         onChange={(e) => setAmount(Number(e.target.value))}
                         placeholder="Enter amount"
                     />
+                </div>
+                <div className="action-buttons">
                     <button onClick={handleAddBalance}>Add Balance</button>
                 </div>
             </div>

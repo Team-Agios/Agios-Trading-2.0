@@ -35,10 +35,10 @@ const ResetPassword: React.FC = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-card">
+        <div className="login-container3">
+            <div className="login-card3">
                 <h2>Reset Password</h2>
-                {error && <p className="error-message">{error}</p>}
+                {error && <p className="error-message3">{error}</p>}
                 <form onSubmit={handleVerify}>
                     <input 
                         type="text" 

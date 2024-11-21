@@ -1,13 +1,15 @@
 .chart-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    margin: 1rem; /* Ajustare pentru alinierea corectă */
-    height: calc(100vh - 60px); /* Mărim înălțimea graficului pentru a ocupa tot spațiul */
-    background-color: #13524B; /* Fundal verde închis */
-    overflow-y: hidden; /* Eliminăm scroll-ul vertical */
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
-    color: #F4F4F8; /* Culoarea textului similară cu navbar-links li a */
+    margin: 16px;
+    height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
+    width: 100%;
+    background-color: #f8f9fa; /* Fundal deschis */
+    overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
+    color: #0e1116; /* Text întunecat */
+    padding-right: 16px; /* Margine internă */
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 
 .chart-header {
@@ -15,43 +17,111 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Butoanele vor trece pe o linie nouă dacă ecranul e mic */
 }
 
 .chart-header h1 {
     margin: 0;
-    font-size: 30px; /* Dimensiunea fontului */
-    color: #F4F4F8; /* Culoarea textului */
+    font-size: 1.5rem;
+    color: #0e1116;
 }
 
 .chart-buttons {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 0.5rem 0;
+    flex-wrap: wrap; /* Butoanele se împart pe mai multe linii dacă spațiul e insuficient */
 }
 
 .chart-buttons button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #13524b;
-    color: #F4F4F8;
+    margin: 0;
+    padding: 10px 15px;
+    background-color: #0e1116;
+    color: #ffffff;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
-    text-decoration: none;
-    display: block;
-    font-weight: bold;
+    font-size: 0.9rem; /* Dimensiune redusă pentru ecrane mici */
 }
 
 .chart-buttons button.active,
 .chart-buttons button:hover {
-    background-color: #4CAF50;
-    color: inherit;
+    background-color: #003554;
+    color: #ffffff;
 }
 
 .chart-content {
-    flex-grow: 1;
-    overflow-y: hidden; /* Eliminăm scroll-ul vertical */
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
+    display: flex;
+    flex-direction: column; /* Organizăm graficele pe verticală */
+    gap: 30px; /* Spațiere între grafice */
+    overflow-y: auto; /* Scroll vertical dacă sunt prea multe grafice */
+    padding: 1rem;
+}
+
+.chart-item {
+    background-color: #ffffff; /* Fundal alb pentru grafice */
+    border: 1px solid #e1e1e1; /* Bordură subțire gri */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Umbră subtilă */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-item h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem; /* Font mai mare pentru titlul graficului */
+    text-align: center;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        margin-left: 0; /* Eliminăm spațiul pentru navbar pe ecrane mici */
+        width: 100%; /* Ocupă toată lățimea */
+        height: calc(100vh - 60px); /* Ajustare dacă navbarul este mai mic */
+    }
+
+    .chart-header h1 {
+        font-size: 1.2rem; /* Font mai mic */
+    }
+
+    .chart-buttons button {
+        font-size: 0.8rem; /* Butoane mai mici */
+        padding: 8px 12px;
+    }
+
+    .chart-item {
+        padding: 15px; /* Reducem padding-ul pe ecrane mici */
+    }
+
+    .chart-item h3 {
+        font-size: 1rem; /* Reducem dimensiunea fontului pentru titluri */
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-header h1 {
+        font-size: 1rem;
+    }
+
+    .chart-buttons {
+        gap: 5px;
+    }
+
+    .chart-buttons button {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+
+    .chart-item {
+        padding: 10px; /* Mai puțin padding */
+    }
+
+    .chart-item h3 {
+        font-size: 0.9rem; /* Titluri mai mici */
+    }
 }

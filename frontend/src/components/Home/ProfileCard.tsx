@@ -67,7 +67,7 @@ const ProfileCard: React.FC = () => {
     }, [authContext]);
 
     return (
-        <Link to="/profile" className="profile-card">
+        <Link to="/profile" className="profile-card1">
             <div className="profile-info">
                 {isLoadingProfile ? (
                     <p>Loading profile...</p>
