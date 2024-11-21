@@ -5,11 +5,12 @@
     height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
     width: calc(100% - 250px); /* Ajustăm lățimea pentru a ține cont de navbar */
     margin-left: 250px; /* Asigurăm că începe după navbar */
-    background-color: #E5E7E6; /* Fundal neutru */
-    overflow: hidden; /* Eliminăm scroll-ul */
+    background-color: #f8f9fa; /* Fundal deschis */
+    overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
     color: #0e1116; /* Text întunecat */
     padding: 1rem; /* Margine internă */
     box-sizing: border-box;
+    border-radius: 10px;
 }
 
 .chart-header {
@@ -22,7 +23,7 @@
 
 .chart-header h1 {
     margin: 0;
-    font-size: 1.5rem; /* Dimensiunea adaptată */
+    font-size: 1.5rem;
     color: #0e1116;
 }
 
@@ -53,12 +54,31 @@
 }
 
 .chart-content {
-    flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Prevenim scroll-ul */
+    flex-direction: column; /* Organizăm graficele pe verticală */
+    gap: 30px; /* Spațiere între grafice */
+    overflow-y: auto; /* Scroll vertical dacă sunt prea multe grafice */
+    padding: 1rem;
 }
+
+.chart-item {
+    background-color: #ffffff; /* Fundal alb pentru grafice */
+    border: 1px solid #e1e1e1; /* Bordură subțire gri */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Umbră subtilă */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-item h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem; /* Font mai mare pentru titlul graficului */
+    text-align: center;
+    color: #333;
+}
+
 @media (max-width: 768px) {
     .chart-container {
         margin-left: 0; /* Eliminăm spațiul pentru navbar pe ecrane mici */
@@ -74,6 +94,14 @@
         font-size: 0.8rem; /* Butoane mai mici */
         padding: 8px 12px;
     }
+
+    .chart-item {
+        padding: 15px; /* Reducem padding-ul pe ecrane mici */
+    }
+
+    .chart-item h3 {
+        font-size: 1rem; /* Reducem dimensiunea fontului pentru titluri */
+    }
 }
 
 @media (max-width: 480px) {
@@ -88,5 +116,13 @@
     .chart-buttons button {
         font-size: 0.7rem;
         padding: 6px 10px;
+    }
+
+    .chart-item {
+        padding: 10px; /* Mai puțin padding */
+    }
+
+    .chart-item h3 {
+        font-size: 0.9rem; /* Titluri mai mici */
     }
 }
