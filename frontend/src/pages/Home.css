@@ -1,22 +1,22 @@
 .home-container {
     display: flex;
-    height: 100vh;
-    margin-left: 290px;
+    flex-direction: column;
+    height: auto; /* Permitem înălțime variabilă */
+    margin-left: 290px; /* Spațiu pentru navbar */
     background-color: #E5E7E6;
-    overflow-y: hidden; /* Scoatem scroll-ul vertical */
-    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
+    overflow-y: auto; /* Scroll doar pe verticală */
+    overflow-x: hidden; /* Ascundem scroll-ul orizontal */
+    box-sizing: border-box;
 }
+
 
 .home-content {
-    flex-grow: 1;
-    color: #0E1116; /* Aceeași culoare a textului ca navbar-links li a */
-    padding: 20px;
-    overflow-y: hidden;
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
+    flex-grow: 1; /* Ocupă tot spațiul disponibil */
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    overflow: visible; /* Eliminăm scroll-ul intern */
 }
-
 .home-header {
     display: flex;
     justify-content: space-between;
@@ -35,11 +35,9 @@
 
 .cards {
     display: flex;
+    flex-wrap: wrap; /* Permite afișarea pe mai multe rânduri */
     gap: 15px;
     margin-bottom: 20px;
-    height: 40vh; /* Mărim înălțimea secțiunii cardurilor */
-    overflow-y: hidden; /* Scoatem scroll-ul vertical */
-    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
 }
 
 .chart-container {
@@ -48,6 +46,13 @@
     height: 1500vh; /* Mărim înălțimea graficului */
     overflow-y: hidden; /* Înlăturăm scroll-ul vertical */
     overflow-x: hidden; /* Înlăturăm scroll-ul orizontal */
+}
+.chart-container {
+    flex-grow: 1; /* Asigurăm că ocupă tot spațiul rămas */
+    height: auto; /* Permitem înălțime variabilă */
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .chatbot-icon {
@@ -70,20 +75,19 @@
 }
 
 .card {
-    background-color: #003554; /* Schimbat pentru a fi similar cu profile-card */
-    color: #000; /* Text alb */
-    border: none; /* Eliminăm bordura albă */
-    padding: 30px 20px;
+    flex: 1 1 calc(33.333% - 30px); /* Ajustăm cardurile pentru a se potrivi spațiului */
+    max-width: 300px;
+    min-width: 200px;
+    height: auto; /* Permitem dimensiune variabilă */
+    background-color: #003554;
+    color: #E5E7E6;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1 1 calc(33.333% - 30px); /* Ajustăm flex pentru a împărți spațiul în mod egal */
-    min-width: 50px;
-    max-width: 500px; /* Micșorăm lățimea maximă pentru carduri */
-    text-decoration: none; /* Asigură că link-ul nu are subliniere */
-    display: block; /* Asigură că link-ul ocupă întregul spațiu al cardului */
-    transition: background-color 0.3s, transform 0.3s; /* Adăugăm tranziția */
-    font-weight: bold;
+    padding: 20px;
     cursor: pointer;
+}
+.card .card-content {
+    text-align: center; /* Centrează textul în card */
 }
 
 .card:hover {
@@ -110,12 +114,8 @@
     color: #E5E7E6; /* Text alb */
 }
 .chart {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aliniem conținutul la stânga */
-    margin: 20px; /* Micșorăm margin pentru a se încadra mai bine */
-    height: 100%; /* Asigurăm că graficul ocupă întreg spațiul vertical disponibil */
-    width: 100%; /* Asigurăm că graficul ocupă întreg spațiul orizontal disponibil */
+    width: 100%; /* Ocupă întreaga lățime */
+    height: 100%; /* Ocupă întreaga înălțime */
 }
 
 .chart h1 {
@@ -153,17 +153,14 @@
 
     /* Graficul */
     .chart-container {
+        flex: 1 1 60%; /* Ocupă 60% din înălțimea disponibilă */
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
-        margin: 16px;
-        height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
-        width: 100%; /* Ajustăm lățimea pentru a ține cont de navbar */
-        background-color: #f8f9fa; /* Fundal deschis */
-        overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
-        color: #0e1116; /* Text întunecat */
-        padding: 1rem; /* Margine internă */
-        box-sizing: border-box;
-        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
     }
     
     /* Header */

@@ -2,48 +2,39 @@
     display: flex;
     flex-direction: column;
     margin: 16px;
-    height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
+    height: auto; /* Permite extinderea în funcție de conținut */
     width: 100%;
-    background-color: #f8f9fa; /* Fundal deschis */
-    overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
-    color: #0e1116; /* Text întunecat */
-    padding-right: 16px; /* Margine internă */
+    background-color: #f8f9fa;
+    color: #0e1116;
+    padding: 1rem;
     box-sizing: border-box;
     border-radius: 10px;
+    overflow: hidden; /* Eliminăm scrollbar-ul */
 }
 
 .chart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Butoanele vor trece pe o linie nouă dacă ecranul e mic */
-}
-
-.chart-header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #0e1116;
+    margin-bottom: 20px; /* Spațiu sub antet */
+    flex-wrap: wrap; /* Permite ca elementele să treacă pe linii noi */
 }
 
 .chart-buttons {
     display: flex;
-    gap: 10px;
-    margin: 0.5rem 0;
-    flex-wrap: wrap; /* Butoanele se împart pe mai multe linii dacă spațiul e insuficient */
+    gap: 10px; /* Spațiu între butoane */
+    margin-top: 10px; /* Spațiu între titlu și butoane */
 }
 
 .chart-buttons button {
-    margin: 0;
     padding: 10px 15px;
     background-color: #0e1116;
     color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
     transition: background-color 0.3s;
-    font-size: 0.9rem; /* Dimensiune redusă pentru ecrane mici */
 }
 
 .chart-buttons button.active,
@@ -53,75 +44,33 @@
 }
 
 .chart-content {
-    display: flex;
-    flex-direction: column; /* Organizăm graficele pe verticală */
-    gap: 30px; /* Spațiere între grafice */
-    overflow-y: auto; /* Scroll vertical dacă sunt prea multe grafice */
-    padding: 1rem;
+    display: grid; /* Layout de tip grilă */
+    grid-template-columns: 1; /* Ajustează numărul de coloane */
+    gap: 20px; /* Spațiere între grafice */
+    justify-items: center; /* Centrează fiecare grafic */
+    align-items: center; /* Centrează fiecare grafic vertical */
+    width: 100%;
+    margin-top: 20px; /* Spațiu între butoane și grafice */
 }
 
 .chart-item {
-    background-color: #ffffff; /* Fundal alb pentru grafice */
-    border: 1px solid #e1e1e1; /* Bordură subțire gri */
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Umbră subtilă */
+    width: 100%;
+    max-width: 700px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .chart-item h3 {
-    margin-bottom: 20px;
-    font-size: 1.2rem; /* Font mai mare pentru titlul graficului */
+    margin-bottom: 10px;
+    font-size: 1rem; /* Dimensiune font pentru titlu */
     text-align: center;
     color: #333;
-}
-
-@media (max-width: 768px) {
-    .chart-container {
-        margin-left: 0; /* Eliminăm spațiul pentru navbar pe ecrane mici */
-        width: 100%; /* Ocupă toată lățimea */
-        height: calc(100vh - 60px); /* Ajustare dacă navbarul este mai mic */
-    }
-
-    .chart-header h1 {
-        font-size: 1.2rem; /* Font mai mic */
-    }
-
-    .chart-buttons button {
-        font-size: 0.8rem; /* Butoane mai mici */
-        padding: 8px 12px;
-    }
-
-    .chart-item {
-        padding: 15px; /* Reducem padding-ul pe ecrane mici */
-    }
-
-    .chart-item h3 {
-        font-size: 1rem; /* Reducem dimensiunea fontului pentru titluri */
-    }
-}
-
-@media (max-width: 480px) {
-    .chart-header h1 {
-        font-size: 1rem;
-    }
-
-    .chart-buttons {
-        gap: 5px;
-    }
-
-    .chart-buttons button {
-        font-size: 0.7rem;
-        padding: 6px 10px;
-    }
-
-    .chart-item {
-        padding: 10px; /* Mai puțin padding */
-    }
-
-    .chart-item h3 {
-        font-size: 0.9rem; /* Titluri mai mici */
-    }
 }
