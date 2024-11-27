@@ -15,21 +15,24 @@
     max-height: 80vh;
     overflow-y: auto;
     padding-right: 10px;
+    display: grid; /* Activează layout-ul grilă */
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Coloane responsive */
+    gap: 20px; /* Spațiere între articole */
 }
 
 .news-article {
-    margin-bottom: 5px; /* Aceeași marjă ca navbar-links li */
-    padding: 10px; /* Aceeași padding ca navbar-links li a */
-    background-color: #003554; /* Aceeași culoare de fundal ca navbar-links li a */
-    color: #ecf0f1; /* Aceeași culoare a textului ca navbar-links li a */
-    border-radius: 5px; /* Aceeași bordură rotunjită ca navbar-links li a */
-    text-decoration: none; /* Eliminăm sublinierea */
-    display: flex; /* Asigurăm că ocupă întregul spațiu */
-    flex-direction: column; /* Aliniem conținutul pe verticală */
-    align-items: flex-start; /* Aliniem conținutul la stânga */
-    transition: background-color 0.3s; /* Aceeași tranziție ca navbar-links li a */
-    cursor: pointer; /* Adăugăm cursor pointer */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adăugăm o umbră pentru consistență */
+    margin: 0;
+    padding: 0; /* Eliminăm padding-ul inițial */
+    background-color: #003554;
+    color: #ecf0f1;
+    border-radius: 8px; /* Borduri rotunjite */
+    display: flex;
+    flex-direction: column; /* Asigurăm că imaginea și textul sunt pe verticală */
+    align-items: stretch; /* Imaginea va ocupa toată lățimea */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+    overflow: hidden; /* Asigurăm că marginile imaginii respectă bordurile rotunjite */
 }
 
 .news-article:hover {

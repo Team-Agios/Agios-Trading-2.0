@@ -53,6 +53,7 @@ const BusinessNews: React.FC = () => {
                                 className="news-article"
                                 onClick={() => handleArticleClick(article.url)}
                             >
+                                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrzKaHhZfohjvg9I1gSEX38zTjgJcK7Lr1vQ&s'></img>
                                 <h4>{article.title}</h4>
                                 <p>{article.description}</p>
                             </div>
