@@ -1,155 +1,91 @@
 .navbar {
     display: flex;
-    flex-direction: column;
-    background-color: #E5E7E6;
-    color: #000;
-    width: 250px;
-    height: 100vh;
-    border: 2px solid #000;
-    border-left: none;
-    border-bottom: none;
-    border-top: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 20px;
-    justify-content: space-between; /* Asigură că butonul de setări este în partea de jos */
-}
-
-.profile-card1,
-.button {
-    margin: 20px 0;
-    padding: 30px 20px;
-    background-color: #003554;
-    color: #0E1116;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    text-decoration: none;
-    display: block;
-    font-weight: bold;
-}
-
-.profile-card1:hover,
-.button:hover {
-    background-color: #003554;
-    color: #0E1116;
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    width: 100%;
-}
-
-.profile-info:hover {
-    background-color: transparent;
-}
-
-.profile-name {
-    font-weight: bold;
-    color: #E5E7E6;
-}
-
-.profile-title {
-    font-size: 1em;
-    color: #E5E7E6;
-}
-
-.profile-balance {
-    font-size: 1.1em;
-    color: #E5E7E6;
-}
-
-.profile-details {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #003554;
-    color: #E5E7E6;
-    border-radius: 10px;
-}
-
-.profile-field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
-
-.profile-field label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.admins-menu {
-    margin-top: 20px;
-}
-
-.admins-menu-title {
-    padding: 10px 0;
-    font-size: 1.2em;
-    color: #E5E7E6;
-    margin-bottom: 10px;
-}
-
-.navbar-links {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.navbar-links li {
-    margin-bottom: 5px;
-}
-
-.navbar-links li a {
+    padding: 10px 40px;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .navbar-left {
     display: flex;
     align-items: center;
-    padding: 10px;
-    background-color: #003554;
-    color: #E5E7E6;
-    border-radius: 5px;
+    gap: 10px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .navbar-right nav {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navbar-right nav a {
+    color: var(--text-primary);
     text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.navbar-links li a:hover {
-    background-color: #E5E7E6;
-    color: #000;
-}
-
-.navbar-links .icon {
-    margin-right: 15px;
-}
-
-.settings-button {
-    margin: 20px 0 50px 0; /* Adaugă o margine de 30px față de marginea de jos */
-    padding: 10px 20px;
-    background-color: #162447;
-    color: #F4F4F8;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .navbar-right nav a:hover {
+    background-color: var(--bg-secondary);
+  }
+  
+  .navbar-buttons button {
+    background-color: var(--bg-secondary);
     border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  
+  .profile-pic {
+    width: 36px;
+    height: 36px;
+    background-color: var(--bg-secondary);
+    border-radius: 50%;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #101923;
+    padding: 10px 20px;
+    border-bottom: 1px solid #223449;
+  }
+  
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #ffffff;
     font-weight: bold;
-}
-
-.settings-button .icon {
-    margin-right: 10px; /* Adaugă spațiu între pictogramă și text */
-}
-
-.settings-button:hover {
-    background-color: #2ec4b6;
-    color: #000;
-}
+  }
+  
+  .navbar-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .navbar-icons button {
+    background: #223449;
+    color: #ffffff;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
