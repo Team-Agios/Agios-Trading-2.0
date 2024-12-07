@@ -130,18 +130,18 @@ const Chart = () => {
                                         {
                                             label: 'Total Invested',
                                             data: data.totalInvested,
-                                            borderColor: 'rgba(75, 192, 192, 1)',
-                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                            borderWidth: 1,
+                                            borderColor: '#358ef3', // Albastru deschis
+                                            backgroundColor: 'rgba(53, 142, 243, 0.2)', // Albastru transparent
+                                            borderWidth: 2,
                                             pointRadius: 0,
                                             tension: 0.4,
                                         },
                                         {
                                             label: 'Average Price',
                                             data: data.averagePrice,
-                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                            borderWidth: 1,
+                                            borderColor: '#90abcb', // Gri-albăstrui
+                                            backgroundColor: 'rgba(144, 171, 203, 0.2)', // Gri-albăstrui transparent
+                                            borderWidth: 2,
                                             pointRadius: 0,
                                             tension: 0.4,
                                         },
@@ -150,15 +150,43 @@ const Chart = () => {
                                 options={{
                                     maintainAspectRatio: false,
                                     plugins: {
-                                        tooltip: { enabled: true },
-                                        legend: { display: false },
+                                        tooltip: {
+                                            enabled: true,
+                                            backgroundColor: '#223449', // Fundal întunecat pentru tooltip
+                                            titleColor: '#ffffff', // Titlul tooltip-ului alb
+                                            bodyColor: '#ffffff', // Textul tooltip-ului alb
+                                        },
+                                        legend: {
+                                            display: true,
+                                            labels: {
+                                                color: '#e5e7e6', // Alb pentru textul legendei
+                                            },
+                                        },
                                     },
                                     scales: {
-                                        x: { display: true, grid: { display: false } },
-                                        y: { display: true, grid: { display: true } },
+                                        x: {
+                                            display: true,
+                                            grid: {
+                                                display: false, // Ascunde liniile grilei pe axa X
+                                            },
+                                            ticks: {
+                                                color: '#e5e7e6', // Alb pentru etichetele axei X
+                                            },
+                                        },
+                                        y: {
+                                            display: true,
+                                            grid: {
+                                                display: true,
+                                                color: '#314b68', // Gri-albăstrui pentru liniile grilei
+                                            },
+                                            ticks: {
+                                                color: '#e5e7e6', // Alb pentru etichetele axei Y
+                                            },
+                                        },
                                     },
                                 }}
                             />
+
                         </div>
                     ))}
                 </div>
