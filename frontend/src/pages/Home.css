@@ -1,61 +1,95 @@
+/* General container styling */
 .home-container {
     display: flex;
-    height: 100vh;
-    margin-left: 290px;
-    background-color: #E5E7E6;
-    overflow-y: hidden; /* Scoatem scroll-ul vertical */
-    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
-}
-
-.home-content {
-    flex-grow: 1;
-    color: #0E1116; /* Aceeași culoare a textului ca navbar-links li a */
-    padding: 20px;
-    overflow-y: hidden;
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
-    display: flex;
     flex-direction: column;
-}
-
-.home-header {
+    min-height: 100vh;
+    background-color: #101923;
+    color: #e5e7e6;
+  }
+  
+  /* Content styling */
+  .home-content {
+    flex-grow: 1;
+    padding: 20px 40px;
+  }
+  
+  /* Header styling */
+  .home-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-}
-
-.home-header h2 {
+  }
+  
+  .home-header h2 {
     margin: 0;
-}
-
-.home-header .header-icons {
+    font-size: 24px;
+    color: #ffffff;
+  }
+  
+  .header-icons i {
+    margin-right: 15px;
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  /* Card styling */
+  .cards {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-}
-
-.cards {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    height: 40vh; /* Mărim înălțimea secțiunii cardurilor */
-    overflow-y: hidden; /* Scoatem scroll-ul vertical */
-    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
-}
-
-.chart-container {
-    flex-grow: 1;
-    margin-bottom: 20px;
-    height: 1500vh; /* Mărim înălțimea graficului */
-    overflow-y: hidden; /* Înlăturăm scroll-ul vertical */
-    overflow-x: hidden; /* Înlăturăm scroll-ul orizontal */
-}
-
-.chatbot-icon {
+  }
+  
+  .card {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: 300px;
+    background-color: #223449;
+    color: #e5e7e6;
+    border-radius: 10px;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card:hover {
+    background-color: #358ef3;
+    color: #ffffff;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-value {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .card-change.green {
+    color: #4caf50;
+  }
+  
+  .card-change.red {
+    color: #f44336;
+  }
+  
+  /* Chart container */
+  .chart-container {
+    margin-top: 30px;
+    background-color: #223449;
+    border-radius: 10px;
+    padding: 20px;
+    color: #e5e7e6;
+  }
+  
+  /* Chatbot button */
+  .chatbot-icon {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #003554;
-    color: #000;
+    background-color: #358ef3;
+    color: #ffffff;
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -63,113 +97,9 @@
     font-size: 24px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.chatbot-icon:hover {
+  }
+  
+  .chatbot-icon:hover {
     background-color: #003554;
-}
-
-.card {
-    background-color: #003554; /* Schimbat pentru a fi similar cu profile-card */
-    color: #000; /* Text alb */
-    border: none; /* Eliminăm bordura albă */
-    padding: 30px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1 1 calc(33.333% - 30px); /* Ajustăm flex pentru a împărți spațiul în mod egal */
-    min-width: 50px;
-    max-width: 500px; /* Micșorăm lățimea maximă pentru carduri */
-    text-decoration: none; /* Asigură că link-ul nu are subliniere */
-    display: block; /* Asigură că link-ul ocupă întregul spațiu al cardului */
-    transition: background-color 0.3s, transform 0.3s; /* Adăugăm tranziția */
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.card:hover {
-    background-color: #003554; /* Schimbă culoarea de fundal la hover */
-    color: inherit; /* Păstrează culoarea textului la hover */
-}
-
-.card.green {
-    background-color: #003554; /* Verde */
-    color: #E5E7E6; /* Text alb */
-}
-
-.card.red {
-    background-color: #003554; /* Roșu */
-    color: #E5E7E6; /* Text alb */
-}
-
-.card.blue {
-    background-color: #003554; /* Albastru */
-    color: #E5E7E6; /* Text alb */
-}
-.card.brown {
-    background-color: #003554; /* Albastru */
-    color: #E5E7E6; /* Text alb */
-}
-.chart {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aliniem conținutul la stânga */
-    margin: 20px; /* Micșorăm margin pentru a se încadra mai bine */
-    height: 100%; /* Asigurăm că graficul ocupă întreg spațiul vertical disponibil */
-    width: 100%; /* Asigurăm că graficul ocupă întreg spațiul orizontal disponibil */
-}
-
-.chart h1 {
-    font-size: 18px; /* Micșorăm dimensiunea fontului */
-    margin-bottom: 10px; /* Micșorăm margin pentru a economisi spațiu */
-}
-/* Media queries pentru ecrane mai mici de 768px */
-@media (max-width: 768px) {
-    /* Ajustarea containerului principal */
-    .home-container {
-        flex-direction: column; /* Elemente pe verticală */
-        margin-left: 0; /* Elimină spațiul lateral */
-        padding: 10px; /* Adaugă padding */
-    }
-
-    /* Sidebar */
-    .navbar {
-        width: 100%; /* Sidebar ocupă toată lățimea */
-        height: auto; /* Permite sidebar-ului să se extindă */
-        flex-direction: row; /* Elemente afișate pe un rând */
-        justify-content: space-around; /* Aliniere uniformă */
-    }
-
-    /* Cardurile */
-    .cards {
-        flex-direction: column; /* Afișare verticală */
-        gap: 15px; /* Spațiu între carduri */
-    }
-
-    .card {
-        width: 100%; /* Cardurile ocupă întreaga lățime */
-        max-width: 100%; /* Elimină restricția de lățime */
-        flex: none; /* Dezactivează comportamentul flexibil */
-    }
-
-    /* Graficul */
-    .chart-container {
-        display: flex;
-        flex-direction: column;
-        margin: 16px;
-        height: calc(100vh - 2rem); /* Înălțimea completă minus margin */
-        width: 100%; /* Ajustăm lățimea pentru a ține cont de navbar */
-        background-color: #f8f9fa; /* Fundal deschis */
-        overflow-y: auto; /* Scroll doar pe verticală pentru conținutul lung */
-        color: #0e1116; /* Text întunecat */
-        padding: 1rem; /* Margine internă */
-        box-sizing: border-box;
-        border-radius: 10px;
-    }
-    
-    /* Header */
-    .home-header {
-        flex-direction: column; /* Elemente afișate pe verticală */
-        align-items: flex-start; /* Aliniere la stânga */
-        gap: 10px; /* Spațiu între elemente */
-    }
-}
+  }
+  
