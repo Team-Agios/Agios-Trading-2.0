@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className="navbar">
       <div className="navbar-left">
@@ -18,14 +24,21 @@ const Navbar = () => {
             />
           </svg>
         </div>
-        <h2>Invest</h2>
+        <h2>Agios-Trading</h2>
       </div>
       <div className="navbar-right">
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/market">Market</Link>
-          <Link to="/portfolio">Portfolio</Link>
-          <Link to="/watchlist">Watchlist</Link>
+        <button className="menu-toggle" onClick={toggleMenu}>
+          &#9776;
+        </button>
+        <nav className={`navbar-links ${menuOpen ? "open" : ""}`}>
+          <Link to="/home">Home</Link>
+          <Link to="/stocks">Market</Link>
+          <Link to="/news">News</Link>
+          <Link to="/transactions">History</Link>
+          <Link to="/invest">Balance</Link>
+          <Link to="/activity">Activity</Link>
+          <Link to="/invest">Invest</Link>
+          <Link to="/depozit">Depozit</Link>
           <Link to="/discover">Discover</Link>
         </nav>
         <div className="navbar-buttons">

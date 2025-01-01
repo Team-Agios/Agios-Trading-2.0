@@ -1,13 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Home/Navbar';
 import './DepositFunds.css';
 import Chatbot from './Chatbot';
 
 const DepositFunds: React.FC = () => {
   const [chatbotVisible, setChatbotVisible] = useState(false);
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
+  const [copyAction, setCopyAction] = useState<string>('');
+
+  useEffect(() => {
+    // Request pentru a obține metodele de plată
+    const fetchPaymentMethods = async () => {
+      try {
+        const response = await fetch('/api/payment-methods'); // Endpointul pentru obținerea metodelor de plată
+        const data = await response.json();
+        setPaymentMethods(data); // Presupunem că backend-ul returnează un array de metode de plată
+      } catch (error) {
+        console.error('Error fetching payment methods:', error);
+      }
+    };
+
+    fetchPaymentMethods();
+  }, []);
+
   const toggleChatbot = () => {
     setChatbotVisible(!chatbotVisible);
   };
+
+  const handleCopyInstructions = (method: string) => {
+    setCopyAction(method);
+
+    // Trimiterea acțiunii utilizatorului către backend
+    const sendCopyActionToBackend = async () => {
+      try {
+        const response = await fetch('/api/save-copy-action', { // Endpoint pentru a salva acțiunea utilizatorului
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ action: 'copy_instructions', method }),
+        });
+        const data = await response.json();
+        console.log('Action saved:', data);
+      } catch (error) {
+        console.error('Error saving copy action:', error);
+      }
+    };
+
+    sendCopyActionToBackend();
+  };
+
   return (
     <div className="deposit-funds-container">
       {/* Include Navbar */}
@@ -22,19 +64,15 @@ const DepositFunds: React.FC = () => {
             business days for the funds to appear in your account.
           </p>
           <div className="options">
-            <label className="option">
-              <input type="radio" name="funding-method" className="radio-input" defaultChecked />
-              <div className="option-text">Wire transfer</div>
-            </label>
-            <label className="option">
-              <input type="radio" name="funding-method" className="radio-input" />
-              <div className="option-text">ACH transfer</div>
-            </label>
-            <label className="option">
-              <input type="radio" name="funding-method" className="radio-input" />
-              <div className="option-text">Check</div>
-            </label>
+            {paymentMethods.map((method, index) => (
+              <label key={index} className="option">
+                <input type="radio" name="funding-method" className="radio-input" />
+                <div className="option-text">{method.name}</div>
+              </label>
+            ))}
           </div>
+
+          {/* Example Wire Transfer */}
           <h3 className="section-title">Wire Transfer</h3>
           <p className="section-description">Please use the following information to complete your transfer:</p>
           <div className="details-grid">
@@ -56,8 +94,10 @@ const DepositFunds: React.FC = () => {
             </div>
           </div>
           <div className="button-container">
-            <button className="button">Copy instructions</button>
+            <button className="button" onClick={() => handleCopyInstructions('wire')}>Copy instructions</button>
           </div>
+
+          {/* Example ACH Transfer */}
           <h3 className="section-title">ACH Transfer</h3>
           <p className="section-description">Please use the following information to complete your transfer:</p>
           <div className="details-grid">
@@ -71,25 +111,26 @@ const DepositFunds: React.FC = () => {
             </div>
           </div>
           <div className="button-container">
-            <button className="button">Copy instructions</button>
+            <button className="button" onClick={() => handleCopyInstructions('ach')}>Copy instructions</button>
           </div>
+
+          {/* Example Check */}
           <h3 className="section-title">Check</h3>
           <p className="section-description">
             Please make the check payable to: Stockbank, Inc. and mail to: 123 Wall Street, New York, NY 10005
           </p>
           <div className="button-container">
-            <button className="button">Copy instructions</button>
+            <button className="button" onClick={() => handleCopyInstructions('check')}>Copy instructions</button>
           </div>
         </div>
       </div>
 
-        <button className="chatbot-icon" onClick={toggleChatbot}>
-          💬
-        </button>
-        {chatbotVisible && <Chatbot />}
-
+      {/* Chatbot */}
+      <button className="chatbot-icon" onClick={toggleChatbot}>
+        💬
+      </button>
+      {chatbotVisible && <Chatbot />}
     </div>
-    
   );
 };
 
