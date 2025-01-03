@@ -13,6 +13,9 @@ import Balance from './pages/Balance';
 import Chatbot from './pages/Chatbot';
 import Otp from './components/Auth/Otp';
 import Verify from './components/Auth/Verify';
+import ActivityPage from './pages/ActivityPage';
+import Invest from './pages/Invest1';
+import DepositFunds from './pages/DepositFunds';
 import './App.css';
 
 // Definirea rutelor
@@ -31,6 +34,9 @@ const routes = [
   { path: "/balance", element: <Balance /> },
   { path: "/chatbot", element: <Chatbot /> },
   { path: "/otp", element: <Otp /> },
+  {path :"/activity", element: <ActivityPage/>},
+  {path:"/depozit",element:<DepositFunds/>},
+  {path:"/invest",element:<Invest/>},
 ];
 
 const router = createBrowserRouter(routes, {
