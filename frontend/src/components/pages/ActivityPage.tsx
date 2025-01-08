@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "../config/axiosConfig"; // Configurația Axios
-import Navbar from "../components/Home/Navbar";
+import axios from "../../config/axiosConfig"; // Configurația Axios
+import Navbar from "../Home/Navbar";
 import "./ActivityPage.css";
 
 interface Transaction {

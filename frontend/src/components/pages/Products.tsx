@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../config/axiosConfig';
+import axios from '../../config/axiosConfig';
 import './Products.css';
-import Navbar from '../components/Home/Navbar';
+import Navbar from '../Home/Navbar';
 
 interface Stock {
   symbol: string;

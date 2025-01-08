@@ -4,18 +4,18 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import ForgotPassword from './components/Auth/ForgotPassword';
 import ResetPassword from './components/Auth/ResetPassword';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import BusinessNews from './pages/BusinessNews';
-import StockList10 from './pages/Products';
-import Transactions from './pages/Transactions';
-import Balance from './pages/Balance';
-import Chatbot from './pages/Chatbot';
+import Home from './components/pages/Home';
+import Profile from './components/pages/Profile';
+import BusinessNews from './components/pages/BusinessNews';
+import StockList10 from './components/pages/Products';
+import Transactions from './components/pages/Transactions';
+import Balance from './components/pages/Balance';
+import Chatbot from './components/pages/Chatbot';
 import Otp from './components/Auth/Otp';
 import Verify from './components/Auth/Verify';
-import ActivityPage from './pages/ActivityPage';
-import Invest from './pages/Invest1';
-import DepositFunds from './pages/DepositFunds';
+import ActivityPage from './components/pages/ActivityPage';
+import Invest from './components/pages/Invest1';
+import DepositFunds from './components/pages/DepositFunds';
 import './App.css';
 
 // Definirea rutelor
