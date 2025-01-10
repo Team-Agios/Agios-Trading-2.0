@@ -1,16 +1,32 @@
 .chart-container {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-    height: 100%;
-    width: 100%;
-    background-color: #223449; /* Fundal întunecat */
-    color: #e5e7e6; /* Text alb */
+    width: 100%; 
+    max-width: 100%;
+    margin: 0 auto;
     padding: 1rem;
     box-sizing: border-box;
+    background-color: #223449;
     border-radius: 10px;
-    overflow-y: auto;
+    overflow: hidden;
 }
+
+.chart-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+@media (max-width: 768px) {
+    .chart-content {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 .chart-header {
     display: flex;
@@ -46,23 +62,24 @@
 
 .chart-content {
     display: grid;
-    grid-template-columns: 1; 
-    gap: 1.25rem;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexibil: 1 sau mai multe coloane */
+    gap: 3rem; /* Spațiu între grafice */
     width: 100%;
     margin-top: 1.25rem;
-    height: auto;
+}
+canvas {
+    width: 100% !important;
+    height: auto !important;
 }
 
 .chart-item {
-    background-color: #101923; /* Fundal întunecat */
-    border: 1px solid #314b68; /* Gri-albăstrui */
+    background-color: #101923;
+    border: 1px solid #314b68;
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    min-width: 700px;
-    height: 300px;
+    width: 100%; /* Flexibil: ocupă toată lățimea disponibilă în grilă */
+    height: 300px; /* Înălțime consistentă */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,9 +87,40 @@
     overflow: hidden;
 }
 
+
+.chart-item canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
 .chart-item h3 {
     margin-bottom: 0.625rem;
     font-size: 1rem;
     text-align: center;
     color: #e5e7e6; /* Text alb */
+}
+/* Legend container */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem; /* Adjust space between buttons and legend */
+    margin-bottom: 1rem; /* Adjust space between legend and chart */
+}
+
+/* Each legend item */
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem; /* Match existing font size */
+    color: #e5e7e6; /* Maintain consistent text color */
+}
+
+/* Legend color box */
+.legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 0.5rem;
+    border-radius: 3px;
 }

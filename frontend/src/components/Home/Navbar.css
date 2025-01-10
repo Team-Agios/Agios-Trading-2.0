@@ -58,6 +58,21 @@
   border-radius: 50%;
 }
 
+/* Desktop Submenu Styling */
+.navbar-links .submenu {
+  display: none;
+  position: absolute;
+  background-color: #101923;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-links .has-submenu:hover .submenu {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Sidebar Menu for Mobile */
 @media screen and (max-width: 768px) {
   .menu-toggle {
@@ -68,16 +83,16 @@
     display: none;
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0; /* Meniul apare din dreapta */
     height: 100%;
     width: 75%;
     background-color: #101923;
     flex-direction: column;
     padding: 20px;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
     z-index: 100;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 
   .navbar-links.open {
@@ -87,9 +102,19 @@
 
   .navbar-links a {
     font-size: 16px;
-    padding: 15px 0;
+    padding: 10px 0;
     color: #ffffff;
     border-bottom: 1px solid #223449;
+  }
+
+  .navbar-links .submenu {
+    display: none;
+    flex-direction: column;
+    padding-left: 15px; /* Indentăm submeniul */
+  }
+
+  .navbar-links .submenu.open {
+    display: flex;
   }
 
   .menu-close {
@@ -100,11 +125,42 @@
     border: none;
     position: absolute;
     top: 10px;
-    right: 20px;
+    left: 20px;
     cursor: pointer;
   }
 
   .navbar-buttons {
     display: none;
   }
+
+  /* Submenu Header */
+.submenu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.submenu-toggle {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.submenu-toggle:hover {
+  color: #00bfff; /* Schimbare de culoare la hover */
+}
+
+.submenu {
+  display: none;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.submenu.open {
+  display: flex;
+}
+
 }

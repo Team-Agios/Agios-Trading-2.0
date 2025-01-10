@@ -1,16 +1,19 @@
-/* General container styling */
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Noto Sans', sans-serif;
+  background-color: #101923;
+  color: #e5e7e6;
+  overflow-x: hidden; /* Elimină scroll-ul orizontal */
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #101923;
-  color: #e5e7e6;
-}
-
-/* Content styling */
-.home-content {
-  flex-grow: 1;
-  padding: 20px 40px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Header styling */
@@ -19,81 +22,66 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .home-header h2 {
+  font-size: 28px;
   margin: 0;
-  font-size: 24px;
   color: #ffffff;
-}
-
-.header-icons i {
-  margin-right: 15px;
-  font-size: 20px;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-/* Card styling */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.card {
-  flex: 1 1 calc(33.333% - 20px);
-  max-width: 300px;
-  background-color: #223449;
-  color: #e5e7e6;
-  border-radius: 10px;
-  padding: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.card:hover {
-  background-color: #358ef3;
-  color: #ffffff;
-}
-
-.card-title {
-  font-size: 18px;
   font-weight: bold;
 }
 
-.card-value {
+/* Owned Stocks Section */
+.owned-stocks {
+  margin-top: 20px;
+}
+
+.owned-stocks h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Cards Section */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Layout flexibil */
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.card {
+  background-color: #1f2a38;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
   font-size: 16px;
-  margin: 10px 0;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
 }
 
-.card-change.green {
-  color: #4caf50;
+.card-value {
+  font-size: 14px;
+  color: #90abcb;
 }
 
-.card-change.red {
-  color: #f44336;
-}
-
-/* Chart container */
-.chart-container {
-  margin-top: 30px;
-  background-color: #223449;
-  border-radius: 10px;
-  padding: 20px;
-  color: #e5e7e6;
-  width: 100%;
-  box-sizing: border-box;
-  max-width: 800px; /* Added maximum width */
-  margin: 0 auto; /* Center the chart */
-}
-
-.chart-container canvas {
-  width: 100% !important; /* Ensure full responsiveness */
-  height: 300px !important; /* Set a fixed height for better control */
-  display: block;
-}
-
-/* Chatbot button */
+/* Chatbot Icon */
 .chatbot-icon {
   position: fixed;
   bottom: 20px;
@@ -106,79 +94,56 @@
   height: 50px;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .chatbot-icon:hover {
   background-color: #003554;
 }
 
-/* Responsive Styling */
-@media (max-width: 768px) {
-  .home-content {
-      padding: 10px 20px; /* Reduced padding for smaller screens */
-  }
-
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .cards {
-      gap: 15px; /* Adjust gap for smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajustare pentru ecrane mici */
+    gap: 12px;
   }
 
   .card {
-      flex: 1 1 calc(50% - 15px); /* Two cards per row */
-      max-width: none; /* Allow cards to resize dynamically */
+    padding: 12px;
   }
 
-  .header-icons i {
-      font-size: 18px; /* Adjust icon size */
-      margin-right: 10px;
+  .card-title {
+    font-size: 14px;
   }
 
-  .chart-container {
-      padding: 15px; /* Reduced padding for smaller screens */
-      max-width: 100%; /* Ensure it takes full width on smaller screens */
-  }
-
-  .chart-container canvas {
-      width: 100% !important;
-      height: 250px !important; /* Adjust height for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .home-content {
-      padding: 10px; /* Further reduced padding for mobile */
-  }
-
-  .cards {
-      gap: 10px;
-      flex-direction: column; /* Stack cards vertically */
-  }
-
-  .card {
-      flex: 1 1 100%; /* Full width for each card */
+  .card-value {
+    font-size: 12px;
   }
 
   .home-header h2 {
-      font-size: 20px; /* Adjust header font size */
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr; /* O singură coloană pe ecrane foarte mici */
   }
 
-  .header-icons i {
-      font-size: 16px; /* Further adjust icon size */
-      margin-right: 8px;
+  .card {
+    padding: 10px;
   }
 
-  .chart-container {
-      padding: 10px; /* Further reduced padding */
+  .card-title {
+    font-size: 14px;
   }
 
-  .chart-container canvas {
-      width: 100% !important;
-      height: 200px !important; /* Smaller height for very small screens */
+  .card-value {
+    font-size: 12px;
   }
 
-  .chatbot-icon {
-      width: 40px;
-      height: 40px;
-      font-size: 20px; /* Adjust size for smaller screens */
+  .home-header h2 {
+    font-size: 18px;
+    text-align: center;
   }
 }

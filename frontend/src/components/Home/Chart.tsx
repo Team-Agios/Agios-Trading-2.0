@@ -90,7 +90,7 @@ const Chart = () => {
 
     return (
         <div className="chart-container">
-            <div className="chart-header">
+                <div className="chart-header">
                 <h1>Portfolio Graphs</h1>
                 <div className="chart-buttons">
                     <button
@@ -112,8 +112,19 @@ const Chart = () => {
                         Year
                     </button>
                 </div>
-            </div>
 
+                {/* Legend section added */}
+                <div className="chart-legend">
+                    <span className="legend-item">
+                        <span className="legend-color" style={{ backgroundColor: '#358ef3' }}></span>
+                        Total Invested
+                    </span>
+                    <span className="legend-item">
+                        <span className="legend-color" style={{ backgroundColor: '#90abcb' }}></span>
+                        Average Price
+                    </span>
+                </div>
+            </div>
             {error && <div className="error">{error}</div>}
 
             {isLoading ? (
@@ -121,7 +132,7 @@ const Chart = () => {
             ) : processedData && processedData.length > 0 ? (
                 <div className="chart-content">
                     {processedData.map((data, index) => (
-                        <div key={index} className="chart-item minimalist">
+                        <div key={index} className="chart-item">
                             <h3>{data.symbol}</h3>
                             <Line
                                 data={{
@@ -130,8 +141,8 @@ const Chart = () => {
                                         {
                                             label: 'Total Invested',
                                             data: data.totalInvested,
-                                            borderColor: '#358ef3', // Albastru deschis
-                                            backgroundColor: 'rgba(53, 142, 243, 0.2)', // Albastru transparent
+                                            borderColor: '#358ef3',
+                                            backgroundColor: 'rgba(53, 142, 243, 0.2)',
                                             borderWidth: 2,
                                             pointRadius: 0,
                                             tension: 0.4,
@@ -139,8 +150,8 @@ const Chart = () => {
                                         {
                                             label: 'Average Price',
                                             data: data.averagePrice,
-                                            borderColor: '#90abcb', // Gri-albăstrui
-                                            backgroundColor: 'rgba(144, 171, 203, 0.2)', // Gri-albăstrui transparent
+                                            borderColor: '#90abcb',
+                                            backgroundColor: 'rgba(144, 171, 203, 0.2)',
                                             borderWidth: 2,
                                             pointRadius: 0,
                                             tension: 0.4,
@@ -149,17 +160,18 @@ const Chart = () => {
                                 }}
                                 options={{
                                     maintainAspectRatio: false,
+                                    responsive: true,
                                     plugins: {
                                         tooltip: {
                                             enabled: true,
-                                            backgroundColor: '#223449', // Fundal întunecat pentru tooltip
-                                            titleColor: '#ffffff', // Titlul tooltip-ului alb
-                                            bodyColor: '#ffffff', // Textul tooltip-ului alb
+                                            backgroundColor: '#223449',
+                                            titleColor: '#ffffff',
+                                            bodyColor: '#ffffff',
                                         },
                                         legend: {
                                             display: true,
                                             labels: {
-                                                color: '#e5e7e6', // Alb pentru textul legendei
+                                                color: '#e5e7e6',
                                             },
                                         },
                                     },
@@ -167,26 +179,25 @@ const Chart = () => {
                                         x: {
                                             display: true,
                                             grid: {
-                                                display: false, // Ascunde liniile grilei pe axa X
+                                                display: false,
                                             },
                                             ticks: {
-                                                color: '#e5e7e6', // Alb pentru etichetele axei X
+                                                color: '#e5e7e6',
                                             },
                                         },
                                         y: {
                                             display: true,
                                             grid: {
                                                 display: true,
-                                                color: '#314b68', // Gri-albăstrui pentru liniile grilei
+                                                color: '#314b68',
                                             },
                                             ticks: {
-                                                color: '#e5e7e6', // Alb pentru etichetele axei Y
+                                                color: '#e5e7e6',
                                             },
                                         },
                                     },
                                 }}
                             />
-
                         </div>
                     ))}
                 </div>
