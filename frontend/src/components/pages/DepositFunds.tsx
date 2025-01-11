@@ -6,7 +6,13 @@ import Chatbot from './Chatbot';
 const DepositFunds: React.FC = () => {
   const [chatbotVisible, setChatbotVisible] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
-  const [copyAction, setCopyAction] = useState<string>('');
+  const [formData, setFormData] = useState({
+    cardNumber: '',
+    expirationDate: '',
+    cvv: '',
+    cardHolderName: '',
+    transferAmount: '',
+  });
 
   useEffect(() => {
     // Request pentru a obține metodele de plată
@@ -27,27 +33,32 @@ const DepositFunds: React.FC = () => {
     setChatbotVisible(!chatbotVisible);
   };
 
-  const handleCopyInstructions = (method: string) => {
-    setCopyAction(method);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    // Trimiterea acțiunii utilizatorului către backend
-    const sendCopyActionToBackend = async () => {
-      try {
-        const response = await fetch('/api/save-copy-action', { // Endpoint pentru a salva acțiunea utilizatorului
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ action: 'copy_instructions', method }),
-        });
-        const data = await response.json();
-        console.log('Action saved:', data);
-      } catch (error) {
-        console.error('Error saving copy action:', error);
-      }
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    sendCopyActionToBackend();
+    try {
+      const response = await fetch('/api/process-card-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log('Payment processed:', data);
+      alert('Payment successfully submitted!');
+    } catch (error) {
+      console.error('Error processing payment:', error);
+      alert('Error processing payment. Please try again.');
+    }
   };
 
   return (
@@ -94,25 +105,77 @@ const DepositFunds: React.FC = () => {
             </div>
           </div>
           <div className="button-container">
-            <button className="button" onClick={() => handleCopyInstructions('wire')}>Copy instructions</button>
+            <button className="button">Copy instructions</button>
           </div>
 
-          {/* Example ACH Transfer */}
+          {/* ACH Transfer Form */}
           <h3 className="section-title">ACH Transfer</h3>
-          <p className="section-description">Please use the following information to complete your transfer:</p>
-          <div className="details-grid">
-            <div className="detail">
-              <p className="label">Account number</p>
-              <p className="value">1234567890</p>
+          <p className="section-description">Enter your card details and the amount to complete the transfer:</p>
+          <form className="ach-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="transferAmount" className="form-label">Transfer Amount</label>
+              <input
+                type="number"
+                id="transferAmount"
+                name="transferAmount"
+                className="form-input"
+                value={formData.transferAmount}
+                onChange={handleInputChange}
+                placeholder="Enter amount"
+                required
+              />
             </div>
-            <div className="detail">
-              <p className="label">Routing number</p>
-              <p className="value">123456789</p>
+            <div className="form-group">
+              <label htmlFor="cardNumber" className="form-label">Card Number</label>
+              <input
+                type="text"
+                id="cardNumber"
+                name="cardNumber"
+                className="form-input"
+                value={formData.cardNumber}
+                onChange={handleInputChange}
+                required
+              />
             </div>
-          </div>
-          <div className="button-container">
-            <button className="button" onClick={() => handleCopyInstructions('ach')}>Copy instructions</button>
-          </div>
+            <div className="form-group">
+              <label htmlFor="expirationDate" className="form-label">Expiration Date</label>
+              <input
+                type="text"
+                id="expirationDate"
+                name="expirationDate"
+                className="form-input"
+                placeholder="MM/YY"
+                value={formData.expirationDate}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="cvv" className="form-label">CVV</label>
+              <input
+                type="text"
+                id="cvv"
+                name="cvv"
+                className="form-input"
+                value={formData.cvv}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="cardHolderName" className="form-label">Cardholder Name</label>
+              <input
+                type="text"
+                id="cardHolderName"
+                name="cardHolderName"
+                className="form-input"
+                value={formData.cardHolderName}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <button type="submit" className="button">Submit Payment</button>
+          </form>
 
           {/* Example Check */}
           <h3 className="section-title">Check</h3>
@@ -120,7 +183,7 @@ const DepositFunds: React.FC = () => {
             Please make the check payable to: Stockbank, Inc. and mail to: 123 Wall Street, New York, NY 10005
           </p>
           <div className="button-container">
-            <button className="button" onClick={() => handleCopyInstructions('check')}>Copy instructions</button>
+            <button className="button">Copy instructions</button>
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    console.log("Menu toggled:", !menuOpen);
     setMenuOpen(!menuOpen);
   };
 
@@ -53,20 +52,14 @@ const Navbar = () => {
           <Link to="/transactions" onClick={closeMenu}>
             History
           </Link>
-          <Link to="/invest" onClick={closeMenu}>
-            Balance
-          </Link>
-          <Link to="/activity" onClick={closeMenu}>
-            Activity
+          <Link to="/profile" onClick={closeMenu}>
+            Account
           </Link>
           <Link to="/invest" onClick={closeMenu}>
             Invest
           </Link>
           <Link to="/depozit" onClick={closeMenu}>
             Depozit
-          </Link>
-          <Link to="/discover" onClick={closeMenu}>
-            Discover
           </Link>
         </nav>
         <div className="navbar-buttons">

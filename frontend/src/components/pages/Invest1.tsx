@@ -1,122 +1,72 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../config/axiosConfig";
-import "./Invest1.css";
-import Chatbot from "./Chatbot";
+import { useLocation } from "react-router-dom";
 import Navbar from "../Home/Navbar";
+import "./Invest1.css";
 
 interface Stock {
   symbol: string;
-  name: string;
+  name?: string;
   currentPrice: number;
-  image?: string;
 }
 
 const Invest: React.FC = () => {
-  const [chatbotVisible, setChatbotVisible] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [stocks, setStocks] = useState<Stock[]>([]);
-  const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
+  const location = useLocation();
+  const stock = location.state?.stock as Stock | undefined;
+
+  const [orderType, setOrderType] = useState<"market" | "limit">("market");
   const [quantity, setQuantity] = useState(1);
-  const [orderType, setOrderType] = useState("market");
-  const [timeInForce, setTimeInForce] = useState("GTC");
+  const [limitPrice, setLimitPrice] = useState(stock?.currentPrice || 0);
   const [estimatedCost, setEstimatedCost] = useState(0);
 
-  const toggleChatbot = () => {
-    setChatbotVisible(!chatbotVisible);
-  };
-
   useEffect(() => {
-    if (selectedStock) {
-      setEstimatedCost(selectedStock.currentPrice * quantity);
+    // Update estimated cost based on order type
+    if (orderType === "market") {
+      setEstimatedCost(quantity * (stock?.currentPrice || 0));
+    } else if (orderType === "limit") {
+      setEstimatedCost(quantity * limitPrice);
     }
-  }, [selectedStock, quantity]);
-
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(`/stocks/search?query=${searchQuery}`);
-      setStocks(response.data.stocks || []);
-    } catch (error) {
-      console.error("Error fetching stocks:", error);
-    }
-  };
+  }, [quantity, limitPrice, orderType, stock]);
 
   const handleBuy = async () => {
-    if (!selectedStock) return alert("Please select a stock to buy.");
+    if (!stock) return alert("No stock selected.");
+
+    const price = orderType === "market" ? stock.currentPrice : limitPrice;
 
     const transaction = {
       type: "buy",
       quantity,
-      price: selectedStock.currentPrice,
+      price,
       date: new Date(),
-      symbol: selectedStock.symbol,
-      strategy: "default",
+      symbol: stock.symbol,
+      strategy: orderType,
     };
 
     try {
-      const response = await axios.post("/transactions/add", transaction);
-      alert(`Bought ${quantity} unit(s) of ${selectedStock.symbol} at $${selectedStock.currentPrice}`);
-    } catch (error: any) {
-      if (error.response?.data?.message?.includes("insufficient funds")) {
-        alert("Insufficient funds");
-      } else {
-        alert("Error completing purchase");
-      }
+      alert(`Buying ${quantity} unit(s) of ${stock.symbol} at $${price.toFixed(2)}`);
+    } catch (error) {
+      alert("Error completing purchase.");
     }
   };
 
-  const handleSelectStock = (stock: Stock) => {
-    setSelectedStock(stock);
-  };
+  if (!stock) {
+    return (
+      <div>
+        <Navbar />
+        <h1>No stock selected</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="invest-root">
       <Navbar />
       <main>
-        <section className="intro">
-          <h1>Buy and sell stocks</h1>
-          <p>Trade your favorite companies, ETFs, and cryptocurrencies.</p>
-          <label className="search">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="e.g., AAPL, TSLA"
-            />
-            <button onClick={handleSearch}>Search</button>
-          </label>
-        </section>
-
-        {/* Stocks Section */}
-        <section className="stocks">
-          <h2>Stocks and ETFs</h2>
-          {stocks.length === 0 ? (
-            <p>No stocks found. Try a different query.</p>
-          ) : (
-            <div className="stock-list">
-              {stocks.map((stock) => (
-                <div
-                  key={stock.symbol}
-                  className={`stock-card ${
-                    selectedStock?.symbol === stock.symbol ? "selected" : ""
-                  }`}
-                  onClick={() => handleSelectStock(stock)}
-                >
-                  <div className="stock-details">
-                    <div className="stock-image"></div>
-                    <div>
-                      <p>{stock.name}</p>
-                      <span>${stock.currentPrice.toFixed(2)} per share</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
+        <h1>Invest in {stock.symbol}</h1>
+        <p>Current Price: ${stock.currentPrice.toFixed(2)}</p>
 
         {/* Order Type Section */}
         <section className="order-type">
-          <h2>Order type</h2>
+          <h2>Order Type</h2>
           <div className="radio-group">
             <label>
               <input
@@ -124,7 +74,7 @@ const Invest: React.FC = () => {
                 name="order"
                 value="market"
                 checked={orderType === "market"}
-                onChange={(e) => setOrderType(e.target.value)}
+                onChange={(e) => setOrderType(e.target.value as "market")}
               />
               Market
             </label>
@@ -133,7 +83,8 @@ const Invest: React.FC = () => {
                 type="radio"
                 name="order"
                 value="limit"
-                onChange={(e) => setOrderType(e.target.value)}
+                checked={orderType === "limit"}
+                onChange={(e) => setOrderType(e.target.value as "limit")}
               />
               Limit
             </label>
@@ -151,46 +102,26 @@ const Invest: React.FC = () => {
           />
         </section>
 
-        {/* Time in Force Section */}
-        <section className="time-in-force">
-          <h2>Time in force</h2>
-          <div className="radio-group">
-            <label>
-              <input
-                type="radio"
-                name="time"
-                value="GTC"
-                checked={timeInForce === "GTC"}
-                onChange={(e) => setTimeInForce(e.target.value)}
-              />
-              Good till cancel (GTC)
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="time"
-                value="Day"
-                onChange={(e) => setTimeInForce(e.target.value)}
-              />
-              Day
-            </label>
-          </div>
-        </section>
+        {/* Limit Price Section */}
+        {orderType === "limit" && (
+          <section className="limit-price">
+            <h2>Limit Price</h2>
+            <input
+              type="number"
+              value={limitPrice}
+              onChange={(e) => setLimitPrice(Number(e.target.value))}
+              min="0"
+            />
+          </section>
+        )}
 
         {/* Estimated Cost Section */}
         <section className="cost">
-          <h2>Estimated cost</h2>
+          <h2>Estimated Cost</h2>
           <p>${estimatedCost.toFixed(2)}</p>
-          <button onClick={handleBuy} disabled={!selectedStock}>
-            Review order
-          </button>
+          <button onClick={handleBuy}>Buy</button>
         </section>
       </main>
-
-      <button className="chatbot-icon" onClick={toggleChatbot}>
-        💬
-      </button>
-      {chatbotVisible && <Chatbot />}
     </div>
   );
 };

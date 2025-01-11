@@ -1,221 +1,255 @@
-/* General container styling */
+/* Asigurăm eliminarea completă a scroll-ului orizontal */
+
+/* Container Principal */
 .stock-list-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #101923;
-    color: #e5e7e6;
-    padding: 0; /* Removed padding to allow full width */
-    width: 100%;
-    margin: 0; /* Removed any unintended margin */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #101923!important;
+  color: #e5e7e6;
+  width: 100%; /* Fixăm lățimea */
+  margin: 0;
+  padding: 0; /* Eliminăm padding-ul */
+  overflow-x: hidden; /* Eliminăm scrollbar-ul orizontal */
+  box-sizing: border-box; /* Corectăm calculul dimensiunilor */
 }
-
-/* Main content area */
+/* Conținutul listei */
 .stock-list-content {
-    flex-grow: 1;
-    padding: 0; /* Removed padding */
-    border-radius: 0; /* Removed border radius */
-    background: #101923;
-    width: 100%;
+  flex-grow: 1;
+  padding: 20px;
+  background: #101923; /* Culoare originală */
+  width: 100%;
+  box-sizing: border-box;
 }
-
-/* Stock list styling */
+/* Grilă pentru Casete */
 .stock-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 10px;
-    max-height: 80vh;
-    overflow-y: auto;
-    width: 100%;
-    margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto; /* Centrează conținutul */
+  box-sizing: border-box;
 }
 
-/* Stock item (individual card) */
+/* Casetele Individuale */
 .stock-item {
-    background-color: #223449;
-    border-radius: 10px;
-    padding: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid #3a3d46;
-    color: #e5e7e6;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  max-width: 100%; /* Prevenim depășirea containerului */
+  background-color: #1f2a38!important;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #3a3d46;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stock-item:hover {
-    background-color: #358ef3;
-    color: #ffffff;
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+/* Secțiunea Predict */
+.stock-input-box {
+  width: 100%; /* Lățime completă */
+  box-sizing: border-box;
+  margin: 0 auto; /* Centrează conținutul */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Spațiu între elemente */
+  background-color: #101923; /* Culoare originală */
+  border: 1px solid #3a3d46;
+  border-radius: 8px;
+  color: #e5e7e6;
+  max-width: 800px; /* Dimensiune maximă pentru desktop */
 }
 
-/* Header inside each card */
-.stock-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
+/* Input-ul de Text */
+.stock-input-box input {
+  width: 100%; /* Prevenim depășirea */
+  box-sizing: border-box;
 }
 
-.stock-header h2 {
+/* Butoanele din Secțiunea Predict */
+.stock-input-box button {
+  width: 100%; /* Ocupă întreaga lățime pe mobil */
+  max-width: 150px; /* Dimensiune fixă pentru desktop */
+  margin: 0 auto; /* Centrează butoanele */
+}
+
+/* Responsivitate pentru Dispozitive Mici */
+@media (max-width: 768px) {
+  .stock-list {
+    grid-template-columns: 1fr; /* O coloană */
+  }
+  .stock-input-box {
+    width: 100%; /* Lățime completă */
+  }
+}
+
+  
+  /* Textul și elementele interne ale casetei */
+  .stock-header h2 {
     font-size: 18px;
-    margin: 0;
     font-weight: bold;
-}
-
-.logo-placeholder {
+    margin: 0;
+    color: #ffffff;
+  }
+  
+  .logo-placeholder {
     width: 40px;
     height: 40px;
     background-color: #3a3d46;
     border-radius: 50%;
     margin-right: 10px;
-}
-
-/* Stock details */
-.stock-details {
-    margin-bottom: 10px;
+  }
+  
+  .stock-details {
+    margin-bottom: 15px;
     font-size: 16px;
     color: #9ea2a8;
-}
-
-.stock-label {
+  }
+  
+  .stock-label {
     font-weight: bold;
-}
-
-.stock-value {
-    color: #4caf50; /* Green for positive numbers */
-}
-
-/* Buttons inside each card */
-.stock-buttons {
+  }
+  
+  .stock-value {
+    color: #4caf50;
+  }
+  
+  /* Butoane pentru fiecare casetă */
+  .stock-buttons {
     display: flex;
-    gap: 5px;
-}
-
-.stock-buttons button {
-    padding: 8px 15px;
+    gap: 10px;
+  }
+  
+  .stock-buttons button {
+    flex: 1;
+    padding: 10px 15px;
     font-size: 14px;
     font-weight: bold;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.stock-buttons .buy-button {
-    background-color: #1abc9c;
+  }
+  
+  .stock-buttons .buy-button {
+    background-color: #358ef3;
     color: white;
-}
-
-.stock-buttons .buy-button:hover {
-    background-color: #16a085;
+  }
+  
+  .stock-buttons .buy-button:hover {
+    background-color: #003554;
     transform: scale(1.05);
-}
-
-.stock-buttons .sell-button {
+  }
+  
+  .stock-buttons .sell-button {
     background-color: #e74c3c;
     color: white;
-}
-
-.stock-buttons .sell-button:hover {
+  }
+  
+  .stock-buttons .sell-button:hover {
     background-color: #c0392b;
     transform: scale(1.05);
-}
-
-/* Input box */
+  }
+  
+/* Secțiunea Predict - Responsiv */
 .stock-input-box {
-    background-color: #223449;
-    color: #e5e7e6;
-    border: 1px solid #3a3d46;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(34, 52, 73, 0.9); /* Fundal mat */
+  color: #e5e7e6;
+  border: 1px solid #3a3d46;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  box-sizing: border-box; /* Asigurăm că padding-ul este inclus */
 }
 
+/* Input-ul de text */
 .stock-input-box input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #3498db;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    outline: none;
-    background-color: #1c1c24;
-    color: #e5e7e6;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  flex: 1;
+  padding: 12px;
+  font-size: 14px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  outline: none;
+  background-color: #1c1c24;
+  color: #e5e7e6;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stock-input-box input:focus {
-    border-color: #2980b9;
-    box-shadow: 0 0 8px rgba(41, 128, 185, 0.5);
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.5);
 }
 
-.stock-input-box .buttons-container {
-    display: flex;
-    justify-content: space-between; /* Separated buttons */
-    gap: 10px;
-}
-
+/* Butoanele din secțiunea Predict */
 .stock-input-box button {
-    flex: 1; /* Equal width for buttons */
-    padding: 8px 15px;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    background-color: #358ef3;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 12px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #358ef3;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 120px; /* Dimensiune fixă pentru butoane */
 }
 
 .stock-input-box button:hover {
-    background-color: #003554;
-    transform: scale(1.05);
+  background-color: #003554;
+  transform: scale(1.05);
 }
 
-/* Scrollbar for stock list */
-.stock-list::-webkit-scrollbar {
-    width: 6px;
+/* Containerele pentru butoane */
+.stock-input-box .buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap; /* Permite împachetarea butoanelor */
 }
 
-.stock-list::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-radius: 10px;
-}
-
-.stock-list::-webkit-scrollbar-thumb:hover {
-    background-color: #7f8c8d;
-}
-
-/* Responsive Styling */
+/* Pentru ecrane mai mici */
 @media (max-width: 768px) {
-    .stock-list {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller cards for smaller screens */
-    }
+  .stock-input-box {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
 
-    .stock-input-box {
-        padding: 8px; /* Reduced padding */
-    }
+  .stock-input-box input {
+    width: 100%; /* Input-ul ocupă lățimea completă */
+  }
 
-    .stock-buttons button {
-        font-size: 12px; /* Smaller font for buttons */
-        padding: 6px 10px;
-    }
+  .stock-input-box .buttons-container {
+    flex-direction: column; /* Butoanele pe coloane */
+    gap: 10px;
+  }
+
+  .stock-input-box button {
+    width: 100%; /* Butoanele ocupă lățimea completă */
+  }
 }
 
-@media (max-width: 480px) {
-    .stock-list {
-        grid-template-columns: 1fr; /* Single column on very small screens */
-    }
+  
+  /* Eliminăm scroll-ul orizontal pe întregul document */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Eliminăm scroll-ul orizontal */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
 
-    .stock-input-box .buttons-container {
-        flex-direction: column; /* Stack buttons vertically */
-    }
-
-    .stock-input-box button {
-        margin-bottom: 8px;
-    }
+.stock-list-container {
+  overflow-x: hidden; /* Eliminăm scroll-ul orizontal în container */
 }

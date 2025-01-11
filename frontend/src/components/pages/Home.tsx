@@ -3,7 +3,7 @@ import axios from '../../config/axiosConfig';
 import './Home.css';
 import Navbar from '../Home/Navbar';
 import Chatbot from './Chatbot'; 
-import Chart from '../Home/Chart'; // Importă componenta Chart
+import Chart from '../Home/Chart';
 
 interface Stock {
   symbol: string;
@@ -15,7 +15,8 @@ interface Stock {
 }
 
 const Home: React.FC = () => {
-  const [stocks, setStocks] = useState<Stock[]>([]);
+  const [stocks, setStocks] = useState<Stock[]>([]); // Toate stocurile
+  const [ownedStocks, setOwnedStocks] = useState<Stock[]>([]); // Stocuri cumpărate
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [chatbotVisible, setChatbotVisible] = useState(false);
@@ -24,14 +25,22 @@ const Home: React.FC = () => {
     const fetchMarketSummary = async () => {
       try {
         const response = await axios.get('/market/market-summary');
-        setStocks(response.data.stocks);
+        console.log('API Response:', response.data);
+    
+        const fetchedStocks: Stock[] = response.data.stocks;
+    
+        // Folosim toate stocurile returnate pentru secțiunea Owned Stocks
+        setStocks(fetchedStocks);
+        setOwnedStocks(fetchedStocks); // Toate stocurile sunt considerate achiziționate
         setIsLoading(false);
       } catch (error) {
+        console.error('Error fetching market summary:', error);
         setError('Error fetching market summary');
         setIsLoading(false);
       }
     };
-
+    
+    
     fetchMarketSummary();
   }, []);
 
@@ -44,50 +53,49 @@ const Home: React.FC = () => {
       <Navbar />
       <div className="home-content">
         <div className="home-header">
-          <h2>Today, 17 May 2024</h2>
-          <div className="header-icons">
-            <i className="icon-search">🔍</i>
-            <i className="icon-bell">🔔</i>
-            <i className="icon-settings">⚙️</i>
+        <h2>Today, {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+        </div>
+
+        {/* Acțiuni cumpărate */}
+        <div className="owned-stocks">
+          <h3>Owned Stocks</h3>
+          <div className="cards">
+            {ownedStocks.length > 0 ? (
+              ownedStocks.map((stock, index) => (
+                <div key={index} className="card">
+                  <div className="card-title">{stock.symbol}</div>
+                  <div className="card-value">${stock.currentPrice.toFixed(2)}</div>
+                </div>
+              ))
+            ) : (
+              <p>You don’t own any stocks yet.</p>
+            )}
           </div>
         </div>
+
+
+        {/* Toate stocurile */}
         <div className="cards">
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>{error}</p>
           ) : (
-            stocks.map((stock, index) => {
-              const cardColors = ['green', 'red', 'blue', 'brown'];
-              return (
-                <div
-                  key={index}
-                  className={`card ${cardColors[index % cardColors.length]}`}
-                >
-                  <div className="card-content">
-                    <div className="card-title">{stock.symbol}</div>
-                    <div className="card-value">${stock.currentPrice.toFixed(2)}</div>
-                    <div
-                      className={`card-change ${
-                        stock.currentPrice > stock.previousClosePrice ? 'green' : 'red'
-                      }`}
-                    >
-                      {`$${(
-                        stock.currentPrice - stock.previousClosePrice
-                      ).toFixed(2)} (${(
-                        ((stock.currentPrice - stock.previousClosePrice) /
-                          stock.previousClosePrice) *
-                        100
-                      ).toFixed(2)}%)`}
-                    </div>
+            stocks.map((stock, index) => (
+              <div key={index} className="card">
+                <div className="card-content">
+                  <div className="card-title">{stock.symbol}</div>
+                  <div className="card-value">
+                    ${stock.currentPrice.toFixed(2)}
                   </div>
                 </div>
-              );
-            })
+              </div>
+            ))
           )}
         </div>
+
         <div className="chart-container">
-          <Chart /> {/* Reintroducem componenta Chart */}
+          <Chart />
         </div>
         <button className="chatbot-icon" onClick={toggleChatbot}>
           💬
@@ -99,3 +107,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
