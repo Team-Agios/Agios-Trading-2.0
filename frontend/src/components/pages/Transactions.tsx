@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../config/axiosConfig';
-import Navbar from '../components/Home/Navbar';
+import axios from '../../config/axiosConfig';
+import Navbar from '../Home/Navbar';
 import './Transactions.css';
 
 interface Transaction {

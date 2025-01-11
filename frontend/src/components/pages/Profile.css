@@ -1,110 +1,181 @@
-/* Profile.css */
-
 /* General container styling */
-.profile-container {
+.stock-list-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #e5e7e6;
     min-height: 100vh;
+    margin-left: 290px;
+    background-color: #f9f9f9;
     padding: 20px;
 }
 
-/* Profile card styling */
-.profile-card-custom {
-    background: #003554;
+/* Main content area */
+.stock-list-content {
+    color: #2c3e50;
+    flex-grow: 1;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-card-custom h2 {
-    color: #e5e7e6;
-    font-size: 24px;
-    margin-bottom: 20px;
+/* Stock list styling */
+.stock-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-/* Profile field styling */
-.profile-field-custom {
+/* Stock item (individual card) */
+.stock-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+}
+
+.stock-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f8faff;
+}
+
+/* Header inside each card */
+.stock-header {
+    display: flex;
+    align-items: center;
     margin-bottom: 15px;
 }
 
-.profile-field-custom label {
+.stock-header h2 {
+    font-size: 18px;
+    color: #003554;
+    margin: 0;
+    font-weight: bold;
+}
+
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* Stock details */
+.stock-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #555;
+}
+
+.stock-label {
+    font-weight: bold;
+}
+
+.stock-value {
+    color: #27ae60;
+}
+
+/* Buttons inside each card */
+.stock-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.stock-buttons button {
+    padding: 10px 20px;
     font-size: 14px;
     font-weight: bold;
-    color: #e5e7e6;
-    margin-bottom: 5px;
-}
-
-.profile-field-custom p {
-    font-size: 16px;
-    color: #e5e7e6;
-    margin: 0;
-}
-
-.profile-field-custom input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #f8f9fa;
-    transition: border-color 0.2s;
-}
-
-.profile-field-custom input:focus {
-    outline: none;
-    border-color: #007bff;
-    background-color: #ffffff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-}
-
-/* Buttons */
-.chart-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.chart-buttons button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #007bff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.chart-buttons button:hover {
-    background-color: #0056b3;
+.stock-buttons .buy-button {
+    background-color: #1abc9c;
+    color: white;
 }
 
-.chart-buttons button:active {
-    background-color: #004085;
+.stock-buttons .buy-button:hover {
+    background-color: #16a085;
+    transform: scale(1.05);
 }
 
-/* Responsive design */
-@media (max-width: 480px) {
-    .profile-card-custom {
-        padding: 20px;
-    }
+.stock-buttons .sell-button {
+    background-color: #e74c3c;
+    color: white;
+}
 
-    .profile-field-custom input {
-        font-size: 14px;
-    }
+.stock-buttons .sell-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
 
-    .chart-buttons button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
+/* Input box */
+.stock-input-box {
+    background-color: #ffffff;
+    color: #34495e;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stock-input-box input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stock-input-box input:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.5);
+}
+
+.stock-input-box button {
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #003554;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.stock-input-box button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Scrollbar for stock list */
+.stock-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.stock-list::-webkit-scrollbar-thumb {
+    background-color: #bdc3c7;
+    border-radius: 10px;
+}
+
+.stock-list::-webkit-scrollbar-thumb:hover {
+    background-color: #7f8c8d;
 }

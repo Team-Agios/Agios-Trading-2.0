@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../config/axiosConfig';
-import Navbar from '../components/Home/Navbar';
+import axios from '../../config/axiosConfig';
+import Navbar from '../Home/Navbar';
 import './Balance.css';
 
 const Balance: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Home/Navbar';
+import Navbar from '../Home/Navbar';
 import './DepositFunds.css';
 import Chatbot from './Chatbot';
 

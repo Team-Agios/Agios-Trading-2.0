@@ -6,7 +6,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
+    console.log("Menu toggled:", !menuOpen);
     setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   return (
@@ -31,18 +36,43 @@ const Navbar = () => {
           &#9776;
         </button>
         <nav className={`navbar-links ${menuOpen ? "open" : ""}`}>
-          <Link to="/home">Home</Link>
-          <Link to="/stocks">Market</Link>
-          <Link to="/news">News</Link>
-          <Link to="/transactions">History</Link>
-          <Link to="/invest">Balance</Link>
-          <Link to="/activity">Activity</Link>
-          <Link to="/invest">Invest</Link>
-          <Link to="/depozit">Depozit</Link>
-          <Link to="/discover">Discover</Link>
+          {menuOpen && (
+            <button className="menu-close" onClick={closeMenu}>
+              &times;
+            </button>
+          )}
+          <Link to="/home" onClick={closeMenu}>
+            Home
+          </Link>
+          <Link to="/stocks" onClick={closeMenu}>
+            Market
+          </Link>
+          <Link to="/news" onClick={closeMenu}>
+            News
+          </Link>
+          <Link to="/transactions" onClick={closeMenu}>
+            History
+          </Link>
+          <Link to="/invest" onClick={closeMenu}>
+            Balance
+          </Link>
+          <Link to="/activity" onClick={closeMenu}>
+            Activity
+          </Link>
+          <Link to="/invest" onClick={closeMenu}>
+            Invest
+          </Link>
+          <Link to="/depozit" onClick={closeMenu}>
+            Depozit
+          </Link>
+          <Link to="/discover" onClick={closeMenu}>
+            Discover
+          </Link>
         </nav>
         <div className="navbar-buttons">
-          <div className="profile-pic"></div>
+          <Link to="/profile">
+            <div className="profile-pic"></div>
+          </Link>
         </div>
       </div>
     </header>

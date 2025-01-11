@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "../config/axiosConfig";
+import axios from "../../config/axiosConfig";
 import "./Invest1.css";
 import Chatbot from "./Chatbot";
-import Navbar from "../components/Home/Navbar";
+import Navbar from "../Home/Navbar";
 
 interface Stock {
   symbol: string;

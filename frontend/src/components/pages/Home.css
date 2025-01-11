@@ -1,121 +1,184 @@
+/* General container styling */
 .home-container {
-    display: flex;
-    height: 100vh;
-    margin-left: 290px;
-    background-color: #E5E7E6;
-    overflow-y: hidden; /* Scoatem scroll-ul vertical */
-    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #101923;
+  color: #e5e7e6;
 }
 
+/* Content styling */
 .home-content {
-    flex-grow: 1;
-    color: #0E1116; /* Aceeași culoare a textului ca navbar-links li a */
-    padding: 20px;
-    overflow-y: hidden;
-    overflow-x: hidden; /* Eliminăm scroll-ul orizontal */
-    display: flex;
-    flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 40px;
 }
 
+/* Header styling */
 .home-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .home-header h2 {
-    margin: 0;
+  margin: 0;
+  font-size: 24px;
+  color: #ffffff;
 }
 
-.home-header .header-icons {
-    display: flex;
-    gap: 20px;
+.header-icons i {
+  margin-right: 15px;
+  font-size: 20px;
+  color: #ffffff;
+  cursor: pointer;
 }
 
+/* Card styling */
 .cards {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    height: 40vh; /* Mărim înălțimea secțiunii cardurilor */
-    overflow-y: hidden; /* Scoatem scroll-ul vertical */
-    overflow-x: hidden; /* Scoatem scroll-ul orizontal */
-}
-
-.chart-container {
-    flex-grow: 1;
-    margin-bottom: 20px;
-    height: 1500vh; /* Mărim înălțimea graficului */
-    overflow-y: hidden; /* Înlăturăm scroll-ul vertical */
-    overflow-x: hidden; /* Înlăturăm scroll-ul orizontal */
-}
-
-.chatbot-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #003554;
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.chatbot-icon:hover {
-    background-color: #003554;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .card {
-    background-color: #003554; /* Schimbat pentru a fi similar cu profile-card */
-    color: #000; /* Text alb */
-    border: none; /* Eliminăm bordura albă */
-    padding: 30px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1 1 calc(33.333% - 30px); /* Ajustăm flex pentru a împărți spațiul în mod egal */
-    min-width: 50px;
-    max-width: 250px; /* Micșorăm lățimea maximă pentru carduri */
-    text-decoration: none; /* Asigură că link-ul nu are subliniere */
-    display: block; /* Asigură că link-ul ocupă întregul spațiu al cardului */
-    transition: background-color 0.3s, transform 0.3s; /* Adăugăm tranziția */
-    font-weight: bold;
-    cursor: pointer;
+  flex: 1 1 calc(33.333% - 20px);
+  max-width: 300px;
+  background-color: #223449;
+  color: #e5e7e6;
+  border-radius: 10px;
+  padding: 15px;
+  transition: background-color 0.3s ease;
 }
 
 .card:hover {
-    background-color: #003554; /* Schimbă culoarea de fundal la hover */
-    color: inherit; /* Păstrează culoarea textului la hover */
+  background-color: #358ef3;
+  color: #ffffff;
 }
 
-.card.green {
-    background-color: #003554; /* Verde */
-    color: #E5E7E6; /* Text alb */
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.card.red {
-    background-color: #003554; /* Roșu */
-    color: #E5E7E6; /* Text alb */
+.card-value {
+  font-size: 16px;
+  margin: 10px 0;
 }
 
-.card.blue {
-    background-color: #003554; /* Albastru */
-    color: #E5E7E6; /* Text alb */
+.card-change.green {
+  color: #4caf50;
 }
 
-.chart {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aliniem conținutul la stânga */
-    margin: 20px; /* Micșorăm margin pentru a se încadra mai bine */
-    height: 100%; /* Asigurăm că graficul ocupă întreg spațiul vertical disponibil */
-    width: 100%; /* Asigurăm că graficul ocupă întreg spațiul orizontal disponibil */
+.card-change.red {
+  color: #f44336;
 }
 
-.chart h1 {
-    font-size: 18px; /* Micșorăm dimensiunea fontului */
-    margin-bottom: 10px; /* Micșorăm margin pentru a economisi spațiu */
+/* Chart container */
+.chart-container {
+  margin-top: 30px;
+  background-color: #223449;
+  border-radius: 10px;
+  padding: 20px;
+  color: #e5e7e6;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 800px; /* Added maximum width */
+  margin: 0 auto; /* Center the chart */
+}
+
+.chart-container canvas {
+  width: 100% !important; /* Ensure full responsiveness */
+  height: 300px !important; /* Set a fixed height for better control */
+  display: block;
+}
+
+/* Chatbot button */
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #358ef3;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-icon:hover {
+  background-color: #003554;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .home-content {
+      padding: 10px 20px; /* Reduced padding for smaller screens */
+  }
+
+  .cards {
+      gap: 15px; /* Adjust gap for smaller screens */
+  }
+
+  .card {
+      flex: 1 1 calc(50% - 15px); /* Two cards per row */
+      max-width: none; /* Allow cards to resize dynamically */
+  }
+
+  .header-icons i {
+      font-size: 18px; /* Adjust icon size */
+      margin-right: 10px;
+  }
+
+  .chart-container {
+      padding: 15px; /* Reduced padding for smaller screens */
+      max-width: 100%; /* Ensure it takes full width on smaller screens */
+  }
+
+  .chart-container canvas {
+      width: 100% !important;
+      height: 250px !important; /* Adjust height for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-content {
+      padding: 10px; /* Further reduced padding for mobile */
+  }
+
+  .cards {
+      gap: 10px;
+      flex-direction: column; /* Stack cards vertically */
+  }
+
+  .card {
+      flex: 1 1 100%; /* Full width for each card */
+  }
+
+  .home-header h2 {
+      font-size: 20px; /* Adjust header font size */
+  }
+
+  .header-icons i {
+      font-size: 16px; /* Further adjust icon size */
+      margin-right: 8px;
+  }
+
+  .chart-container {
+      padding: 10px; /* Further reduced padding */
+  }
+
+  .chart-container canvas {
+      width: 100% !important;
+      height: 200px !important; /* Smaller height for very small screens */
+  }
+
+  .chatbot-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 20px; /* Adjust size for smaller screens */
+  }
 }
