@@ -18,6 +18,7 @@ import Invest from './components/pages/Invest1';
 import DepositFunds from './components/pages/DepositFunds';
 import './App.css';
 import AgiosTradingPresentation from './components/Presentation/Presentation';
+import OtpReset from './components/Auth/OtpReset';
 
 // Definirea rutelor
 const routes = [
@@ -35,6 +36,7 @@ const routes = [
   { path: "/balance", element: <Balance /> },
   { path: "/chatbot", element: <Chatbot /> },
   { path: "/otp", element: <Otp /> },
+  { path: "/otpreset", element: <OtpReset /> },
   {path :"/activity", element: <ActivityPage/>},
   {path:"/depozit",element:<DepositFunds/>},
   {path:"/invest",element:<Invest/>},
