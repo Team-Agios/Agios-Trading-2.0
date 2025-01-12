@@ -17,10 +17,11 @@ import ActivityPage from './components/pages/ActivityPage';
 import Invest from './components/pages/Invest1';
 import DepositFunds from './components/pages/DepositFunds';
 import './App.css';
+import AgiosTradingPresentation from './components/Presentation/Presentation';
 
 // Definirea rutelor
 const routes = [
-  { path: "/", element: <Login /> },
+  { path: "/", element: <AgiosTradingPresentation /> },
   { path: "/login/:userId?", element: <Login /> },
   { path: "/register/:referralCode?", element: <Register /> },
   { path: "/verify/:token", element: <Verify /> },
