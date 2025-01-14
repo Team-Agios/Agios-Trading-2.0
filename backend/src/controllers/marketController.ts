@@ -19,7 +19,7 @@ interface StockData {
     pc: number;
 }
 
-const topSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'FB', 'NFLX', 'NVDA', 'BABA', 'DIS'];
+const topSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NFLX', 'NVDA', 'BABA', 'DIS'];
 
 const getTopStocks = async (count: number): Promise<string[]> => {
     try {
