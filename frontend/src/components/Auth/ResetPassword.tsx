@@ -13,7 +13,6 @@ const ResetPassword: React.FC = () => {
     const handleVerify = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            // Apelarea endpointului pentru verificarea codului și resetarea parolei
             const response = await fetch('/auth/reset-password', {
                 method: 'POST',
                 headers: {
@@ -23,7 +22,6 @@ const ResetPassword: React.FC = () => {
             });
 
             if (response.ok) {
-                // Redirecționarea către pagina de login după succes
                 navigate('/login');
             } else {
                 const errorData = await response.json();
@@ -35,27 +33,30 @@ const ResetPassword: React.FC = () => {
     };
 
     return (
-        <div className="login-container3">
-            <div className="login-card3">
-                <h2>Reset Password</h2>
-                {error && <p className="error-message3">{error}</p>}
-                <form onSubmit={handleVerify}>
-                    <input 
-                        type="text" 
-                        placeholder="Enter your code" 
-                        value={code} 
-                        onChange={(e) => setCode(e.target.value)} 
-                        required 
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Enter new password" 
-                        value={newPassword} 
-                        onChange={(e) => setNewPassword(e.target.value)} 
-                        required 
-                    />
-                    <button type="submit">Verify</button>
-                </form>
+        <div className="reset-container">
+            <div className="left-panel"></div>
+            <div className="right-panel">
+                <div className="reset-card">
+                    <h2>Reset Password</h2>
+                    {error && <p className="error-message3">{error}</p>}
+                    <form onSubmit={handleVerify}>
+                        <input
+                            type="text"
+                            placeholder="Enter your code"
+                            value={code}
+                            onChange={(e) => setCode(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Enter new password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Verify</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

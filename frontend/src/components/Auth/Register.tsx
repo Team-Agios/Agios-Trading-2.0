@@ -30,53 +30,56 @@ const Register: React.FC = () => {
 
     return (
         <div className="register-container">
-            <div className="register-card">
-                <h2>Register</h2>
-                <form onSubmit={handleRegister}>
-                    <input
-                        type="text"
-                        placeholder="First Name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Register</button>
-                </form>
-                <p>
-                    Already have an account? <a href="/login">Login here</a>
-                </p>
-                <div className="contact-support">
-                    <p>For support, contact us:</p>
-                    <p>Email: support@example.com</p>
-                    <p>Phone: +1 234 567 890</p>
+            <div className="left-panel"></div>
+            <div className="right-panel">
+                <div className="register-card">
+                    <h2>Register</h2>
+                    <form onSubmit={handleRegister}>
+                        <input
+                            type="text"
+                            placeholder="First Name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Phone"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Register</button>
+                    </form>
+                    <p>
+                        Already have an account? <a href="/login">Login here</a>
+                    </p>
+                    <div className="contact-support">
+                        <p>For support, contact us:</p>
+                        <p>Email: support@example.com</p>
+                        <p>Phone: +1 234 567 890</p>
+                    </div>
                 </div>
             </div>
         </div>

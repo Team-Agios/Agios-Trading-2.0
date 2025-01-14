@@ -19,7 +19,6 @@ const ForgotPassword: React.FC = () => {
             });
 
             if (response.ok) {
-                // Redirecționarea către pagina ResetPassword cu email-ul în state
                 navigate('/reset-password', { state: { email } });
             } else {
                 const errorData = await response.json();
@@ -43,19 +42,22 @@ const ForgotPassword: React.FC = () => {
 
     return (
         <div className="forgot-password-container">
-            <div className="forgot-password-card">
-                <h2>Forgot Password</h2>
-                {error && <p className="error-message">{error}</p>}
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                        required 
-                    />
-                    <button type="submit">Submit</button>
-                </form>
+            <div className="left-panel"></div>
+            <div className="right-panel">
+                <div className="forgot-password-card">
+                    <h2>Forgot Password</h2>
+                    {error && <p className="error-message">{error}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

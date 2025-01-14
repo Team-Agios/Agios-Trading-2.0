@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Verify.css'; // Importăm fișierul CSS
+import './Verify.css';
 
 const Verify: React.FC = () => {
   const { token } = useParams<{ token: string }>();
@@ -12,7 +12,7 @@ const Verify: React.FC = () => {
     const confirmEmail = async () => {
       try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/verify/${token}`);
-        
+
         console.log('Response status:', response.status);
         console.log('Response data:', response.data);
 
@@ -35,9 +35,12 @@ const Verify: React.FC = () => {
 
   return (
     <div className="verify-container">
-      <div className="verify-card">
-        <h2>Email Confirmation</h2>
-        <p>{message}</p>
+      <div className="left-panel"></div>
+      <div className="right-panel">
+        <div className="verify-card">
+          <h2>Email Confirmation</h2>
+          <p>{message}</p>
+        </div>
       </div>
     </div>
   );
