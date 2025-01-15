@@ -166,4 +166,38 @@ export const getStockLogo = async (req: Request, res: Response) => {
         console.error(`Error fetching logo for symbol ${symbol}:`, error);
         res.status(500).json({ message: 'Error fetching stock logo', error: String(error) });
     }
+
+    
+};
+
+export const getCurrentStockPrice = async (req: Request, res: Response) => {
+    const { symbol } = req.params;
+
+    if (!symbol) {
+        return res.status(400).json({ message: 'Stock symbol is required' });
+    }
+
+    try {
+        const response = await axios.get<StockData>(`${FINNHUB_API_URL}/quote`, {
+            params: { symbol },
+            headers: {
+                'X-Finnhub-Token': FINNHUB_API_KEY
+            }
+        });
+
+        if (response.status !== 200) {
+            return res.status(response.status).json({ message: `Error fetching current price for symbol: ${symbol}` });
+        }
+
+        const stockData = response.data;
+
+        if (!stockData || typeof stockData.c !== 'number') {
+            return res.status(404).json({ message: `Current price not found for symbol: ${symbol}` });
+        }
+
+        res.status(200).json({ symbol, currentPrice: stockData.c });
+    } catch (error) {
+        console.error(`Error fetching current price for symbol ${symbol}:`, error);
+        res.status(500).json({ message: 'Error fetching current stock price', error: String(error) });
+    }
 };

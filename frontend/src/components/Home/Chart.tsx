@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import axios from '../../config/axiosConfig';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,16 +11,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import './Chart.css';
 
-interface Dataset {
-    label: string;
-    data: number[];
-}
-
-interface GraphResponse {
-    labels: string[];
-    datasets: Dataset[];
-}
-
 interface ProcessedData {
     symbol: string;
     labels: string[];
@@ -31,7 +21,6 @@ interface ProcessedData {
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
 const Chart = () => {
-    const [graphData, setGraphData] = useState<GraphResponse | null>(null);
     const [processedData, setProcessedData] = useState<ProcessedData[]>([]);
     const [mode, setMode] = useState<string>('week');
     const [error, setError] = useState<string | null>(null);
@@ -47,12 +36,22 @@ const Chart = () => {
                 return;
             }
 
-            const response = await axios.get(`/portfolio/portfolio-graph?mode=${mode}`, {
+            const response = await axios.get(`http://localhost:5869/api/portfolio/portfolio-graph`, {
                 headers: { Authorization: `Bearer ${token}` },
+                params: { mode },
             });
 
             console.log('Graph Data Response:', response.data);
-            setGraphData(response.data);
+
+            // Transform API response to match the data structure for the charts
+            const transformedData: ProcessedData[] = response.data.map((item: any) => ({
+                symbol: item.symbol,
+                labels: item.data.totalInvested.map((_: number, index: number) => `Day ${index + 1}`),
+                totalInvested: item.data.totalInvested,
+                averagePrice: item.data.avgPrice,
+            }));
+
+            setProcessedData(transformedData);
             setError(null);
         } catch (error: any) {
             console.error('Error fetching graph data:', error.response?.data || error.message);
@@ -62,34 +61,13 @@ const Chart = () => {
         }
     }, [mode]);
 
-    const processGraphData = useCallback((data: GraphResponse) => {
-        const { labels, datasets } = data;
-
-        const transformedData = labels.map((label: string, index: number) => {
-            return {
-                symbol: label,
-                labels: datasets[0]?.data.map((_: number, i: number) => `Day ${i + 1}`),
-                totalInvested: datasets[0]?.data,
-                averagePrice: datasets[1]?.data,
-            };
-        });
-
-        setProcessedData(transformedData);
-    }, []);
-
     useEffect(() => {
         fetchGraphData();
     }, [fetchGraphData]);
 
-    useEffect(() => {
-        if (graphData) {
-            processGraphData(graphData);
-        }
-    }, [graphData, processGraphData]);
-
     return (
         <div className="chart-container">
-                <div className="chart-header">
+            <div className="chart-header">
                 <h1>Portfolio Graphs</h1>
                 <div className="chart-buttons">
                     <button
@@ -112,7 +90,6 @@ const Chart = () => {
                     </button>
                 </div>
 
-                {/* Legend section added */}
                 <div className="chart-legend">
                     <span className="legend-item">
                         <span className="legend-color" style={{ backgroundColor: '#358ef3' }}></span>
@@ -124,6 +101,7 @@ const Chart = () => {
                     </span>
                 </div>
             </div>
+
             {error && <div className="error">{error}</div>}
 
             {isLoading ? (
