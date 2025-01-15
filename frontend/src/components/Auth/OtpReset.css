@@ -1,0 +1,79 @@
+.otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #E5E7E6;
+}
+
+.otp-card {
+    background: #003554;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.otp-card h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.error-message {
+    background: #ff4d4f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.otp-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.otp-card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #162447;
+    color: #fff;
+}
+
+.otp-card input::placeholder {
+    color: #a9a9a9;
+}
+
+.otp-card button {
+    width: 100%;
+    padding: 10px;
+    background: #E5E7E6;
+    color: #003554;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.otp-card button:hover {
+    background: #1ec1a6;
+}
+
+.retry-button {
+    width: 100%;
+    padding: 10px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.retry-button:hover {
+    background: #fb8c00;
+}

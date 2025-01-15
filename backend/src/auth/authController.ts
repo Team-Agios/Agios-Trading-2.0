@@ -62,11 +62,16 @@ export const verifyOtp = async (req: Request, res: Response) => {
   }
 };
 
-export const forgotPassword = async (req: Request, res: Response) => {
+export const requestPasswordChange = async (req: Request, res: Response) => {
   try {
-    const { email } = req.body;
-    await AuthService.forgotPassword(email);
-    res.send({ message: 'Password reset email sent successfully' });
+    const { email, newPassword, confirmNewPassword } = req.body;
+
+    if (newPassword !== confirmNewPassword) {
+      return res.status(400).send('Passwords do not match');
+    }
+
+    await AuthService.requestPasswordChange(email, newPassword);
+    res.send({ message: 'OTP sent to your email for password change confirmation' });
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(400).send(error.message);
@@ -76,12 +81,11 @@ export const forgotPassword = async (req: Request, res: Response) => {
   }
 };
 
-export const resetPassword = async (req: Request, res: Response) => {
+export const confirmPasswordChange = async (req: Request, res: Response) => {
   try {
-    const { token } = req.params;
-    const { newPassword } = req.body;
-    await AuthService.resetPassword(token, newPassword);
-    res.send({ message: 'Password has been reset successfully' });
+    const { email, otp } = req.body;
+    await AuthService.confirmPasswordChange(email, otp);
+    res.send({ message: 'Password has been successfully updated' });
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(400).send(error.message);
