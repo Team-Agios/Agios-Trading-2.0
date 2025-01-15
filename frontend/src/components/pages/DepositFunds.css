@@ -234,3 +234,13 @@ body {
     padding: 8px; /* Smaller padding for smaller screens */
   }
 }
+.balance-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.balance-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
