@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import axios from '../../config/axiosConfig';
+import axios from "../../config/axiosConfig";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [balance, setBalance] = useState<number | null>(null); // Sold local pentru Navbar
+  const [profilePicture, setProfilePicture] = useState<string | null>(null); // Profil picture state
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -33,8 +34,27 @@ const Navbar = () => {
     }
   };
 
+  // Funcția de preluare a imaginii de profil
+  const fetchProfilePicture = async () => {
+    try {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        const response = await axios.get("/users/profile-picture", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProfilePicture(response.data.profilePicture); // Setăm imaginea de profil
+      }
+    } catch (error) {
+      console.error("Error fetching profile picture for Navbar:", error);
+      setProfilePicture(null); // Dacă nu găsim imaginea, setăm null
+    }
+  };
+
   useEffect(() => {
-    fetchBalance(); // Preluăm soldul la montarea componentei Navbar
+    fetchBalance(); // Preluăm soldul
+    fetchProfilePicture(); // Preluăm imaginea de profil
   }, []);
 
   return (
@@ -61,7 +81,17 @@ const Navbar = () => {
         </nav>
         <div className="navbar-buttons">
           <Link to="/profile">
-            <div className="profile-pic"></div>
+            <div className="profile-pic">
+              {profilePicture ? (
+                <img
+                  src={`http://localhost:5869${profilePicture}`}
+                  alt="Profile"
+                  className="profile-pic-image"
+                />
+              ) : (
+                <div className="default-profile-pic"></div> 
+              )}
+            </div>
           </Link>
         </div>
       </div>
