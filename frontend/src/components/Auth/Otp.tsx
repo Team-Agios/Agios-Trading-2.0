@@ -31,10 +31,10 @@ const Otp: React.FC = () => {
     };
 
     return (
-        <div className="otp-container">
-            <div className="left-panel"></div>
-            <div className="right-panel">
-                <div className="otp-card">
+        <div className="otp-container2">
+            <div className="left-panel2"></div>
+            <div className="right-panel2">
+                <div className="otp-card2">
                     <h2>Enter code</h2>
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <form onSubmit={handleVerifyOtp}>
