@@ -43,21 +43,23 @@ const OtpReset: React.FC = () => {
     };
 
     return (
-        <div className="otp-container">
-            <div className="otp-card">
-                <h2>Enter OTP</h2>
-                {successMessage && <div className="success-message">{successMessage}</div>}
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <form onSubmit={handleVerifyOtp}>
-                    <input
-                        type="text"
-                        placeholder="Enter OTP"
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Verify</button>
-                </form>
+        <div className="otp-container1">
+            <div className="left-panel1"></div>
+            <div className="right-panel1">
+                <div className="otp-card1">
+                    <h2>Enter code</h2>
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
+                    <form onSubmit={handleVerifyOtp}>
+                        <input
+                            type="text"
+                            placeholder="Enter email code"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Verify</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

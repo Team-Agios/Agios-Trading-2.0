@@ -130,31 +130,28 @@ body {
 }
 
 /* Predict Section */
+/* Stock Input Box */
 .stock-input-box {
-  background-color: rgba(34, 52, 73, 0.9);
-  color: #e5e7e6;
-  border: 1px solid #3a3d46;
+  background-color: #1f2a38;
   border-radius: 8px;
   padding: 15px;
-  margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  width: 100%;
-  box-sizing: border-box;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .stock-input-box input {
-  flex: 1;
+  width: 100%;
+  max-width: 600px;
   padding: 12px;
   font-size: 14px;
   border: 2px solid #3498db;
   border-radius: 8px;
   outline: none;
-  background-color: #1c1c24;
+  background-color: #101923;
   color: #e5e7e6;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stock-input-box input:focus {
@@ -162,22 +159,41 @@ body {
   box-shadow: 0 0 8px rgba(41, 128, 185, 0.5);
 }
 
+/* Buttons in the Stock Input Box */
+.stock-input-box .buttons-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .stock-input-box button {
-  padding: 12px 15px;
+  padding: 12px 20px;
   font-size: 14px;
   font-weight: bold;
-  color: white;
+  color: #ffffff;
   background-color: #358ef3;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  width: 120px;
 }
 
 .stock-input-box button:hover {
   background-color: #003554;
   transform: scale(1.05);
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .stock-input-box .buttons-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .stock-input-box button {
+    width: 100%;
+  }
 }
 
 /* Button Container in Predict Section */
@@ -188,7 +204,37 @@ body {
   justify-content: flex-end;
   flex-wrap: wrap;
 }
+.result-message {
+  background-color: #1f2a38;
+  color: #e5e7e6;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+/* Color Highlight for Prediction and Decision */
+.result-message:first-of-type {
+  border-left: 5px solid #4caf50; /* Green for Prediction */
+}
+
+.result-message:last-of-type {
+  border-left: 5px solid #e74c3c; /* Red for Decision */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .result-message {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
 /* Responsive Styling for Smaller Screens */
 @media (max-width: 768px) {
   .stock-list {
