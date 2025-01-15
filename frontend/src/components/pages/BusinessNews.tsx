@@ -7,6 +7,7 @@ interface NewsArticle {
   title: string;
   description: string;
   url: string;
+  urlToImage: string; // Adăugăm acest câmp pentru imagine
   source: {
     name: string;
   };
@@ -56,8 +57,9 @@ const BusinessNews: React.FC = () => {
                 onClick={() => handleArticleClick(article.url)}
               >
                 <img
-                  src="https://via.placeholder.com/300x150" // Placeholder pentru imagini
+                  src={article.urlToImage} // Afișăm imaginea reală
                   alt={article.title}
+                  className="news-article-image"
                 />
                 <h4>{article.title}</h4>
                 <p>{article.description}</p>

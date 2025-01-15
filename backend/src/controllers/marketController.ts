@@ -19,6 +19,18 @@ interface StockData {
     pc: number;
 }
 
+interface NewsAPIArticle {
+    title: string;
+    description: string;
+    url: string;
+    urlToImage?: string; 
+    source: {
+      name: string;
+    };
+    publishedAt: string;
+  }
+  
+
 const topSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NFLX', 'NVDA', 'BABA', 'DIS'];
 
 const getTopStocks = async (count: number): Promise<string[]> => {
@@ -104,7 +116,16 @@ export const getMarketNews = async (req: Request, res: Response) => {
 
     try {
         const newsResponse = await axios.get(`${NEWS_API_URL}?category=business&language=en&apiKey=${NEWS_API_KEY}`);
-        const news = newsResponse.data.articles;
+        const articles: NewsAPIArticle[] = newsResponse.data.articles;
+
+        const news = articles.map(article => ({
+            title: article.title,
+            description: article.description,
+            url: article.url,
+            urlToImage: article.urlToImage || "https://via.placeholder.com/300x150",
+            source: article.source,
+            publishedAt: article.publishedAt,
+        }));
 
         res.status(200).json({ news });
     } catch (error) {
@@ -112,6 +133,8 @@ export const getMarketNews = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error fetching market news', error });
     }
 };
+
+
 
 export const getStockLogo = async (req: Request, res: Response) => {
     const { symbol } = req.params;
