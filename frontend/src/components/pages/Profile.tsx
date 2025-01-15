@@ -9,7 +9,7 @@ interface UserProfile {
   passHash: string;
   role: string;
   strategy: string;
-  profilePicture?: string; // Add optional profile picture field
+  profilePicture?: string; // Optional profile picture field
 }
 
 const Profile: React.FC = () => {
@@ -23,6 +23,7 @@ const Profile: React.FC = () => {
   });
 
   const [password, setPassword] = useState("");
+  const [profilePicture, setProfilePicture] = useState<File | null>(null); // For uploading a new picture
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -71,28 +72,41 @@ const Profile: React.FC = () => {
     }
   };
 
-  const fetchProfilePicture = async () => {
+  const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setProfilePicture(e.target.files[0]);
+    }
+  };
+
+  const handleUploadProfilePicture = async () => {
+    if (!profilePicture) {
+      alert("Please select a picture to upload.");
+      return;
+    }
+
     try {
       const token = localStorage.getItem("authToken");
       if (token) {
-        const response = await axios.get("/users/profile-picture", {
+        const formData = new FormData();
+        formData.append("profilePicture", profilePicture);
+
+        const response = await axios.post("/users/profile/upload-picture", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         });
+
         setProfile((prevProfile) => ({
           ...prevProfile,
           profilePicture: response.data.profilePicture,
         }));
+        alert("Profile picture updated successfully!");
       }
     } catch (error) {
-      console.error("Error fetching profile picture", error);
+      console.error("Error uploading profile picture", error);
     }
   };
-
-  useEffect(() => {
-    fetchProfilePicture();
-  }, []);
 
   return (
     <div className="profile-container">
@@ -100,7 +114,11 @@ const Profile: React.FC = () => {
         <div className="profile-header">
           <div className="profile-picture-container">
             <img
-              src={profile.profilePicture || "/default-profile.png"}
+              src={
+                profile.profilePicture
+                  ? `http://localhost:5869${profile.profilePicture}`
+                  : "/default-profile.png"
+              }
               alt="Profile"
               className="profile-picture"
             />
@@ -174,6 +192,19 @@ const Profile: React.FC = () => {
             )}
           </div>
         </form>
+        {isEditing && (
+          <div className="profile-field-custom">
+            <label>Profile Picture:</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleProfilePictureChange}
+            />
+            <button type="button" onClick={handleUploadProfilePicture}>
+              Upload Picture
+            </button>
+          </div>
+        )}
         <div className="chart-buttons">
           <button onClick={isEditing ? handleSave : () => setIsEditing(true)}>
             {isEditing ? "Save" : "Edit Profile"}

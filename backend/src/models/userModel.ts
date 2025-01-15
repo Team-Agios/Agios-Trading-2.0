@@ -13,6 +13,7 @@ export interface IUser extends Document {
   resetToken?: string; 
   resetTokenExpiry?: Date; 
   tempNewPassword?: string;
+  profilePicture?: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -27,7 +28,8 @@ const UserSchema: Schema = new Schema({
   otpExpiry: { type: Date },
   resetToken: { type: String }, 
   resetTokenExpiry: { type: Date },
-  tempNewPassword: { type: String }
+  tempNewPassword: { type: String },
+  profilePicture: { type: String }
 });
 
 export default mongoose.model<IUser>('User', UserSchema);

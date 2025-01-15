@@ -15,6 +15,7 @@ import portfolioRoutes from './routes/portfolioRoutes';
 import widgetRoutes from './routes/widgetRoutes';
 import balanceRoutes from './routes/balanceRoutes';
 import lstmRoutes from './routes/lstmRoutes';
+import path from "path";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ const app = express();
 app.use(morgan('dev')); 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/stock', stockRoutes);
