@@ -53,10 +53,13 @@ const Chatbot: React.FC = () => {
         <div className="chatbot-messages">
           {messages.map((msg, index) => (
             <div key={index} className={`chatbot-message ${msg.sender}`}>
+              <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
               {msg.text}
+              </pre>
             </div>
-          ))}
+         ))}
         </div>
+
         <div className="chatbot-input-container">
           <input
             type="text"

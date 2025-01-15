@@ -1,3 +1,4 @@
+// chatbotController.ts
 import { Request, Response } from 'express';
 import { getChatbotResponse } from '../services/llamaService';
 
@@ -8,11 +9,15 @@ interface Message {
   sender: 'user' | 'bot';
 }
 
+const initialMessages: Message[] = [
+  { id: 1, text: "Welcome to the chatbot!", sender: "bot" }
+];
+
 export const chatWithBot = async (req: Request, res: Response) => {
   const { message } = req.body;
 
-  if (!message) {
-    return res.status(400).json({ message: 'Message is required' });
+  if (!message || typeof message !== 'string') {
+    return res.status(400).json({ message: 'A valid message string is required' });
   }
 
   try {
@@ -26,12 +31,6 @@ export const chatWithBot = async (req: Request, res: Response) => {
 
 export const getInitialMessages = async (req: Request, res: Response) => {
   try {
-    // Define initial messages with proper typing
-    const initialMessages: Message[] = [
-      { id: 1, text: "Welcome to the chatbot!", sender: "bot" }
-      // You can add more predefined messages here
-    ];
-
     return res.status(200).json(initialMessages);
   } catch (error) {
     console.error('Error fetching initial messages:', error);
