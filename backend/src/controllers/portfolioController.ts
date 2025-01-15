@@ -25,6 +25,8 @@ export const getPortfolioGraphData = async (req: Request, res: Response) => {
   }
 
   const mode = req.query.mode as string;
+  const stockSymbol = req.query.symbol as string; 
+
   if (!['week', 'month', 'year'].includes(mode)) {
     return res.status(400).json({ message: 'Invalid mode. Allowed values are: week, month, year' });
   }
@@ -45,10 +47,20 @@ export const getPortfolioGraphData = async (req: Request, res: Response) => {
         break;
     }
 
-    const transactions = await Transaction.find({
+    const transactionsQuery: any = {
       userId,
       date: { $gte: startDate.toDate() },
-    });
+    };
+
+    if (stockSymbol) {
+      transactionsQuery.symbol = stockSymbol;
+    }
+
+    const transactions = await Transaction.find(transactionsQuery);
+
+    if (transactions.length === 0) {
+      return res.status(404).json({ message: 'No transactions found for the specified criteria' });
+    }
 
     const portfolio = transactions.reduce<{ [symbol: string]: PortfolioData }>((acc, transaction) => {
       const { symbol, quantity, price, type } = transaction;
@@ -70,16 +82,24 @@ export const getPortfolioGraphData = async (req: Request, res: Response) => {
       return acc;
     }, {});
 
+    const filteredPortfolio = stockSymbol
+      ? { [stockSymbol]: portfolio[stockSymbol] }
+      : portfolio;
+
+    if (!filteredPortfolio[stockSymbol]) {
+      return res.status(404).json({ message: 'No data found for the specified stock' });
+    }
+
     const graphData: GraphData = {
-      labels: Object.keys(portfolio),
+      labels: Object.keys(filteredPortfolio),
       datasets: [
         {
           label: 'Total Invested',
-          data: Object.values(portfolio).map(p => p.totalInvested),
+          data: Object.values(filteredPortfolio).map(p => p.totalInvested),
         },
         {
           label: 'Average Price',
-          data: Object.values(portfolio).map(p => p.avgPrice),
+          data: Object.values(filteredPortfolio).map(p => p.avgPrice),
         },
       ],
     };
