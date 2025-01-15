@@ -130,52 +130,47 @@ class AuthService {
     return token;
   }
 
-  public async forgotPassword(email: string): Promise<void> {
+  public async requestPasswordChange(email: string, newPassword: string): Promise<void> {
     const user = await User.findOne({ email });
     if (!user) {
-      throw new Error('User with this email does not exist');
+        throw new Error('User with this email does not exist');
     }
-  
-    const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); 
-  
-    user.resetToken = resetToken;
-    user.resetTokenExpiry = resetTokenExpiry;
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a 6-digit OTP
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP expires in 10 minutes
+
+    user.otp = otp;
+    user.otpExpiry = otpExpiry;
+    user.tempNewPassword = await bcrypt.hash(newPassword, 10); // Temporarily store hashed password
+    console.log(`Temp password set for user ${email}: ${user.tempNewPassword}`); // Debug
+    console.log(`OTP generated: ${otp}`); // Debug
     await user.save();
+
+    await this.sendOtpEmail(user.email, otp); // Send OTP via email
+}
+
   
-    const transporter = await this.createTransporter();
-  
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: user.email,
-      subject: 'Password Reset Request',
-      text: `You requested to reset your password. Use the link below to reset it:
-      http://${process.env.HOST}/api/auth/reset-password/${resetToken}
-  
-      If you did not request this, please ignore this email.`
-    };
-  
-    try {
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Password reset email sent: ' + info.response);
-    } catch (error) {
-      console.error('Error sending password reset email:', error);
-      throw new Error('Failed to send reset password email');
-    }
+public async confirmPasswordChange(email: string, otp: string): Promise<void> {
+  const user = await User.findOne({ email, otp, otpExpiry: { $gte: new Date() } });
+  if (!user) {
+      console.log(`User not found or OTP invalid for email: ${email}`); // Debug
+      throw new Error('Invalid or expired OTP');
   }
-  
-  public async resetPassword(resetToken: string, newPassword: string): Promise<void> {
-    const user = await User.findOne({ resetToken, resetTokenExpiry: { $gte: new Date() } });
-    if (!user) {
-      throw new Error('Invalid or expired reset token');
-    }
-  
-    const passHash = await bcrypt.hash(newPassword, 10);
-    user.passHash = passHash;
-    user.resetToken = '';
-    user.resetTokenExpiry = undefined;
-    await user.save();
+
+  if (!user.tempNewPassword) {
+      console.log(`No temp password found for email: ${email}`); // Debug
+      throw new Error('No password change requested');
   }
+
+  user.passHash = user.tempNewPassword; // Update with the new password
+  user.tempNewPassword = undefined; // Clear temporary password
+  user.otp = '';
+  user.otpExpiry = undefined;
+
+  console.log(`Password updated successfully for email: ${email}`); // Debug
+  await user.save();
+}
+
   
 }
 
