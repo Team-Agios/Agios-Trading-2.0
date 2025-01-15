@@ -109,20 +109,18 @@ const Profile: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="profile-container">
-      <Navbar/>
       <div className="profile-card-custom">
         <div className="profile-header">
           <div className="profile-picture-container">
             <img
-              src={
-                profile.profilePicture
-                  ? `http://localhost:5869${profile.profilePicture}`
-                  : "/default-profile.png"
-              }
+              src={profile.profilePicture
+                ? `http://localhost:5869${profile.profilePicture}`
+                : "/default-profile.png"}
               alt="Profile"
-              className="profile-picture"
-            />
+              className="profile-picture" />
           </div>
           <h2>{profile.name}</h2>
         </div>
@@ -134,8 +132,7 @@ const Profile: React.FC = () => {
                 type="text"
                 name="name"
                 value={profile.name}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
             ) : (
               <p>{profile.name}</p>
             )}
@@ -147,8 +144,7 @@ const Profile: React.FC = () => {
                 type="email"
                 name="email"
                 value={profile.email}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
             ) : (
               <p>{profile.email}</p>
             )}
@@ -160,8 +156,7 @@ const Profile: React.FC = () => {
                 type="text"
                 name="role"
                 value={profile.role}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
             ) : (
               <p>{profile.role}</p>
             )}
@@ -173,8 +168,7 @@ const Profile: React.FC = () => {
                 type="text"
                 name="strategy"
                 value={profile.strategy}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
             ) : (
               <p>{profile.strategy}</p>
             )}
@@ -186,8 +180,7 @@ const Profile: React.FC = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+                onChange={(e) => setPassword(e.target.value)} />
             ) : (
               <p>********</p>
             )}
@@ -199,8 +192,7 @@ const Profile: React.FC = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={handleProfilePictureChange}
-            />
+              onChange={handleProfilePictureChange} />
             <button type="button" onClick={handleUploadProfilePicture}>
               Upload Picture
             </button>
@@ -213,6 +205,7 @@ const Profile: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

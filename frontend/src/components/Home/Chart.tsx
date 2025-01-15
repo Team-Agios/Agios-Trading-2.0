@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import { useState, useEffect, useCallback } from 'react';
+import axios from '../../config/axiosConfig';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -47,9 +47,8 @@ const Chart = () => {
                 return;
             }
 
-            const response = await axios.get(`http://localhost:5869/api/portfolio/portfolio-graph`, {
+            const response = await axios.get(`/portfolio/portfolio-graph?mode=${mode}`, {
                 headers: { Authorization: `Bearer ${token}` },
-                params: { mode },
             });
 
             console.log('Graph Data Response:', response.data);

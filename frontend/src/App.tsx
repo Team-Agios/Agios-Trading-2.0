@@ -35,7 +35,9 @@ const routes = [
   { path: "/stocks", element: <StockList10 /> },
   { path: "/transactions", element: <Transactions /> },
   { path: "/balance", element: <Balance /> },
-  { path: "/chatbot", element: <Chatbot /> },
+  { path: "/chatbot", element: <Chatbot isVisible={false} onClose={function (): void {
+    throw new Error('Function not implemented.');
+  } } /> },
   { path: "/otp", element: <Otp /> },
   { path: "/otpreset", element: <OtpReset /> },
   {path :"/activity", element: <ActivityPage/>},

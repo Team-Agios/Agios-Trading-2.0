@@ -3,14 +3,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #101923;
+  background-color: #101923 !important;
   padding: 10px 20px;
   border-bottom: 1px solid #223449;
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%; /* Lățimea completă a paginii */
-  box-sizing: border-box; /* Asigură că padding-ul nu afectează dimensiunea */
+  width: 100%;
+  box-sizing: border-box; 
+  margin-bottom: 20px;
 }
 .navbar-left {
   display: flex;
@@ -27,6 +28,19 @@
   display: flex;
   align-items: center;
 }
+
+/* Default: Hide the Account link */
+.navbar-links a[href="/profile"] {
+  display: none;
+}
+
+/* Mobile: Show the Account link */
+@media screen and (max-width: 768px) {
+  .navbar-links a[href="/profile"] {
+    display: block;
+  }
+}
+
 
 .menu-toggle {
   background: none;
@@ -102,6 +116,7 @@
   .navbar-buttons {
     display: none; /* Hide buttons on mobile */
   }
+
 }
 .menu-close {
   display: none; /* Ascuns implicit pentru desktop */

@@ -102,10 +102,10 @@ const Navbar = () => {
                 <img
                   src={`http://localhost:5869${profilePicture}`}
                   alt="Profile"
-                  className="profile-pic-image"
+                  className="profile-pic"
                 />
               ) : (
-                <div className="default-profile-pic"></div>
+                <div className="profile-pic"></div>
               )}
             </div>
           </Link>

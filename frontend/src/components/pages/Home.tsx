@@ -2,109 +2,106 @@ import React, { useEffect, useState } from 'react';
 import axios from '../../config/axiosConfig';
 import './Home.css';
 import Navbar from '../Home/Navbar';
-import Chatbot from './Chatbot'; 
+import Chatbot from './Chatbot';
 import Chart from '../Home/Chart';
 
 interface Stock {
   symbol: string;
-  currentPrice: number;
-  highPrice: number;
-  lowPrice: number;
-  openPrice: number;
-  previousClosePrice: number;
+  totalInvested: number;
+  averagePrice: number;
 }
 
 const Home: React.FC = () => {
-  const [stocks, setStocks] = useState<Stock[]>([]); // Toate stocurile
-  const [ownedStocks, setOwnedStocks] = useState<Stock[]>([]); // Stocuri cumpărate
+  const [ownedStocks, setOwnedStocks] = useState<Stock[]>([]); // User-owned stocks
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [chatbotVisible, setChatbotVisible] = useState(false);
 
   useEffect(() => {
-    const fetchMarketSummary = async () => {
+    const fetchUserStocks = async () => {
       try {
-        const response = await axios.get('/market/market-summary');
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            setError('Authorization token is missing.');
+            setIsLoading(false);
+            return;
+        }
+
+        const response = await axios.get(`/get/${token}`);
         console.log('API Response:', response.data);
-    
-        const fetchedStocks: Stock[] = response.data.stocks;
-    
-        // Folosim toate stocurile returnate pentru secțiunea Owned Stocks
-        setStocks(fetchedStocks);
-        setOwnedStocks(fetchedStocks); // Toate stocurile sunt considerate achiziționate
+
+        // Assuming response.data is an array of stocks with `symbol`, `totalInvested`, and `averagePrice`
+        const fetchedStocks: Stock[] = response.data.map((stock: any) => ({
+          symbol: stock.symbol,
+          totalInvested: stock.totalInvested || 0,
+          averagePrice: stock.averagePrice || 0,
+        }));
+
+        setOwnedStocks(fetchedStocks);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching market summary:', error);
-        setError('Error fetching market summary');
+        console.error('Error fetching user stocks:', error);
+        setError('Error fetching user stocks.');
         setIsLoading(false);
       }
     };
-    
-    
-    fetchMarketSummary();
+
+    fetchUserStocks();
   }, []);
 
   const toggleChatbot = () => {
     setChatbotVisible(!chatbotVisible);
   };
 
+  const closeChatbot = () => {
+    setChatbotVisible(false);
+  };
+
   return (
     <div className="home-container">
       <Navbar />
-      <div className="home-content">
-        <div className="home-header">
-        <h2>Today, {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</h2>
-        </div>
+      <div className="home-header">
+        <h2>
+          Today,{' '}
+          {new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </h2>
+      </div>
 
-        {/* Acțiuni cumpărate */}
-        <div className="owned-stocks">
-          <h3>Owned Stocks</h3>
-          <div className="cards">
-            {ownedStocks.length > 0 ? (
-              ownedStocks.map((stock, index) => (
-                <div key={index} className="card">
-                  <div className="card-title">{stock.symbol}</div>
-                  <div className="card-value">${stock.currentPrice.toFixed(2)}</div>
-                </div>
-              ))
-            ) : (
-              <p>You don’t own any stocks yet.</p>
-            )}
-          </div>
-        </div>
-
-
-        {/* Toate stocurile */}
+      {/* Owned Stocks Section */}
+      <div className="owned-stocks">
+        <h3>Owned Stocks</h3>
         <div className="cards">
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>{error}</p>
-          ) : (
-            stocks.map((stock, index) => (
+          ) : ownedStocks.length > 0 ? (
+            ownedStocks.map((stock, index) => (
               <div key={index} className="card">
-                <div className="card-content">
-                  <div className="card-title">{stock.symbol}</div>
-                  <div className="card-value">
-                    ${stock.currentPrice.toFixed(2)}
-                  </div>
-                </div>
+                <div className="card-title">{stock.symbol}</div>
+                <div className="card-value">Total Invested: ${stock.totalInvested.toFixed(2)}</div>
+                <div className="card-value">Price: ${stock.averagePrice.toFixed(2)}</div>
               </div>
             ))
+          ) : (
+            <p>You don’t own any stocks yet.</p>
           )}
         </div>
-
-        <div className="chart-container">
-          <Chart />
-        </div>
-        <button className="chatbot-icon" onClick={toggleChatbot}>
-          💬
-        </button>
-        {chatbotVisible && <Chatbot />}
       </div>
+
+      <div className="chart-container">
+        <Chart />
+      </div>
+      <button className="chatbot-icon" onClick={toggleChatbot}>
+        💬
+      </button>
+      <Chatbot isVisible={chatbotVisible} onClose={closeChatbot} />
     </div>
   );
 };
 
 export default Home;
-
