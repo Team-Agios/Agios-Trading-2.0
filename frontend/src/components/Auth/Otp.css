@@ -1,23 +1,52 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f3f4f6;
+    color: #000;
+}
+
 .otp-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+.left-panel {
+    flex: 1;
+    background-image: url('logo.webp'); /* Înlocuiește cu calea către poza ta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #E5E7E6;
+    position: relative;
 }
 
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1f2a38;
+    padding: 20px;
+    width: 100%; /* Asigură că partea dreaptă ocupă toată lățimea pe mobil */
+}
+
+/* Card OTP */
 .otp-card {
     background: #003554;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .otp-card h2 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #e5e7e6;
 }
 
 .error-message {
@@ -39,8 +68,8 @@
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
-    background: #162447;
-    color: #fff;
+    background: #e5e7e6;
+    color: #000;
 }
 
 .otp-card input::placeholder {
@@ -50,7 +79,7 @@
 .otp-card button {
     width: 100%;
     padding: 10px;
-    background: #E5E7E6;
+    background: #e5e7e6;
     color: #003554;
     border: none;
     border-radius: 5px;
@@ -59,7 +88,7 @@
 }
 
 .otp-card button:hover {
-    background: #1ec1a6;
+    background: #d9d9d9;
 }
 
 .retry-button {
@@ -76,4 +105,18 @@
 
 .retry-button:hover {
     background: #fb8c00;
+}
+
+/* Responsive: Ascundem partea stângă pe ecrane mici */
+@media (max-width: 768px) {
+    .left-panel {
+        display: none;
+    }
+
+    .right-panel {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
 }

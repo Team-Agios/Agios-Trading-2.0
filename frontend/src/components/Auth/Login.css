@@ -1,19 +1,47 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f3f4f6;
+    color: #000;
+}
 
-.login-container1 {
+.login-container {
+    display: flex;
+    flex-wrap: wrap; /* Asigură că elementele se rearanjează pe ecrane mici */
+    height: 100vh;
+}
+
+.left-panel {
+    flex: 1;
+    background-image: url('logo.webp'); /* Înlocuiește cu calea către poza ta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #e5e7e6;
+    position: relative;
 }
 
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1f2a38;
+    padding: 20px;
+    width: 100%; /* Asigură că partea dreaptă ocupă toată lățimea pe mobil */
+}
+
+/* Card de login */
 .login-card1 {
     background: #003554;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-card1 h2 {
@@ -59,7 +87,7 @@
 }
 
 .login-card1 button:hover {
-    background: #e5e7e6;
+    background: #d9d9d9;
 }
 
 .login-card1 p {
@@ -76,9 +104,16 @@
     text-decoration: underline;
 }
 
-.login-card1 .forgot-password {
-    color: #a9a9a9;
-    margin-bottom: 20px;
-    display: block;
-    text-align: left;
+/* Responsive: Ascundem partea stângă pe ecrane mici */
+@media (max-width: 768px) {
+    .left-panel {
+        display: none; /* Ascundem partea stângă complet */
+    }
+
+    .right-panel {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
 }

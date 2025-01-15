@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../config/axiosConfig';
 import './Otp.css';
@@ -10,10 +10,12 @@ const Otp: React.FC = () => {
     const location = useLocation();
     const email = location.state?.email;
 
-    if (!email) {
-        navigate('/login');
-        return null;
-    }
+    useEffect(() => {
+        console.log('Email:', email);
+        if (!email) {
+            navigate('/login');
+        }
+    }, [email, navigate]);
 
     const handleVerifyOtp = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -30,19 +32,22 @@ const Otp: React.FC = () => {
 
     return (
         <div className="otp-container">
-            <div className="otp-card">
-                <h2>Enter code</h2>
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <form onSubmit={handleVerifyOtp}>
-                    <input
-                        type="text"
-                        placeholder="Enter email code"
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Verify</button>
-                </form>
+            <div className="left-panel"></div>
+            <div className="right-panel">
+                <div className="otp-card">
+                    <h2>Enter code</h2>
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
+                    <form onSubmit={handleVerifyOtp}>
+                        <input
+                            type="text"
+                            placeholder="Enter email code"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Verify</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

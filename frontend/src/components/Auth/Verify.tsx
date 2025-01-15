@@ -38,14 +38,17 @@ const Verify: React.FC = () => {
 
   return (
     <div className="verify-container">
-      <div className={`verify-card ${isError ? 'error' : 'success'}`}>
-        <h2>Email Confirmation</h2>
-        <p>{message}</p>
-        {isError && (
-          <button onClick={() => navigate('/resend-verification')} className="resend-button">
-            Resend Verification Email
-          </button>
-        )}
+      <div className="left-panel"></div>
+      <div className="right-panel">
+        <div className={`verify-card ${isError ? 'error' : 'success'}`}>
+          <h2>Email Confirmation</h2>
+          <p>{message}</p>
+          {isError && (
+            <button onClick={() => navigate('/resend-verification')} className="resend-button">
+              Resend Verification Email
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,23 +1,51 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f3f4f6;
+    color: #000;
+}
+
 .verify-container {
+    display: flex;
+    flex-wrap: wrap; /* Rearanjare pe ecrane mici */
+    height: 100vh;
+}
+
+.left-panel {
+    flex: 1;
+    background-image: url('logo.webp'); /* Înlocuiește cu calea către imaginea ta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #e5e7e6;
+    position: relative;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1f2a38;
+    padding: 20px;
+    width: 100%; /* Asigură că partea dreaptă ocupă întreaga lățime pe mobil */
 }
 
 .verify-card {
-    background: #1a1a2e;
+    background: #003554;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .verify-card h2 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #e5e7e6;
 }
 
 .verify-card p {
@@ -26,4 +54,18 @@
     background: #162447;
     padding: 10px;
     border-radius: 5px;
+}
+
+/* Responsive: Ascundem partea stângă pe ecrane mici */
+@media (max-width: 768px) {
+    .left-panel {
+        display: none;
+    }
+
+    .right-panel {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
 }

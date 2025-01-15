@@ -1,23 +1,51 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f3f4f6;
+    color: #000;
+}
+
 .register-container {
+    display: flex;
+    flex-wrap: wrap; /* Asigură rearanjarea pe ecrane mici */
+    height: 100vh;
+}
+
+.left-panel {
+    flex: 1;
+    background-image: url('logo.webp'); /* Înlocuiește cu calea către imaginea ta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #E5E7E6;
+    position: relative;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1f2a38;
+    padding: 20px;
+    width: 100%; /* Asigură că partea dreaptă ocupă întreaga lățime pe mobil */
 }
 
 .register-card {
     background: #003554;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .register-card h2 {
     margin-bottom: 20px;
-    color: #E5E7E6;
+    color: #e5e7e6;
 }
 
 .register-card form {
@@ -31,19 +59,19 @@
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
-    background: #E5E7E6;
-    color: #0e1116;
+    background: #e5e7e6;
+    color: #000;
 }
 
 .register-card input::placeholder {
-    color: #0e1116;
+    color: #a9a9a9;
 }
 
 .register-card button {
     width: 100%;
     padding: 10px;
-    background: #E5E7E6;
-    color: #000;
+    background: #e5e7e6;
+    color: #003554;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -51,16 +79,16 @@
 }
 
 .register-card button:hover {
-    background: #cfdbd9;
+    background: #d9d9d9;
 }
 
 .register-card p {
-    color: #cfdbd9;
+    color: #fff;
     margin-top: 20px;
 }
 
 .register-card p a {
-    color: #E5E7E6;
+    color: #e5e7e6;
     text-decoration: none;
 }
 
@@ -69,7 +97,21 @@
 }
 
 .contact-support {
-    color: #fff;
+    color: #e5e7e6;
     text-align: center;
     margin-top: 20px;
+}
+
+/* Responsive: Ascundem partea stângă pe ecrane mici */
+@media (max-width: 768px) {
+    .left-panel {
+        display: none;
+    }
+
+    .right-panel {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
 }
