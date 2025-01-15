@@ -1,3 +1,4 @@
+// llamaService.ts
 import axios from 'axios';
 import dotenv from 'dotenv';
 
@@ -10,59 +11,45 @@ interface Message {
   content: string;
 }
 
-interface ChatbotResponse {
-  model: string;
-  created_at: string;
-  message: Message;
-  done: boolean;
-}
-
 export const getChatbotResponse = async (message: string): Promise<string> => {
   if (!LLAMA_API_URL) {
-    console.error('LLAMA_API_URL is not set');
-    throw new Error('LLAMA_API_URL is not set');
+    throw new Error('LLAMA_API_URL environment variable is not set');
   }
 
-  console.log('Sending request to chatbot service:', LLAMA_API_URL);
-
   try {
-    const response = await axios.post(`${LLAMA_API_URL}/api/chat`, {
-      model: 'llama3',
-      messages: [
-        {
-          role: 'user',
-          content: message
-        }
-      ]
-    }, {
-      responseType: 'stream'
-    });
+    const response = await axios.post(
+      `${LLAMA_API_URL}/api/chat`,
+      {
+        model: 'llama3',
+        messages: [{ role: 'user', content: message }],
+      },
+      {
+        responseType: 'stream',
+        timeout: 10000,
+      }
+    );
 
     let responseText = '';
 
-    // Handle data stream
-    response.data.on('data', (chunk: Buffer) => {
-      const lines = chunk.toString('utf8').split('\n').filter(line => line.trim() !== '');
-      for (const line of lines) {
-        try {
-          const parsedLine = JSON.parse(line);
-          if (parsedLine.message && parsedLine.message.role === 'assistant') {
-            responseText += `${parsedLine.message.content} `;
+    return new Promise<string>((resolve, reject) => {
+      response.data.on('data', (chunk: Buffer) => {
+        const lines = chunk.toString('utf8').split('\n').filter(line => line.trim() !== '');
+        for (const line of lines) {
+          try {
+            const parsedLine = JSON.parse(line);
+            if (parsedLine.message?.role === 'assistant') {
+              responseText += parsedLine.message.content + '\n\n';
+            }
+          } catch (err) {
+            console.error('Error parsing stream line:', line, err);
           }
-        } catch (error) {
-          console.error('Failed to parse line as JSON:', line);
         }
-      }
-    });
+      });
 
-    // Handle end and error events
-    await new Promise<void>((resolve, reject) => {
-      response.data.on('end', () => resolve());
-      response.data.on('error', (err: Error) => reject(err));
+      response.data.on('end', () => resolve(responseText.trim()));
+      response.data.on('error', reject);
     });
-
-    return responseText.trim();
-  } catch (error) {
+  } catch (error: any) {
     if (axios.isAxiosError(error)) {
       console.error('Axios error:', error.message, error.response?.data);
     } else {
