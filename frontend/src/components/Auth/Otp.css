@@ -5,15 +5,15 @@ body {
     color: #000;
 }
 
-.otp-container1 {
+.otp-container2 {
     display: flex;
     flex-wrap: wrap;
     height: 100vh;
 }
 
-.left-panel1 {
+.left-panel2 {
     flex: 1;
-    background-image: url('logo.webp'); /* Înlocuiește cu calea către poza ta */
+    background-image: url('logo.webp'); /* Replace with your image path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -23,18 +23,17 @@ body {
     position: relative;
 }
 
-.right-panel1 {
+.right-panel2 {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #1f2a38;
     padding: 20px;
-    width: 100%; /* Asigură că partea dreaptă ocupă toată lățimea pe mobil */
+    width: 100%; /* Ensures full width on smaller screens */
 }
 
-/* Card OTP */
-.otp-card1 {
+.otp-card2 {
     background: #003554;
     padding: 40px;
     border-radius: 10px;
@@ -44,7 +43,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.otp-card1 h2 {
+.otp-card2 h2 {
     margin-bottom: 20px;
     color: #e5e7e6;
 }
@@ -57,12 +56,12 @@ body {
     margin-bottom: 20px;
 }
 
-.otp-card1 form {
+.otp-card2 form {
     display: flex;
     flex-direction: column;
 }
 
-.otp-card1 input {
+.otp-card2 input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -72,11 +71,11 @@ body {
     color: #000;
 }
 
-.otp-card1 input::placeholder {
+.otp-card2 input::placeholder {
     color: #a9a9a9;
 }
 
-.otp-card1 button {
+.otp-card2 button {
     width: 100%;
     padding: 10px;
     background: #e5e7e6;
@@ -87,7 +86,7 @@ body {
     transition: background 0.3s;
 }
 
-.otp-card1 button:hover {
+.otp-card2 button:hover {
     background: #d9d9d9;
 }
 
@@ -107,16 +106,41 @@ body {
     background: #fb8c00;
 }
 
-/* Responsive: Ascundem partea stângă pe ecrane mici */
+/* Responsive Styles */
 @media (max-width: 768px) {
-    .left-panel {
-        display: none;
+    .left-panel2 {
+        display: none; /* Hide the left panel entirely on smaller screens */
     }
 
-    .right-panel {
+    .right-panel2 {
         flex: 1;
         width: 100%;
         justify-content: center;
         align-items: center;
+        padding: 20px; /* Add padding for better layout */
+    }
+
+    .otp-card2 {
+        padding: 20px; /* Reduce padding on smaller screens */
+        max-width: 90%; /* Adjust width for smaller screens */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .otp-card2 h2 {
+        font-size: 1.5rem; /* Adjust font size */
+    }
+
+    .otp-card2 input {
+        padding: 8px; /* Reduce padding for inputs */
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    .otp-card2 button {
+        padding: 8px; /* Reduce padding for buttons */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    .error-message {
+        font-size: 14px; /* Adjust error message font size */
     }
 }

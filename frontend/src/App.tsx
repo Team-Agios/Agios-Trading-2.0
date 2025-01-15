@@ -19,6 +19,7 @@ import DepositFunds from './components/pages/DepositFunds';
 import './App.css';
 import AgiosTradingPresentation from './components/Presentation/Presentation';
 import OtpReset from './components/Auth/OtpReset';
+import VerifyAccount from './components/Auth/VerifyAccount';
 
 // Definirea rutelor
 const routes = [
@@ -40,6 +41,7 @@ const routes = [
   {path :"/activity", element: <ActivityPage/>},
   {path:"/depozit",element:<DepositFunds/>},
   {path:"/invest",element:<Invest/>},
+  {path:"/verify/:token", element:<VerifyAccount />},
 ];
 
 const router = createBrowserRouter(routes, {
