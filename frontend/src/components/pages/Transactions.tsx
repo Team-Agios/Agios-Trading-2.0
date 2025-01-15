@@ -128,32 +128,34 @@ const Transactions: React.FC = () => {
                                     <h2>Transaction ID: {transaction._id}</h2>
                                 </div>
                                 <div className="transaction-details">
-                                    <div className="transaction-row">
-                                        <span className="transaction-label">Type:</span>
-                                        <span className="transaction-value">{transaction.type}</span>
-                                    </div>
-                                    <div className="transaction-row">
-                                        <span className="transaction-label">Quantity:</span>
-                                        <span className="transaction-value">{transaction.quantity}</span>
-                                    </div>
-                                    <div className="transaction-row">
-                                        <span className="transaction-label">Price:</span>
-                                        <span className="transaction-value">${transaction.price.toFixed(2)}</span>
-                                    </div>
-                                    <div className="transaction-row">
-                                        <span className="transaction-label">Date:</span>
-                                        <span className="transaction-value">
-                                            {new Date(transaction.date).toLocaleString()}
-                                        </span>
-                                    </div>
-                                    <div className="transaction-row">
-                                        <span className="transaction-label">Symbol:</span>
-                                        <span className="transaction-value">{transaction.symbol}</span>
-                                    </div>
-                                    <div className="transaction-row">
-                                        <span className="transaction-label">Strategy:</span>
-                                        <span className="transaction-value">{transaction.strategy}</span>
-                                    </div>
+                                    <table className="transaction-table">
+                                        <tbody>
+                                            <tr>
+                                                <th>Type:</th>
+                                                <td className="transaction-row-highlight">{transaction.type}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Quantity:</th>
+                                                <td>{transaction.quantity}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Price:</th>
+                                                <td className="transaction-row-highlight">${transaction.price.toFixed(2)}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Date:</th>
+                                                <td>{new Date(transaction.date).toLocaleString()}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Symbol:</th>
+                                                <td>{transaction.symbol}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Strategy:</th>
+                                                <td>{transaction.strategy}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         ))}
