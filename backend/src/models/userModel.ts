@@ -12,6 +12,7 @@ export interface IUser extends Document {
   otpExpiry?: Date;
   resetToken?: string; 
   resetTokenExpiry?: Date; 
+  tempNewPassword?: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -25,7 +26,8 @@ const UserSchema: Schema = new Schema({
   otp: { type: String },
   otpExpiry: { type: Date },
   resetToken: { type: String }, 
-  resetTokenExpiry: { type: Date } 
+  resetTokenExpiry: { type: Date },
+  tempNewPassword: { type: String }
 });
 
 export default mongoose.model<IUser>('User', UserSchema);

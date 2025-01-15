@@ -23,35 +23,32 @@ const Transactions: React.FC = () => {
     const fetchTransactions = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            if (token) {
-                const response = await axios.post('/transactions/get', null, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                console.log('Response data:', response.data); // Log the response data
-                if (response.data && Array.isArray(response.data.transactions)) {
-                    console.log('Transactions:', response.data.transactions); // Log the transactions
+            if (!token) {
+                setError('Authentication token is missing.');
+                return;
+            }
 
-                    // Fetch logos for each transaction
-                    const transactionsWithLogos = await Promise.all(
-                        response.data.transactions.map(async (transaction: Transaction) => {
-                            const logoUrl = await fetchLogo(transaction.symbol);
-                            return { ...transaction, logo: logoUrl };
-                        })
-                    );
+            const { data } = await axios.post('/transactions/get', null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-                    setTransactions(transactionsWithLogos);
-                } else {
-                    console.error('Invalid response format:', response.data); // Log invalid format
-                    setError('No transactions found...');
-                }
+            if (data && Array.isArray(data.transactions)) {
+                // Fetch logos for each transaction symbol
+                const transactionsWithLogos = await Promise.all(
+                    data.transactions.map(async (transaction: Transaction) => {
+                        const logoUrl = await fetchLogo(transaction.symbol);
+                        return { ...transaction, logo: logoUrl };
+                    })
+                );
+                setTransactions(transactionsWithLogos);
             } else {
-                setError('No transactions found...');
+                setError('No transactions found.');
             }
         } catch (error) {
-            console.error('Error fetching transactions:', error); // Log any errors
-            setError('No transactions found...');
+            console.error('Error fetching transactions:', error);
+            setError('Error fetching transactions.');
         } finally {
             setIsLoading(false);
         }
@@ -60,24 +57,25 @@ const Transactions: React.FC = () => {
     const fetchLogo = async (symbol: string): Promise<string> => {
         try {
             const token = localStorage.getItem('authToken');
-            if (token) {
-                const response = await axios.get(`/logo/get/${symbol}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                if (response.data && response.data.logoUrl) {
-                    return response.data.logoUrl;
-                } else {
-                    console.error('Logo not found for symbol:', symbol);
-                    return '/default-logo.png'; // Fallback logo
-                }
+            if (!token) {
+                console.error('Authentication token is missing.');
+                return '/default-logo.png'; // Fallback logo
+            }
+
+            const { data } = await axios.get(`/transactions/logo-get/${symbol}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (data && data.logo) {
+                return data.logo; // Return the logo URL
             } else {
-                console.error('Token not available');
-                return '/default-logo.png';
+                console.error(`Logo not found for symbol: ${symbol}`);
+                return '/default-logo.png'; // Fallback logo
             }
         } catch (error) {
-            console.error('Error fetching logo:', error);
+            console.error(`Error fetching logo for symbol ${symbol}:`, error);
             return '/default-logo.png'; // Fallback logo
         }
     };
@@ -85,25 +83,21 @@ const Transactions: React.FC = () => {
     const fetchBalance = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            if (token) {
-                const response = await axios.get('/balance/get', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                console.log('Current balance:', response.data);
-                if (response.data && typeof response.data.balance === 'number') {
-                    setBalance(response.data.balance);
-                } else {
-                    console.error('Invalid balance format:', response.data);
-                    setBalance(0); 
-                }
-            } else {
-                setBalance(0); 
+            if (!token) {
+                setBalance(0);
+                return;
             }
+
+            const { data } = await axios.get('/balance/get', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            setBalance(data?.balance || 0);
         } catch (error) {
-            console.error('Error fetching balance', error);
-            setBalance(0); 
+            console.error('Error fetching balance:', error);
+            setBalance(0);
         }
     };
 
@@ -123,7 +117,7 @@ const Transactions: React.FC = () => {
                     <p>{error}</p>
                 ) : (
                     <div className="transaction-list">
-                        {transactions.map(transaction => (
+                        {transactions.map((transaction) => (
                             <div key={transaction._id} className="transaction-item">
                                 <div className="transaction-header">
                                     <img
@@ -148,7 +142,9 @@ const Transactions: React.FC = () => {
                                     </div>
                                     <div className="transaction-row">
                                         <span className="transaction-label">Date:</span>
-                                        <span className="transaction-value">{new Date(transaction.date).toLocaleString()}</span>
+                                        <span className="transaction-value">
+                                            {new Date(transaction.date).toLocaleString()}
+                                        </span>
                                     </div>
                                     <div className="transaction-row">
                                         <span className="transaction-label">Symbol:</span>

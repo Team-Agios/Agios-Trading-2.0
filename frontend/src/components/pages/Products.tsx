@@ -11,6 +11,7 @@ interface Stock {
   lowPrice: number;
   openPrice: number;
   previousClosePrice: number;
+  logo?: string; // Optional property for the logo URL
 }
 
 const StockList10: React.FC = () => {
@@ -28,7 +29,14 @@ const StockList10: React.FC = () => {
       try {
         const response = await axios.get("/market/market-summary10");
         if (response.data && Array.isArray(response.data.stocks)) {
-          setStocks(response.data.stocks);
+          // Fetch logos for each stock symbol
+          const stocksWithLogos = await Promise.all(
+            response.data.stocks.map(async (stock: Stock) => {
+              const logo = await fetchLogo(stock.symbol);
+              return { ...stock, logo };
+            })
+          );
+          setStocks(stocksWithLogos);
         } else {
           setError("Invalid response format");
         }
@@ -41,6 +49,21 @@ const StockList10: React.FC = () => {
 
     fetchStocks();
   }, []);
+
+  const fetchLogo = async (symbol: string): Promise<string> => {
+    try {
+      const response = await axios.get(`/transactions/logo-get/${symbol}`);
+      if (response.data && response.data.logo) {
+        return response.data.logo; // Return the logo URL
+      } else {
+        console.error(`Logo not found for symbol: ${symbol}`);
+        return "/default-logo.png"; // Fallback logo
+      }
+    } catch (error) {
+      console.error(`Error fetching logo for symbol ${symbol}:`, error);
+      return "/default-logo.png"; // Fallback logo
+    }
+  };
 
   const handlePredict = async () => {
     try {
@@ -145,7 +168,11 @@ const StockList10: React.FC = () => {
             {stocks.map((stock) => (
               <div key={stock.symbol} className="stock-item" onClick={() => handleRedirectToInvest(stock)}>
                 <div className="stock-header">
-                  <div className="logo-placeholder"></div>
+                  <img
+                    src={stock.logo || "/default-logo.png"}
+                    alt={`${stock.symbol} logo`}
+                    className="stock-logo"
+                  />
                   <h2>{stock.symbol}</h2>
                 </div>
                 <div className="stock-details">
@@ -155,13 +182,19 @@ const StockList10: React.FC = () => {
                 <div className="stock-buttons">
                   <button
                     className="buy-button"
-                    onClick={() => handleBuy(stock.symbol, stock.currentPrice)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleBuy(stock.symbol, stock.currentPrice);
+                    }}
                   >
                     Buy
                   </button>
                   <button
                     className="sell-button"
-                    onClick={() => handleSell(stock.symbol, stock.currentPrice)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSell(stock.symbol, stock.currentPrice);
+                    }}
                   >
                     Sell
                   </button>

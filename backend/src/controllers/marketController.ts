@@ -19,7 +19,19 @@ interface StockData {
     pc: number;
 }
 
-const topSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'FB', 'NFLX', 'NVDA', 'BABA', 'DIS'];
+interface NewsAPIArticle {
+    title: string;
+    description: string;
+    url: string;
+    urlToImage?: string; 
+    source: {
+      name: string;
+    };
+    publishedAt: string;
+  }
+  
+
+const topSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NFLX', 'NVDA', 'BABA', 'DIS'];
 
 const getTopStocks = async (count: number): Promise<string[]> => {
     try {
@@ -104,11 +116,54 @@ export const getMarketNews = async (req: Request, res: Response) => {
 
     try {
         const newsResponse = await axios.get(`${NEWS_API_URL}?category=business&language=en&apiKey=${NEWS_API_KEY}`);
-        const news = newsResponse.data.articles;
+        const articles: NewsAPIArticle[] = newsResponse.data.articles;
+
+        const news = articles.map(article => ({
+            title: article.title,
+            description: article.description,
+            url: article.url,
+            urlToImage: article.urlToImage || "https://via.placeholder.com/300x150",
+            source: article.source,
+            publishedAt: article.publishedAt,
+        }));
 
         res.status(200).json({ news });
     } catch (error) {
         console.error('Error fetching market news:', error);
         res.status(500).json({ message: 'Error fetching market news', error });
+    }
+};
+
+
+
+export const getStockLogo = async (req: Request, res: Response) => {
+    const { symbol } = req.params;
+
+    if (!symbol) {
+        return res.status(400).json({ message: 'Stock symbol is required' });
+    }
+
+    try {
+        const response = await axios.get(`${FINNHUB_API_URL}/stock/profile2`, {
+            params: { symbol },
+            headers: {
+                'X-Finnhub-Token': FINNHUB_API_KEY
+            }
+        });
+
+        if (response.status !== 200) {
+            return res.status(response.status).json({ message: `Error fetching profile for symbol: ${symbol}` });
+        }
+
+        const profileData = response.data;
+
+        if (!profileData.logo) {
+            return res.status(404).json({ message: `Logo not found for symbol: ${symbol}` });
+        }
+
+        res.status(200).json({ logo: profileData.logo });
+    } catch (error) {
+        console.error(`Error fetching logo for symbol ${symbol}:`, error);
+        res.status(500).json({ message: 'Error fetching stock logo', error: String(error) });
     }
 };
