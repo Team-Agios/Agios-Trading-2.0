@@ -5,13 +5,13 @@ body {
     color: #000;
 }
 
-.otp-container {
+.otp-container1 {
     display: flex;
     flex-wrap: wrap;
     height: 100vh;
 }
 
-.left-panel {
+.left-panel1 {
     flex: 1;
     background-image: url('logo.webp'); /* Înlocuiește cu calea către poza ta */
     background-size: cover;
@@ -23,7 +23,7 @@ body {
     position: relative;
 }
 
-.right-panel {
+.right-panel1 {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@ body {
 }
 
 /* Card OTP */
-.otp-card {
+.otp-card1 {
     background: #003554;
     padding: 40px;
     border-radius: 10px;
@@ -44,7 +44,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.otp-card h2 {
+.otp-card1 h2 {
     margin-bottom: 20px;
     color: #e5e7e6;
 }
@@ -57,12 +57,12 @@ body {
     margin-bottom: 20px;
 }
 
-.otp-card form {
+.otp-card1 form {
     display: flex;
     flex-direction: column;
 }
 
-.otp-card input {
+.otp-card1 input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -72,11 +72,11 @@ body {
     color: #000;
 }
 
-.otp-card input::placeholder {
+.otp-card1 input::placeholder {
     color: #a9a9a9;
 }
 
-.otp-card button {
+.otp-card1 button {
     width: 100%;
     padding: 10px;
     background: #e5e7e6;
@@ -87,7 +87,7 @@ body {
     transition: background 0.3s;
 }
 
-.otp-card button:hover {
+.otp-card1 button:hover {
     background: #d9d9d9;
 }
 
