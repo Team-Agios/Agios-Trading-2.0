@@ -1,3 +1,4 @@
+/* General Styling */
 .business-news-container {
     display: flex;
     flex-direction: column;
@@ -70,4 +71,79 @@
     background-color: #358ef3; /* Schimbă fundalul la hover */
     color: #ffffff;
     transform: scale(1.05); /* Adaugă efect de hover */
+}
+
+/* Responsive Design */
+
+/* Tablets and smaller screens */
+@media screen and (max-width: 1024px) {
+    .news-content {
+        padding: 1.5rem 2rem; /* Reduce padding on smaller screens */
+    }
+
+    .news-scroll-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust column size */
+    }
+
+    .news-article img {
+        height: 120px; /* Reduce image height */
+    }
+
+    .news-article h4 {
+        font-size: 0.9rem; /* Reduce title size */
+    }
+
+    .news-article p {
+        font-size: 0.8rem; /* Reduce description size */
+    }
+}
+
+/* Mobile screens (less than 768px) */
+@media screen and (max-width: 768px) {
+    .news-content {
+        padding: 1rem; /* Further reduce padding for small devices */
+    }
+
+    .news-scroll-container {
+        grid-template-columns: 1fr; /* Single column for narrow screens */
+    }
+
+    .news-article {
+        padding: 0.8rem; /* Reduce card padding */
+    }
+
+    .news-article img {
+        height: 100px; /* Smaller image for mobile */
+    }
+
+    .news-article h4 {
+        font-size: 0.8rem; /* Smaller title */
+    }
+
+    .news-article p {
+        font-size: 0.7rem; /* Smaller description */
+    }
+}
+
+/* Extra small screens (less than 480px) */
+@media screen and (max-width: 480px) {
+    .news-scroll-container {
+        gap: 10px; /* Reduce gap between cards */
+    }
+
+    .news-article {
+        padding: 0.5rem; /* Minimize card padding */
+    }
+
+    .news-article img {
+        height: 80px; /* Smallest image for extra small screens */
+    }
+
+    .news-article h4 {
+        font-size: 0.75rem; /* Further reduce title size */
+    }
+
+    .news-article p {
+        font-size: 0.65rem; /* Further reduce description size */
+    }
 }

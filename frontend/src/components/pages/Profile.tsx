@@ -110,6 +110,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="profile-container">
+      <Navbar/>
       <div className="profile-card-custom">
         <div className="profile-header">
           <div className="profile-picture-container">

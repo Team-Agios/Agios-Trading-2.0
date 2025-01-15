@@ -5,8 +5,8 @@ import axios from "../../config/axiosConfig";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [balance, setBalance] = useState<number | null>(null); // Sold local pentru Navbar
-  const [profilePicture, setProfilePicture] = useState<string | null>(null); // Profil picture state
+  const [balance, setBalance] = useState<number | null>(null); // Local balance for Navbar
+  const [profilePicture, setProfilePicture] = useState<string | null>(null); // Profile picture state
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -16,7 +16,7 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
-  // Funcția de preluare a soldului pentru Navbar
+  // Fetch balance for Navbar
   const fetchBalance = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -26,15 +26,15 @@ const Navbar = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setBalance(response.data.balance ?? 0); // Actualizăm soldul
+        setBalance(response.data.balance ?? 0); // Update balance
       }
     } catch (error) {
       console.error("Error fetching balance for Navbar:", error);
-      setBalance(0); // Setăm soldul implicit la 0 în caz de eroare
+      setBalance(0); // Default to 0 in case of an error
     }
   };
 
-  // Funcția de preluare a imaginii de profil
+  // Fetch profile picture
   const fetchProfilePicture = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -44,40 +44,56 @@ const Navbar = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setProfilePicture(response.data.profilePicture); // Setăm imaginea de profil
+        setProfilePicture(response.data.profilePicture); // Set profile picture
       }
     } catch (error) {
       console.error("Error fetching profile picture for Navbar:", error);
-      setProfilePicture(null); // Dacă nu găsim imaginea, setăm null
+      setProfilePicture(null); // Set to null if not found
     }
   };
 
   useEffect(() => {
-    fetchBalance(); // Preluăm soldul
-    fetchProfilePicture(); // Preluăm imaginea de profil
+    fetchBalance(); // Fetch balance
+    fetchProfilePicture(); // Fetch profile picture
   }, []);
 
   return (
     <header className="navbar">
       <div className="navbar-left">
         <div className="logo">
-          {/* Logo-ul */}
+          {/* Logo */}
         </div>
-        <h2>
-          Agios-Trading{balance !== null ? `: $${balance.toFixed(2)}` : " (Loading...)"}
-        </h2>
+        <h2>Agios-Trading</h2>
       </div>
       <div className="navbar-right">
         <button className="menu-toggle" onClick={toggleMenu}>
-          &#9776;
+          {menuOpen ? "✖" : "☰"}
         </button>
         <nav className={`navbar-links ${menuOpen ? "open" : ""}`}>
-          <Link to="/home" onClick={closeMenu}>Home</Link>
-          <Link to="/stocks" onClick={closeMenu}>Market</Link>
-          <Link to="/news" onClick={closeMenu}>News</Link>
-          <Link to="/transactions" onClick={closeMenu}>History</Link>
-          <Link to="/profile" onClick={closeMenu}>Account</Link>
-          <Link to="/depozit" onClick={closeMenu}>Depozit</Link>
+          <button className="menu-close" onClick={closeMenu}>
+            &times; {/* Simbol X pentru a închide */}
+          </button>
+          <Link to="/home" onClick={closeMenu}>
+            Home
+          </Link>
+          <Link to="/stocks" onClick={closeMenu}>
+            Market
+          </Link>
+          <Link to="/news" onClick={closeMenu}>
+            News
+          </Link>
+          <Link to="/transactions" onClick={closeMenu}>
+            History
+          </Link>
+          <Link to="/profile" onClick={closeMenu}>
+            Account
+          </Link>
+          <Link to="/depozit" onClick={closeMenu}>
+            Depozit
+          </Link>
+          <div className="balance-display">
+            {balance !== null ? `Balance: $${balance.toFixed(2)}` : "Loading..."}
+          </div>
         </nav>
         <div className="navbar-buttons">
           <Link to="/profile">
@@ -89,7 +105,7 @@ const Navbar = () => {
                   className="profile-pic-image"
                 />
               ) : (
-                <div className="default-profile-pic"></div> 
+                <div className="default-profile-pic"></div>
               )}
             </div>
           </Link>
